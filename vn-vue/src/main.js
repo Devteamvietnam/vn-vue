@@ -15,6 +15,11 @@ import permission from './permission'
 import './assets/icons' // icon
 import { parseTime, resetForm, addDateRange, selectDictLabel, selectDictLabels, download, handleTree } from "@/utils/devteam";
 
+import Pagination from "@/components/Pagination";
+//Custom table tool extension
+import RightToolbar from "@/components/RightToolbar"
+
+
 // global method mount
 
 Vue.config.productionTip = false
@@ -39,7 +44,8 @@ Vue.prototype.msgInfo = function (msg) {
 }
 
 
-
+Vue.component('Pagination', Pagination)
+Vue.component('RightToolbar', RightToolbar)
 Vue.use(permission)
 
 Vue.use(Element, {
