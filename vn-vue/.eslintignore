@@ -1,0 +1,10 @@
+# Ignore the syntax check of files of type js in the build directory
+build/*.js
+# Ignore the syntax check of files in the src/assets directory
+src/assets
+# Ignore the syntax check of files in the public directory
+public
+# Ignore the syntax check of js files in the current directory
+*.js
+# Ignore the syntax check of the vue file in the current directory
+*.vue
