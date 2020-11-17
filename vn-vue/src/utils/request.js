@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Notification, MessageBox, Message } from 'element-ui'
-import store from '@/store'
+import store from '@/permission/@/store'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 
