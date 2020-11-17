@@ -1,6 +1,6 @@
 import Home from '../views/Home.vue'
 
-const routes = [
+const  routes = [
     {
       path: '/',
       name: 'Home',
@@ -15,5 +15,5 @@ const routes = [
       component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
   ]
-
+  
   export default routes
