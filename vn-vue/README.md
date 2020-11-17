@@ -7,7 +7,7 @@ An out-of-box UI solution for enterprise applications as a React boilerplate. </
 [![Issues](	https://img.shields.io/github/issues/Devteamvietnam/vn-vue)](https://github.com/Devteamvietnam/vn-vue/issues)
 [![forks](https://img.shields.io/github/forks/Devteamvietnam/vn-vue)](https://github.com/Devteamvietnam/vn-vue/fork)
 [![stars](https://img.shields.io/github/stars/Devteamvietnam/vn-vue)](https://github.com/Devteamvietnam/vn-vue/stargazers)
-[![Build Status](https://travis-ci.com/Devteamvietnam/vn-vue.svg?branch=master)](https://travis-ci.com/Devteamvietnam/vue-admin)
+[![Build Status](https://travis-ci.com/Devteamvietnam/vn-vue.svg?branch=master)](https://travis-ci.com/Devteamvietnam/vn-vue)
 </div>
 
 
