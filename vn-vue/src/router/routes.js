@@ -2,6 +2,11 @@ import Home from '../pages/Home.vue'
 
 const  routes = [
     {
+    path: '/login',
+    component: (resolve) => require(['@/pages/login'], resolve),
+    hidden: true
+    },
+    {
       path: '/',
       name: 'Home',
       component: Home
