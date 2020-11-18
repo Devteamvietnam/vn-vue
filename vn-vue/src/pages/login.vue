@@ -1,9 +1,9 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">CTN Management System</h3>
+      <h3 class="title">{{name}}</h3>
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username"  type="text" auto-complete="off" placeholder="Username">
+        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="Username">
           <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -12,25 +12,25 @@
           v-model="loginForm.password"
           type="password"
           auto-complete="off"
-          placeholder="Password"
           show-password
+          placeholder="Password"
           @keyup.enter.native="handleLogin"
         >
-          <svg-icon slot="prefix" icon-class="password"  class="el-input__icon input-icon" />
+          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
         <el-input
           v-model="loginForm.code"
           auto-complete="off"
-          placeholder="Verification code"
+          placeholder="Code"
           style="width: 63%"
           @keyup.enter.native="handleLogin"
         >
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
         </el-input>
         <div class="login-code">
-          <!-- <img :src="codeUrl" @click="getCode" class="login-code-img"/> -->
+          <img :src="codeUrl" @click="getCode" class="login-code-img"/>
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">Remember</el-checkbox>
@@ -42,7 +42,7 @@
           style="width:100%;"
           @click.native.prevent="handleLogin"
         >
-            <span v-if="!loading">Log in</span>
+          <span v-if="!loading">Log in</span>
            <span v-else>Login...</span>
         </el-button>
       </el-form-item>
@@ -55,31 +55,33 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
+import { getCodeImg } from "@/services/api/login"
+import Cookies from "js-cookie"
 import { encrypt, decrypt } from '@/utils/jsencrypt'
 
 export default {
   name: "Login",
   data() {
     return {
+      name: "CTN Management System",
       codeUrl: "",
       cookiePassword: "",
       loginForm: {
-        username: "admin",
-        password: "admin123",
+        username: "ivan",
+        password: "",
         rememberMe: false,
         code: "",
         uuid: ""
       },
-      loginRules: {
-        username: [
+     loginRules: {
+         username: [
            {required: true, trigger: "blur", message: "Username cannot be empty"}
          ],
          password: [
            {required: true, trigger: "blur", message: "Password cannot be empty"}
          ],
          code: [{ required: true, trigger: "change", message: "Verification code cannot be empty" }]
-      },
+       },
       loading: false,
       redirect: undefined
     };
@@ -93,16 +95,16 @@ export default {
     }
   },
   created() {
-    // this.getCode();
+    this.getCode();
     this.getCookie();
   },
   methods: {
-    // getCode() {
-    //   getCodeImg().then(res => {
-    //     this.codeUrl = "data:image/gif;base64," + res.img;
-    //     this.loginForm.uuid = res.uuid;
-    //   });
-    // },
+    getCode() {
+      getCodeImg().then(res => {
+        this.codeUrl = "data:image/gif;base64," + res.img;
+        this.loginForm.uuid = res.uuid;
+      });
+    },
     getCookie() {
       const username = Cookies.get("username");
       const password = Cookies.get("password");
@@ -119,16 +121,19 @@ export default {
           this.loading = true;
           if (this.loginForm.rememberMe) {
             Cookies.set("username", this.loginForm.username, { expires: 30 });
-            Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
             Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
           } else {
             Cookies.remove("username");
-            Cookies.remove("password");
             Cookies.remove('rememberMe');
           }
           this.$store
             .dispatch("Login", this.loginForm)
             .then(() => {
+              this.$notify({
+                title: 'Success',
+                message: 'Login Successfully!',
+                type: 'success'
+              })
               this.$router.push({ path: this.redirect || "/" });
             })
             .catch(() => {

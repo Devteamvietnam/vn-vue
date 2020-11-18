@@ -38,13 +38,13 @@ router.beforeEach((to, from, next) => {
           })
       } else {
         next()
-        // If there is no need to dynamically change permissions, you can directly delete the permission judgment below by next() ↓
-        // if (hasPermission(store.getters.roles, to.meta.roles)) {
-        // next()
-        //} else {
-        // next({ path:'/401', replace: true, query: {noGoBack: true }})
-        //}
-        // Can be deleted ↑
+        //If there is no need to dynamically change permissions, you can directly delete the permission judgment below by next() ↓
+        if (hasPermission(store.getters.roles, to.meta.roles)) {
+        next()
+        } else {
+        next({ path:'/401', replace: true, query: {noGoBack: true }})
+        }
+        //Can be deleted ↑
       }
     }
   } else {

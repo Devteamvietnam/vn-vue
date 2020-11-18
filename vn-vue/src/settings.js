@@ -1,5 +1,5 @@
 module.exports = {
-  title:'VN Management System',
+  title:'CTN Management System',
 
   /**
    * Whether the system layout configuration
