@@ -9,11 +9,11 @@
         <search id="header-search" class="right-menu-item" />
         
         <el-tooltip content="source address" effect="dark" placement="bottom">
-          <ruo-yi-git id="ivan-git" class="right-menu-item hover-effect" />
+          <ivan-git id="ivan-git" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <el-tooltip content="document address" effect="dark" placement="bottom">
-          <ruo-yi-doc id="ivan-doc" class="right-menu-item hover-effect" />
+          <ivan-doc id="ivan-doc" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -52,8 +52,9 @@ import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import Search from '@/components/HeaderSearch'
-import RuoYiGit from '@/components/Ivan/Git'
-import RuoYiDoc from '@/components/Ivan/Doc'
+import IvanGit from '@/components/Ivan/Git'
+import IvanDoc from '@/components/Ivan/Doc'
+import Cookies from "js-cookie"
 
 export default {
   components: {
@@ -62,8 +63,12 @@ export default {
     Screenfull,
     SizeSelect,
     Search,
-    RuoYiGit,
-    RuoYiDoc
+    IvanGit,
+    IvanDoc
+  },
+  data() {
+    return {
+    }
   },
   computed: {
     ...mapGetters([
@@ -94,11 +99,17 @@ methods: {
          type:'warning'
        }).then(() => {
          this.$store.dispatch('LogOut').then(() => {
-           location.href ='/index';
+           location.href ='/index'
+            this.$notify({
+                title: 'Success',
+                message: 'Logout Successfully!',
+                type: 'success'
+            })
          })
        })
-     }
-   }
+     },
+   },
+
 }
 </script>
 

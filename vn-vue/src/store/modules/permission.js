@@ -1,6 +1,6 @@
-import {constantRoutes} from'@/router'
-import {getRouters} from'@/services/menu'
-import Layout from'@/layouts'
+import {constantRoutes} from '@/router'
+import {getRouters} from '@/services/menu'
+import Layout from '@/layouts'
 
 const permission = {
   state: {

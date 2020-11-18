@@ -21,7 +21,7 @@
              >https://github.com/Devteamvietnam/vue-press-page</el-link
            >
            <br />
-          Devteam Cloud Server Discount Area
+           Devteam Cloud Server Discount Area
           <el-link href="https://devteamvietnam.com" type="primary" target="_blank">
             >☛☛Click me to enter ☚☚
             </el-link>
