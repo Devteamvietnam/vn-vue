@@ -1,5 +1,5 @@
 import {constantRoutes} from'@/router'
-import {getRouters} from'@/api/menu'
+import {getRouters} from'@/services/menu'
 import Layout from'@/layouts'
 
 const permission = {
