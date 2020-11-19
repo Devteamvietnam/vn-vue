@@ -1,6 +1,30 @@
 <template>
-  <div class="app-container home">
-    <el-row :gutter="20">
+  <div class="dashboard-editor-container">
+    <panel-group @handleSetLineChartData="handleSetLineChartData" />
+    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+      <line-chart :chart-data="lineChartData" />
+    </el-row>
+
+    <el-row :gutter="32">
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <raddar-chart />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <pie-chart />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <bar-chart />
+        </div>
+      </el-col>
+    </el-row>
+    <!-- Introduce -->
+
+    <el-row :gutter="20" class="app-container home">
       <el-col :sm="24" :lg="24">
         <blockquote class="text-warning" style="font-size: 14px">
            Receive CTN Management System
@@ -42,13 +66,7 @@
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
         <h2>CTN background management framework</h2>
         <p>
-          I have always wanted to build a back-end management system. I read a lot of excellent open source projects but found that there is no suitable one for me. So I started to write a back-end system in my free time. So with Ruoyi management system. , It can be used for all web applications, such as website management backend, website membership center, CMS, CRM, OA, etc. Of course, you can also customize her deeply to make a stronger system. All front-end and back-end codes are packaged and easy to use, with low error probability. It also supports mobile client access. The system will continue to update some useful functions.
-        </p>
-        <p>
           <b>Current version:</b> <span>v{{ version }}</span>
-        </p>
-        <p>
-          <el-tag type="danger">free and open source</el-tag>
         </p>
         <p>
           <el-button
@@ -68,40 +86,6 @@
           >
         </p>
       </el-col>
-
-    <el-col :sm="24" :lg="12" style="padding-left: 50px">
-        <el-row>
-          <el-col :span="12">
-            <h2>Technology selection</h2>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="6">
-            <h4>Back-end technology</h4>
-            <ul>
-              <li>SpringBoot</li>
-              <li>Spring Security</li>
-              <li>JWT</li>
-              <li>MyBatis</li>
-              <li>Druid</li>
-              <li>Fastjson</li>
-              <li>...</li>
-            </ul>
-          </el-col>
-          <el-col :span="6">
-            <h4>Front-end technology</h4>
-            <ul>
-              <li>Vue</li>
-              <li>Vuex</li>
-              <li>Element-ui</li>
-              <li>Axios</li>
-              <li>Sass</li>
-              <li>Quill</li>
-              <li>...</li>
-            </ul>
-          </el-col>
-        </el-row>
-      </el-col>
     </el-row>
     <el-divider />
     <el-row :gutter="20">
@@ -119,11 +103,12 @@
                 >https://devteamvietnam.com</el-link
               >
             </p>
-             <p>
-               <i class="el-icon-user-solid"></i> Gmail : <p>devteamvietnam@gmail.com</p>
-               <p>Over jungjihoonkr97@gmail.com</p> <p> Over 0337303666</p>
-               <a href="https://devteamvietnam.com" target="_blank"
-                 > jungjihoonkr97</a
+               <i class="el-icon-user-solid"></i> Gmail : devteamvietnam@gmail.com
+               <p class="el-icon-user-solid"> Mail dev: jungjihoonkr97@gmail.com</p> 
+               <p class="el-icon-mobile-phone"> Phone 0337303666</p>
+               <a href="https://devteamvietnam.com" 
+               target="_blank"
+                 ></a
                >
            <p>
               <i class="el-icon-chat-dot-round"></i> Facebook: <a
@@ -160,9 +145,6 @@
                 <li>Fixed the issue of fixed tab routing not refreshing when tabs are closed all</li>
               </ol>
             </el-collapse-item>
-
-
-
           </el-collapse>
         </el-card>
       </el-col>
@@ -171,23 +153,70 @@
 </template>
 
 <script>
+import PanelGroup from './dashboard/PanelGroup'
+import LineChart from './dashboard/LineChart'
+import RaddarChart from './dashboard/RaddarChart'
+import PieChart from './dashboard/PieChart'
+import BarChart from './dashboard/BarChart'
+
+const lineChartData = {
+  newVisitis: {
+    expectedData: [100, 120, 161, 134, 105, 160, 165],
+    actualData: [120, 82, 91, 154, 162, 140, 145]
+  },
+  messages: {
+    expectedData: [200, 192, 120, 144, 160, 130, 140],
+    actualData: [180, 160, 151, 106, 145, 150, 130]
+  },
+  purchases: {
+    expectedData: [80, 100, 121, 104, 105, 90, 100],
+    actualData: [120, 90, 100, 138, 142, 130, 130]
+  },
+  shoppings: {
+    expectedData: [130, 140, 141, 142, 145, 150, 160],
+    actualData: [120, 82, 91, 154, 162, 140, 130]
+  }
+}
+
 export default {
-  name: "index",
+  name: 'Index',
+  components: {
+    PanelGroup,
+    LineChart,
+    RaddarChart,
+    PieChart,
+    BarChart
+  },
   data() {
     return {
       // Version number
       version: "1.0.0",
-    };
+      lineChartData: lineChartData.newVisitis
+    }
   },
   methods: {
+    handleSetLineChartData(type) {
+      this.lineChartData = lineChartData[type]
+    },
     goTarget(href) {
       window.open(href, "_blank");
     },
-  },
-};
+  }
+}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+.dashboard-editor-container {
+  padding: 32px;
+  background-color: rgb(240, 242, 245);
+  position: relative;
+
+  .chart-wrapper {
+    background: #fff;
+    padding: 16px 16px 0;
+    margin-bottom: 32px;
+  }
+}
 .home {
   blockquote {
     padding: 10px 20px;
@@ -249,5 +278,10 @@ export default {
     }
   }
 }
-</style>
 
+@media (max-width:1024px) {
+  .chart-wrapper {
+    padding: 8px;
+  }
+}
+</style>
