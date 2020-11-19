@@ -1,16 +1,6 @@
 <template>
   <div class="component-upload-image">
-    <el-upload
-      :action="uploadImgUrl"
-      list-type="picture-card"
-      :on-success="handleUploadSuccess"
-      :before-upload="handleBeforeUpload"
-      :on-error="handleUploadError"
-      name="file"
-      :show-file-list="false"
-      :headers="headers"
-      style="display: inline-block; vertical-align: top"
-    >
+    <el-upload :action="uploadImgUrl" list-type="picture-card" :on-success="handleUploadSuccess" :before-upload="handleBeforeUpload" :on-error="handleUploadError" name="file" :show-file-list="false" :headers="headers" style="display: inline-block; vertical-align: top">
       <img v-if="value" :src="value" class="avatar" />
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>

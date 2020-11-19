@@ -3,7 +3,7 @@
   * Copyright (c) 2020 ivan
   */
  
-import store from'@/store'
+import store from '@/store'
 
 export default {
    inserted(el, binding, vnode) {

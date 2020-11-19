@@ -16,7 +16,7 @@ const port = process.env.port || process.env.npm_config_port || 8085 // Port
 module.exports = {
   // Deploy the URL in the production environment and development environment.
   // By default, Vue CLI will assume that your application is deployed on the root path of a domain name
-  // For example https://www.ruoyi.vip/. If the application is deployed on a subpath, you need to specify this subpath with this option. For example, if your application is deployed at https://www.ruoyi.vip/admin/, set baseUrl to /admin/.
+  // If the application is deployed on a subpath, you need to specify this subpath with this option. For example, if your application is deployed at https://devteamvietnam/admin/, set baseUrl to /admin/.
   publicPath: process.env.NODE_ENV === "production"? "/": "/",
   // In npm run build or yarn build, the directory name of the generated file (must be consistent with the production environment path of baseUrl) (default dist)
   outputDir:'dist',

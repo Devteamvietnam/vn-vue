@@ -22,7 +22,11 @@
          <span>Display Logo</span>
          <el-switch v-model="sidebarLogo" class="drawer-switch" />
        </div>
-
+  
+       <div class="drawer-item">
+        <span>Dark theme</span>
+         <span> Comming Soon</span>
+       </div>
      </div>
    </div>
 </template>

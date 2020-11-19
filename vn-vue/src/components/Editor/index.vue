@@ -1,16 +1,16 @@
 <template>
-    <div class="editor" ref="editor" :style="styles"></div>
+  <div class="editor" ref="editor" :style="styles"></div>
 </template>
 
 <script>
-import Quill from "quill";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
+import Quill from "quill"
+import "quill/dist/quill.core.css"
+import "quill/dist/quill.snow.css"
+import "quill/dist/quill.bubble.css"
 
 export default {
   name: "Editor",
-props: {
+  props: {
     /* The content of the editor */
     value: {
       type: String,
@@ -40,14 +40,14 @@ props: {
           toolbar: [
             ["bold", "italic", "underline", "strike"], // bold italic underline strikethrough
             ["blockquote", "code-block"], // quote code block
-            [{ list: "ordered" }, {list: "bullet" }], // ordered, unordered list
-            [{ indent: "-1" }, {indent: "+1" }], // indent
+            [{ list: "ordered" }, { list: "bullet" }], // ordered, unordered list
+            [{ indent: "-1" }, { indent: "+1" }], // indent
             [{ size: ["small", false, "large", "huge"] }], // font size
             [{ header: [1, 2, 3, 4, 5, 6, false] }], // header
-            [{ color: [] }, {background: [] }], // font color, font background color
+            [{ color: [] }, { background: [] }], // font color, font background color
             [{ align: [] }], // Alignment
             ["clean"], // Clear text format
-            ["link", "image", "video"] // link, picture, video
+            ["link", "image", "video"], // link, picture, video
           ],
         },
         placeholder: "Please enter content",
@@ -114,8 +114,9 @@ props: {
 </script>
 
 <style>
-.editor, .ql-toolbar {
-  white-space: pre-wrap!important;
+.editor,
+.ql-toolbar {
+  white-space: pre-wrap !important;
   line-height: normal !important;
 }
 .quill-img {
