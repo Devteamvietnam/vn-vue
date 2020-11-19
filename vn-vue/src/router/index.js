@@ -59,7 +59,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: (resolve) => require(['@/pages/index'], resolve),
+        component: (resolve) => require(['@/pages/index_v1'], resolve),
         name: 'Home',
         meta: { title: 'Home', icon: 'dashboard', noCache: true, affix: true }
       }
