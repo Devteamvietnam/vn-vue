@@ -5,28 +5,19 @@
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
+      <template v-if="device !== 'mobile'">
         <search id="header-search" class="right-menu-item" />
-        
-        <el-tooltip content="source address" effect="dark" placement="bottom">
-          <ivan-git id="ivan-git" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
-        <el-tooltip content="document address" effect="dark" placement="bottom">
-          <ivan-doc id="ivan-doc" class="right-menu-item hover-effect" />
-        </el-tooltip>
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
         <el-tooltip content="layout size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
-
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar" class="user-avatar">
+          <img :src="avatar" class="user-avatar" />
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -46,15 +37,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
-import Search from '@/components/HeaderSearch'
-import IvanGit from '@/components/Ivan/Git'
-import IvanDoc from '@/components/Ivan/Doc'
-import Cookies from "js-cookie"
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import Hamburger from "@/components/Hamburger";
+import Screenfull from "@/components/Screenfull";
+import SizeSelect from "@/components/SizeSelect";
+import Search from "@/components/HeaderSearch";
 
 export default {
   components: {
@@ -63,54 +51,46 @@ export default {
     Screenfull,
     SizeSelect,
     Search,
-    IvanGit,
-    IvanDoc
   },
   data() {
-    return {
-    }
+    return {};
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar',
-      'device'
-    ]),
+    ...mapGetters(["sidebar", "avatar", "device"]),
     setting: {
       get() {
-        return this.$store.state.settings.showSettings
+        return this.$store.state.settings.showSettings;
       },
       set(val) {
-        this.$store.dispatch('settings/changeSetting', {
-          key: 'showSettings',
-          value: val
-        })
-      }
-    }
+        this.$store.dispatch("settings/changeSetting", {
+          key: "showSettings",
+          value: val,
+        });
+      },
+    },
   },
-methods: {
-     toggleSideBar() {
-       this.$store.dispatch('app/toggleSideBar')
-     },
-     async logout() {
-       this.$confirm('Are you sure to log out and exit the system?','Prompt', {
-         confirmButtonText:'OK',
-         cancelButtonText:'Cancel',
-         type:'warning'
-       }).then(() => {
-         this.$store.dispatch('LogOut').then(() => {
-           location.href ='/index'
-            this.$notify({
-                title: 'Success',
-                message: 'Logout Successfully!',
-                type: 'success'
-            })
-         })
-       })
-     },
-   },
-
-}
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch("app/toggleSideBar");
+    },
+    async logout() {
+      this.$confirm("Are you sure to log out and exit the system?", "Prompt", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "warning",
+      }).then(() => {
+        this.$store.dispatch("LogOut").then(() => {
+          location.href = "/index";
+          this.$notify({
+            title: "Success",
+            message: "Logout Successfully!",
+            type: "success",
+          });
+        });
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -119,18 +99,18 @@ methods: {
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
     line-height: 46px;
     height: 100%;
     float: left;
     cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, .025)
+      background: rgba(0, 0, 0, 0.025);
     }
   }
 
@@ -162,10 +142,10 @@ methods: {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }

@@ -59,13 +59,39 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: (resolve) => require(['@/pages/index_v1'], resolve),
+        component: (resolve) => require(['@/pages/index'], resolve),
         name: 'Home',
         meta: { title: 'Home', icon: 'dashboard', noCache: true, affix: true }
       }
     ]
   },
-
+  {
+    path:'/user',
+    component: Layout,
+    hidden: true,
+    redirect:'noredirect',
+    children: [
+      {
+        path:'profile',
+        component: (resolve) => require(['@/pages/system/user/profile/index'], resolve),
+        name:'Profile',
+        meta: {title:'personal center', icon:'user'}
+      }
+    ]
+  },
+  {
+    path:'/dict',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path:'type/data/:dictId(\\d+)',
+        component: (resolve) => require(['@/pages/system/dict/data'], resolve),
+        name:'Data',
+        meta: {title:'Dictionary data', icon:''}
+      }
+    ]
+  },
 ]
 
 export default new Router({

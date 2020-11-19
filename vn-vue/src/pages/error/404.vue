@@ -31,7 +31,7 @@ export default {
   name: 'Page404',
   computed: {
     message() {
-      return '找不到网页！'
+      return 'Page found!'
     }
   }
 }
