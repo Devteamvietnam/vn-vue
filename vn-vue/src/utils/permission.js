@@ -1,4 +1,4 @@
-import store from '@/Security/permission/@/store'
+import store from '@/store'
 
 /**
  * Character permission verification
