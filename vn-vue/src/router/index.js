@@ -92,6 +92,19 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/job',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'log',
+        component: (resolve) => require(['@/pages/monitor/job/log'], resolve),
+        name: 'JobLog',
+        meta: { title: 'Scheduling log' }
+      }
+    ]
+  },
 ]
 
 export default new Router({
