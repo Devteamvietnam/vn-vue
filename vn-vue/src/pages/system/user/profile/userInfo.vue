@@ -4,7 +4,7 @@
       <el-input v-model="user.nickName" />
     </el-form-item>
     <el-form-item label="Phone" prop="phonenumber">
-      <el-input v-model="user.phonenumber" maxlength="11" />
+      <el-input v-model="user.phonenumber" maxlength="10" />
     </el-form-item>
     <el-form-item label="Email" prop="email">
       <el-input v-model="user.email" maxlength="50" />
