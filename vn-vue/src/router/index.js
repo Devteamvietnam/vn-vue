@@ -105,6 +105,19 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/gen',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'edit/:tableId(\\d+)',
+        component: (resolve) => require(['@/pages/tool/gen/editTable'], resolve),
+        name: 'GenEdit',
+        meta: { title: 'Modify build configuration' }
+      }
+    ]
+  }
 ]
 
 export default new Router({
