@@ -1,13 +1,13 @@
 <template>
-   <el-form ref="form" :model="user" :rules="rules" label-width="80px">
+   <el-form ref="form" :model="user" :rules="rules" label-width="150px">
      <el-form-item label="Old Password" prop="oldPassword">
-       <el-input v-model="user.oldPassword" placeholder="Please enter the old password" type="password" />
+       <el-input v-model="user.oldPassword" show-password placeholder="Please enter the old password" type="password" />
      </el-form-item>
      <el-form-item label="new password" prop="newPassword">
-       <el-input v-model="user.newPassword" placeholder="Please enter a new password" type="password" />
+       <el-input v-model="user.newPassword" show-password placeholder="Please enter a new password" type="password" />
      </el-form-item>
      <el-form-item label="Confirm Password" prop="confirmPassword">
-       <el-input v-model="user.confirmPassword" placeholder="Please confirm the password" type="password" />
+       <el-input v-model="user.confirmPassword" show-password placeholder="Please confirm the password" type="password" />
      </el-form-item>
      <el-form-item>
        <el-button type="primary" size="mini" @click="submit">Save</el-button>
