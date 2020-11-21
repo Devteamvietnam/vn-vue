@@ -56,7 +56,7 @@
       <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']">Edit</el-button>
-          <el-button size="mini" type="text" icon="el-icon-circle-check" @click="handleDataScope(scope.row)" v-hasPermi="['system:role:edit']">Data permission</el-button>
+          <el-button size="mini" type="text" icon="el-icon-circle-check" @click="handleDataScope(scope.row)" v-hasPermi="['system:role:edit']">Permission</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']">Delete</el-button>
         </template>
       </el-table-column>
