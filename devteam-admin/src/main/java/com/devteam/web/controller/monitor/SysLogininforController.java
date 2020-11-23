@@ -18,9 +18,9 @@ import com.devteam.system.domain.SysLogininfor;
 import com.devteam.system.service.ISysLogininforService;
 
 /**
- * System access record
- *
- * @author ruoyi
+ * 系统访问记录
+ * 
+ * @author ivan
  */
 @RestController
 @RequestMapping("/monitor/logininfor")
@@ -38,18 +38,18 @@ public class SysLogininforController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "Login log", businessType = BusinessType.EXPORT)
+    @Log(title = "登录日志", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:export')")
     @GetMapping("/export")
     public AjaxResult export(SysLogininfor logininfor)
     {
         List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
         ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
-        return util.exportExcel(list, "Login Log");
+        return util.exportExcel(list, "登录日志");
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
-    @Log(title = "Login log", businessType = BusinessType.DELETE)
+    @Log(title = "登录日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{infoIds}")
     public AjaxResult remove(@PathVariable Long[] infoIds)
     {
@@ -57,7 +57,7 @@ public class SysLogininforController extends BaseController
     }
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
-    @Log(title = "Login Log", businessType = BusinessType.CLEAN)
+    @Log(title = "登录日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")
     public AjaxResult clean()
     {
