@@ -32,23 +32,23 @@
     </el-row>
 
     <el-table v-loading="loading" :data="noticeList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" align="center" />
-      <el-table-column label="id" align="center" prop="noticeId" width="100" />
+      <el-table-column type="selection" width="60" align="center" />
+      <el-table-column label="id" align="center" prop="noticeId" width="150" />
       <el-table-column label="Title" align="center" prop="noticeTitle" :show-overflow-tooltip="true" />
-      <el-table-column label="Type" align="center" prop="noticeType" :formatter="typeFormat" width="100" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" width="100" />
-      <el-table-column label="Creator" align="center" prop="createBy" width="100" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="100">
+      <el-table-column label="Type" align="center" prop="noticeType" :formatter="typeFormat" width="150" />
+      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" width="150" />
+      <el-table-column label="Creator" align="center" prop="createBy" width="150" />
+      <el-table-column label="Create time" align="center" prop="createTime" width="150">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, "{y}-{m}-{d}") }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+     <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:notice:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:notice:remove']">Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
@@ -111,7 +111,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Announcement form data

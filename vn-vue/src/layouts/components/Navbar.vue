@@ -6,8 +6,10 @@
 
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
+       <el-tooltip content="Under Development" effect="dark" placement="bottom">
         <search id="header-search" class="right-menu-item" />
-
+       </el-tooltip>
+        
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
         <el-tooltip content="layout size" effect="dark" placement="bottom">

@@ -34,30 +34,30 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
     <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Number" align="center" prop="postId" />
-      <el-table-column label="Code" align="center" prop="postCode" />
+      <el-table-column type="selection" width="60" align="center" />
+      <el-table-column label="Number" align="center" prop="postId" width="140"/>
+      <el-table-column label="Code" align="center" prop="postCode" width="130" />
       <el-table-column label="Name" align="center" prop="postName" />
-      <el-table-column label="sorting" align="center" prop="postSort" />
+      <el-table-column sortable label="sorting" align="center" prop="postSort" />
       <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
       <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+    <!--  <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:post:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:post:remove']">Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify post dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="Name" prop="postName">
           <el-input v-model="form.postName" placeholder="Please enter the post name" />
         </el-form-item>
@@ -100,7 +100,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Job table data

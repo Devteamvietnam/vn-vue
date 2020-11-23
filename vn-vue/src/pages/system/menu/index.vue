@@ -155,7 +155,7 @@ export default {
       // Mask layer
       loading: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Menu table tree data
       menuList: [],
       // Menu tree options
