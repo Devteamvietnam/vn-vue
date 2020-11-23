@@ -9,7 +9,7 @@ import com.devteam.common.core.domain.AjaxResult;
 import com.devteam.framework.web.domain.Server;
 
 /**
- * Server monitoring
+ * 服务器监控
  * 
  * @author ruoyi
  */

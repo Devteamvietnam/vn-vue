@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>devteam</artifactId>
 		<groupId>com.devteam</groupId>
-		<version>3.2.1</version>
+		<version>1.2.6</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -22,30 +22,7 @@
 			<groupId>com.devteam</groupId>
 			<artifactId>devteam-common</artifactId>
 		</dependency>
-
-		<!-- // fix Handler dispatch failed; nested exception is java.lang.NoClassDefFoundError: 
-			javax/xml/bind/DatatypeConverter Java > 9 -->
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.2.11</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.activation</groupId>
-			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-
+		
 	</dependencies>
 
 </project>

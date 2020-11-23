@@ -19,9 +19,9 @@ import com.devteam.common.utils.file.FileUtils;
 import com.devteam.framework.config.ServerConfig;
 
 /**
- * General request processing
- *
- * @author ruoyi
+ * 通用请求处理
+ * 
+ * @author ivan
  */
 @RestController
 public class CommonController
@@ -32,10 +32,10 @@ public class CommonController
     private ServerConfig serverConfig;
 
     /**
-     * Universal download request
-     *
-     * @param fileName file name
-     * @param delete whether to delete
+     * 通用下载请求
+     * 
+     * @param fileName 文件名称
+     * @param delete 是否删除
      */
     @GetMapping("common/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
@@ -44,7 +44,7 @@ public class CommonController
         {
             if (!FileUtils.checkAllowDownload(fileName))
             {
-                throw new Exception(StringUtils.format("File name ({}) is illegal and download is not allowed. ", fileName));
+                throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
             String filePath = DevteamConfig.getDownloadPath() + fileName;
@@ -59,21 +59,21 @@ public class CommonController
         }
         catch (Exception e)
         {
-            log.error("Failed to download file", e);
+            log.error("下载文件失败", e);
         }
     }
 
     /**
-     * Universal upload request
+     * 通用上传请求
      */
     @PostMapping("/common/upload")
     public AjaxResult uploadFile(MultipartFile file) throws Exception
     {
         try
         {
-            // Upload file path
+            // 上传文件路径
             String filePath = DevteamConfig.getUploadPath();
-            // Upload and return the new file name
+            // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + fileName;
             AjaxResult ajax = AjaxResult.success();
@@ -88,7 +88,7 @@ public class CommonController
     }
 
     /**
-     * General download of local resources
+     * 本地资源通用下载
      */
     @GetMapping("/common/download/resource")
     public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response)
@@ -98,13 +98,13 @@ public class CommonController
         {
             if (!FileUtils.checkAllowDownload(resource))
             {
-                throw new Exception(StringUtils.format("The resource file ({}) is illegal and downloading is not allowed. ", resource));
+                throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", resource));
             }
-            // local resource path
+            // 本地资源路径
             String localPath = DevteamConfig.getProfile();
-            // Database resource address
+            // 数据库资源地址
             String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
-            // download name
+            // 下载名称
             String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             FileUtils.setAttachmentResponseHeader(response, downloadName);
@@ -112,7 +112,7 @@ public class CommonController
         }
         catch (Exception e)
         {
-            log.error("Failed to download file", e);
+            log.error("下载文件失败", e);
         }
     }
 }
