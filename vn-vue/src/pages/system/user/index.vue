@@ -53,10 +53,10 @@
         </el-row>
 
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
-          <el-table-column type="selection" width="30" align="center" />
-          <el-table-column label="id" align="center" prop="userId" />
-          <el-table-column label="User name" align="center" prop="userName" :show-overflow-tooltip="true" />
-          <el-table-column label="Nickname" align="center" prop="nickName" :show-overflow-tooltip="true" />
+          <el-table-column  type="selection" width="55" align="center" />
+          <el-table-column sortable label="id" align="center" prop="userId" />
+          <el-table-column label="User Login" align="center" prop="userName" :show-overflow-tooltip="true" />
+          <el-table-column label="Name" align="center" prop="nickName" :show-overflow-tooltip="true" />
           <el-table-column label="Department" align="center" prop="dept.deptName" :show-overflow-tooltip="true" />
           <el-table-column label="Phone" align="center" prop="phonenumber" width="120" />
           <el-table-column label="Status" align="center">
@@ -71,8 +71,8 @@
           </el-table-column>
           <el-table-column label="Action" align="center" width="160" class-name="small-padding fixed-width">
             <template slot-scope="scope">
-              <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']">Edit</el-button>
-              <el-button v-if="scope.row.userId !== 1" size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">Delete</el-button>
+             <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']">Edit</el-button> -->
+             <!-- <el-button v-if="scope.row.userId !== 1" size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">Delete</el-button> -->
               <el-button size="mini" type="text" icon="el-icon-key" @click="handleResetPwd(scope.row)" v-hasPermi="['system:user:resetPwd']">Reset</el-button>
             </template>
           </el-table-column>
@@ -84,10 +84,10 @@
 
     <!-- Add or modify parameter configuration dialog box -->
     <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="100px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="130px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="Nickname" prop="nickName">
+            <el-form-item label="Name" prop="nickName">
               <el-input v-model="form.nickName" placeholder="Please enter the user's nickname" />
             </el-form-item>
           </el-col>
@@ -111,13 +111,13 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="Username" prop="userName">
+            <el-form-item v-if="form.userId == undefined" label="User Login" prop="userName">
               <el-input v-model="form.userName" placeholder="Please enter the user name" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.userId == undefined" label="User password" prop="password">
-              <el-input v-model="form.password" placeholder="Please enter the user password" type="password" />
+              <el-input show-password v-model="form.password" placeholder="Please enter the user password" type="password" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -191,11 +191,11 @@
 </template>
 
 <script>
-import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate } from "@/services/api/system/user";
-import { getToken } from "@/utils/auth";
-import { treeselect } from "@/services/api/system/dept";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate } from "@/services/api/system/user"
+import { getToken } from "@/utils/auth"
+import { treeselect } from "@/services/api/system/dept"
+import Treeselect from "@riophae/vue-treeselect"
+import "@riophae/vue-treeselect/dist/vue-treeselect.css"
 
 export default {
   name: "User",
@@ -211,7 +211,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // User table data
@@ -403,7 +403,7 @@ export default {
         this.postOptions = response.posts;
         this.roleOptions = response.roles;
         this.open = true;
-        this.title = "Add User";
+        this.title = "Add Personnel";
         this.form.password = this.initPassword;
       });
     },

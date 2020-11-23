@@ -8,7 +8,7 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password" type="password" auto-complete="off" show-password placeholder="Password" @keyup.enter.native="handleLogin">
+        <el-input v-model="loginForm.password" @keyup.native="checkCapslock" @blur="capsTooltip = false" type="password" auto-complete="off" show-password placeholder="Password" @keyup.enter.native="handleLogin">
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
@@ -46,6 +46,7 @@ export default {
     return {
       name: "CTN Management System",
       codeUrl: "",
+      capsTooltip: false,
       cookiePassword: "",
       loginForm: {
         username: "ivan",
@@ -76,6 +77,10 @@ export default {
     this.getCookie();
   },
   methods: {
+    checkCapslock(e) {
+      const { key } = e;
+      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
+    },
     getCode() {
       getCodeImg().then((res) => {
         this.codeUrl = "data:image/gif;base64," + res.img;

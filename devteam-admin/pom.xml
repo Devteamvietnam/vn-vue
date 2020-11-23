@@ -5,7 +5,7 @@
 	<parent>
 		<artifactId>devteam</artifactId>
 		<groupId>com.devteam</groupId>
-		<version>3.2.1</version>
+		<version>1.2.6</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
@@ -83,7 +83,6 @@
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>2.2.11</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>

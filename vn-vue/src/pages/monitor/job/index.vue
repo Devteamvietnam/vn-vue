@@ -63,7 +63,7 @@
 
     <!-- Add or modify timed task dialog box -->
     <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="job name" prop="jobName">
@@ -93,7 +93,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="cron expression" prop="cronExpression">
+            <el-form-item label="Cron expression" prop="cronExpression">
               <el-input v-model="form.cronExpression" placeholder="Please enter cron expression" />
             </el-form-item>
           </el-col>
@@ -195,7 +195,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Scheduled task table data

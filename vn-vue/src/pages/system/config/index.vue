@@ -41,8 +41,8 @@
     </el-row>
 
     <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="30" align="center" />
-      <el-table-column label="id" align="center" prop="configId" />
+      <el-table-column type="selection" width="60" align="center" />
+      <el-table-column label="id" align="center" prop="configId" width="80" />
       <el-table-column label="Name" align="center" prop="configName" :show-overflow-tooltip="true" />
       <el-table-column label="Key name" align="center" prop="configKey" :show-overflow-tooltip="true" />
       <el-table-column label="Key value" align="center" prop="configValue" />
@@ -53,12 +53,12 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+     <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
@@ -108,7 +108,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Parameter table data
