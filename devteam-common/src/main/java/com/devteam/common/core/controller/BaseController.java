@@ -21,7 +21,6 @@ import com.devteam.common.utils.sql.SqlUtil;
 /**
  * Web layer general data processing
  *
- * @author ruoyi
  */
 public class BaseController
 {

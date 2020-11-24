@@ -4,8 +4,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * String formatting
- *
- * @author ruoyi
  */
 public class StrFormatter
 {

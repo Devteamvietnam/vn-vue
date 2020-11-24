@@ -10,8 +10,6 @@ import com.devteam.generator.domain.GenTableColumn;
 
 /**
  * Code generator tools
- *
- * @author ruoyi
  */
 public class GenUtils
 {

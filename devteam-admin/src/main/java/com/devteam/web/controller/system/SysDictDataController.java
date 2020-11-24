@@ -27,7 +27,6 @@ import com.devteam.common.utils.poi.ExcelUtil;
 /**
  * Data dictionary information
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/dict/data")

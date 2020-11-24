@@ -5,7 +5,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Paging data
  *
- * @author ruoyi
  */
 public class PageDomain
 {

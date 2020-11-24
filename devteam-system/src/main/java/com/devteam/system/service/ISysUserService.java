@@ -5,8 +5,6 @@ import com.devteam.common.core.domain.entity.SysUser;
 
 /**
  * User business layer
- *
- * @author ruoyi
  */
 public interface ISysUserService
 {

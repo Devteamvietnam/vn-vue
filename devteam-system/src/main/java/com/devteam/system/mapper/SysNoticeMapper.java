@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysNotice;
 
 /**
  * Notice announcement form Data layer
- *
- * @author ruoyi
  */
 public interface SysNoticeMapper
 {

@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysOperLog;
 
 /**
  * Operation log data layer
- *
- * @author ruoyi
  */
 public interface SysOperLogMapper
 {

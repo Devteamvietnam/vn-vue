@@ -13,8 +13,6 @@ import com.devteam.common.utils.ServletUtils;
 
 /**
  * Prevent duplicate submission interceptor
- *
- * @author ruoyi
  */
 @Component
 public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter

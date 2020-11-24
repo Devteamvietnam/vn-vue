@@ -3,7 +3,6 @@ package com.devteam.common.exception;
 /**
  * Tool abnormal
  *
- * @author ruoyi
  */
 public class UtilException extends RuntimeException
 {

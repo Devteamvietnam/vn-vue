@@ -27,7 +27,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Online user monitoring
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/monitor/online")

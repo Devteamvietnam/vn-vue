@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysUserPost;
 
 /**
  * User and position association table Data layer
- *
- * @author ruoyi
  */
 public interface SysUserPostMapper
 {

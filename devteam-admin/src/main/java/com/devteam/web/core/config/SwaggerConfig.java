@@ -24,7 +24,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * Swagger2 interface configuration
  *
- * @author ruoyi
  */
 @Configuration
 @EnableSwagger2
@@ -32,7 +31,7 @@ public class SwaggerConfig
 {
     /** System basic configuration */
     @Autowired
-    private DevteamConfig ruoyiConfig;
+    private DevteamConfig devteamConfig;
 
     /** Whether to open swagger */
     @Value("${swagger.enabled}")
@@ -113,13 +112,13 @@ public class SwaggerConfig
         // Customize with ApiInfoBuilder
         return new ApiInfoBuilder()
                 // set title
-                .title("Title: If According to Management System_Interface Document")
+                .title("Title: Devteam")
                 // description
                 .description ("Description: used to manage the personnel information of the group companies, including XXX, XXX modules...")
                 // author information
-                .contact(new Contact(ruoyiConfig.getName(), null, null))
+                .contact(new Contact(devteamConfig.getName(), null, null))
                 // version
-                .version("version number:" + ruoyiConfig.getVersion())
+                .version("version number:" + devteamConfig.getVersion())
                 .build();
     }
 }

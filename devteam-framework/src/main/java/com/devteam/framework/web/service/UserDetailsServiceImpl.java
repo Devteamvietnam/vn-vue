@@ -18,7 +18,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * User verification processing
  *
- * @author ruoyi
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService

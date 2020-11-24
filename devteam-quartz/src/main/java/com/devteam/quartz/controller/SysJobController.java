@@ -26,8 +26,6 @@ import com.devteam.quartz.util.CronUtils;
 
 /**
  * Scheduling task information operation processing
- *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/monitor/job")

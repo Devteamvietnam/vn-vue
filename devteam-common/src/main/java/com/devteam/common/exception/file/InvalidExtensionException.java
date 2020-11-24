@@ -6,7 +6,6 @@ import org.apache.commons.fileupload.FileUploadException;
 /**
  * File upload error exception category
  *
- * @author ruoyi
  */
 public class InvalidExtensionException extends FileUploadException
 {

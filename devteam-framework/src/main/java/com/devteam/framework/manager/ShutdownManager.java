@@ -7,8 +7,6 @@ import javax.annotation.PreDestroy;
 
 /**
  * Ensure that the background thread can be closed when the application exits
- *
- * @author ruoyi
  */
 @Component
 public class ShutdownManager
@@ -28,7 +26,7 @@ public class ShutdownManager
     {
         try
         {
-            logger.info("====Close CTN MS background task task thread pool====");
+            logger.info("==== Close CTN MS background task thread pool====");
             AsyncManager.me().shutdown();
         }
         catch (Exception e)

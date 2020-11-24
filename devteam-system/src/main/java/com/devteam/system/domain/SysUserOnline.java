@@ -2,8 +2,6 @@ package com.devteam.system.domain;
 
 /**
  * Current online session
- *
- * @author ruoyi
  */
 public class SysUserOnline
 {

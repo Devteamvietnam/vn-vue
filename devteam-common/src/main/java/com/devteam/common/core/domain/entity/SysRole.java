@@ -11,7 +11,6 @@ import com.devteam.common.core.domain.BaseEntity;
 /**
  * Role table sys_role
  *
- * @author ruoyi
  */
 public class SysRole extends BaseEntity
 {
@@ -113,7 +112,7 @@ public class SysRole extends BaseEntity
         this.roleKey = roleKey;
     }
 
-    @NotBlank(message = "显示顺序不能为空")
+    @NotBlank(message = "Display order cannot be empty")
     public String getRoleSort()
     {
         return roleSort;

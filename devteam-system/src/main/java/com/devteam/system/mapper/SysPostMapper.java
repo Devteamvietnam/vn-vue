@@ -7,7 +7,6 @@ import com.devteam.system.domain.SysPost;
 /**
  * Position information data layer
  *
- * @author ruoyi
  */
 public interface SysPostMapper
 {

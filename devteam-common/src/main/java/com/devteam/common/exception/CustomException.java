@@ -3,7 +3,6 @@ package com.devteam.common.exception;
 /**
  * Custom exception
  *
- * @author ruoyi
  */
 public class CustomException extends RuntimeException
 {

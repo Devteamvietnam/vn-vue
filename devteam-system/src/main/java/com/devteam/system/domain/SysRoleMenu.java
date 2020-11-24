@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Role and menu association sys_role_menu
- *
- * @author ruoyi
  */
 public class SysRoleMenu
 {

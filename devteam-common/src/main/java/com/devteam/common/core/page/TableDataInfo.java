@@ -6,7 +6,6 @@ import java.util.List;
 /**
  * Table paging data object
  *
- * @author ruoyi
  */
 public class TableDataInfo implements Serializable
 {

@@ -12,7 +12,6 @@ import com.devteam.common.core.domain.entity.SysUser;
 /**
  * User authority processing
  *
- * @author ruoyi
  */
 @Component
 public class SysPermissionService

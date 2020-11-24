@@ -19,9 +19,8 @@ import com.devteam.common.utils.sign.Base64;
 import com.devteam.common.utils.uuid.IdUtils;
 
 /**
- * 验证码操作处理
- * 
- * @author Ivan
+ * Verification code operation processing
+ *
  */
 @RestController
 public class CaptchaController
@@ -35,24 +34,24 @@ public class CaptchaController
     @Autowired
     private RedisCache redisCache;
     
-    // 验证码类型
+    // Verification code type
     @Value("${devteam.captchaType}")
     private String captchaType;
 
     /**
-     * 生成验证码
+     * Generate verification code
      */
     @GetMapping("/captchaImage")
     public AjaxResult getCode(HttpServletResponse response) throws IOException
     {
-        // 保存验证码信息
+        // Save verification code information
         String uuid = IdUtils.simpleUUID();
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
 
         String capStr = null, code = null;
         BufferedImage image = null;
 
-        // 生成验证码
+        // Generate verification code
         if ("math".equals(captchaType))
         {
             String capText = captchaProducerMath.createText();
@@ -67,7 +66,7 @@ public class CaptchaController
         }
 
         redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
-        // 转换流信息写出
+        // Write out the conversion stream information
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try
         {

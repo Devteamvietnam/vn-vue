@@ -3,7 +3,6 @@ package com.devteam.common.constant;
 /**
  * Common constants for task scheduling
  *
- * @author ruoyi
  */
 public class ScheduleConstants
 {

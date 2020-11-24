@@ -27,7 +27,6 @@ import com.devteam.framework.web.service.TokenService;
 /**
  * Personal information business processing
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/user/profile")

@@ -1,24 +1,22 @@
 package com.devteam.system.domain.vo;
 
 /**
- * 路由显示信息
- * 
- * @author ruoyi
+ * Route display information
  */
 public class MetaVo
 {
     /**
-     * 设置该路由在侧边栏和面包屑中展示的名字
+     * Set the name of the route displayed in the sidebar and breadcrumbs
      */
     private String title;
 
     /**
-     * 设置该路由的图标，对应路径src/assets/icons/svg
+     * Set the icon of the route, corresponding to the path src/assets/icons/svg
      */
     private String icon;
 
     /**
-     * 设置为true，则不会被 <keep-alive>缓存
+     * Set to true, it will not be cached by <keep-alive>
      */
     private boolean noCache;
 

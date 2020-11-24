@@ -6,8 +6,6 @@ import com.devteam.common.core.domain.entity.SysRole;
 
 /**
  * Role business layer
- *
- * @author ruoyi
  */
 public interface ISysRoleService
 {

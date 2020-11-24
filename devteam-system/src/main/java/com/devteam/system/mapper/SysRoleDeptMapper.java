@@ -7,7 +7,6 @@ import com.devteam.system.domain.SysRoleDept;
 /**
  * Role and department association table Data layer
  *
- * @author ruoyi
  */
 public interface SysRoleDeptMapper
 {

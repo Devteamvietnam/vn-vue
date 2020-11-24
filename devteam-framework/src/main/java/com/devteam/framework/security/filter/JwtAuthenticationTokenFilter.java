@@ -18,8 +18,6 @@ import com.devteam.framework.web.service.TokenService;
 
 /**
  * token filter to verify the validity of the token
- *
- * @author ruoyi
  */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter

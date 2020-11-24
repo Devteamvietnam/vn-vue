@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * File type tools
  *
- * @author ruoyi
  */
 public class FileTypeUtils
 {

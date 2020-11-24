@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysNotice;
 
 /**
  * Announcement Service Layer
- *
- * @author ruoyi
  */
 public interface ISysNoticeService
 {

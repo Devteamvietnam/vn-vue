@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * User and role association sys_user_role
- *
- * @author ruoyi
  */
 public class SysUserRole
 {

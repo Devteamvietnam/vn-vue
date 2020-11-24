@@ -6,7 +6,6 @@ import com.devteam.generator.domain.GenTable;
 /**
  * Business data layer
  *
- * @author ruoyi
  */
 public interface GenTableMapper
 {

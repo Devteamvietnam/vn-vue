@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysRoleMenu;
 
 /**
  * Role and menu association table data layer
- *
- * @author ruoyi
  */
 public interface SysRoleMenuMapper
 {

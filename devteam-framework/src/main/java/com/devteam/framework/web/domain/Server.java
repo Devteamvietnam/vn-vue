@@ -23,8 +23,6 @@ import oshi.util.Util;
 
 /**
  * Server related information
- *
- * @author ruoyi
  */
 public class Server
 {

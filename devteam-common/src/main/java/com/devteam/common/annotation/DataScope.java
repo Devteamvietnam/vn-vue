@@ -9,7 +9,6 @@ import java.lang.annotation.Target;
 /**
  * Data permission filter annotation
  * 
- * @author ruoyi
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

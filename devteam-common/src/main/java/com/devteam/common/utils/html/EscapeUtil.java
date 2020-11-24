@@ -5,7 +5,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Tools for escaping and antisense
  *
- * @author ruoyi
  */
 public class EscapeUtil
 {

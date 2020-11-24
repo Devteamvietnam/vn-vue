@@ -21,8 +21,6 @@ import com.devteam.framework.web.service.TokenService;
 
 /**
  * Custom exit processing class returns success
- *
- * @author ruoyi
  */
 @Configuration
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler

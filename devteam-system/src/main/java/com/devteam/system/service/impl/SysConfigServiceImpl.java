@@ -20,8 +20,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Parameter configuration service layer implementation
- *
- * @author ruoyi
  */
 @Service
 public class SysConfigServiceImpl implements ISysConfigService

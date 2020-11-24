@@ -7,7 +7,6 @@ import com.devteam.common.core.domain.entity.SysMenu;
 /**
  * Menu table data layer
  *
- * @author ruoyi
  */
 public interface SysMenuMapper
 {

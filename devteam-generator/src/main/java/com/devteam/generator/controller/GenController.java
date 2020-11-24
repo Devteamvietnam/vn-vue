@@ -31,7 +31,6 @@ import com.devteam.generator.service.IGenTableService;
 /**
  * Code generation operation processing
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/tool/gen")

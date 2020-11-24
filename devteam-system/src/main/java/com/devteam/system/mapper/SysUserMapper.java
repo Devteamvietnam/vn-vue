@@ -6,8 +6,6 @@ import com.devteam.common.core.domain.entity.SysUser;
 
 /**
  * User table data layer
- *
- * @author ruoyi
  */
 public interface SysUserMapper
 {

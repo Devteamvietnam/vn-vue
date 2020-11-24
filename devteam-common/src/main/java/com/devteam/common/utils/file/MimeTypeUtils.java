@@ -3,7 +3,6 @@ package com.devteam.common.utils.file;
 /**
  * Media type tools
  * 
- * @author ruoyi
  */
 public class MimeTypeUtils
 {

@@ -9,8 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
   * Program annotation configuration
-  *
-  * @author ruoyi
   */
 @Configuration
 // Indicates that the proxy object is exposed through the aop framework, and AopContext can access

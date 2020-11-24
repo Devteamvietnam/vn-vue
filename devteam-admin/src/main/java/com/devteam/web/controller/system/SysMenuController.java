@@ -30,7 +30,6 @@ import com.devteam.framework.web.service.TokenService;
 /**
  * Menu information
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/menu")

@@ -6,8 +6,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Code generation business field table gen_table_column
- *
- * @author ruoyi
  */
 public class GenTableColumn extends BaseEntity
 {

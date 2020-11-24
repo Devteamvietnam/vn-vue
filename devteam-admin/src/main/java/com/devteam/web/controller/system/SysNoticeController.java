@@ -25,7 +25,6 @@ import com.devteam.common.utils.SecurityUtils;
 /**
  * Announcement Information Operation Processing
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/notice")

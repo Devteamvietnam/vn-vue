@@ -12,7 +12,6 @@ import com.devteam.common.core.domain.BaseEntity;
 /**
  * Dictionary data table sys_dict_data
  *
- * @author ruoyi
  */
 public class SysDictData extends BaseEntity
 {

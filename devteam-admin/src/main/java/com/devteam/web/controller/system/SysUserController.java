@@ -36,7 +36,6 @@ import com.devteam.framework.web.service.TokenService;
 /**
  * User Info
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/user")

@@ -2,8 +2,6 @@ package com.devteam.common.constant;
 
 /**
  * Code generation general constants
- *
- * @author ruoyi
  */
 public class GenConstants
 {

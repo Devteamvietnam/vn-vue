@@ -2,8 +2,6 @@ package com.devteam.common.enums;
 
 /**
  * Operator category
- *
- * @author ruoyi
  */
 public enum OperatorType
 {

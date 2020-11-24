@@ -7,7 +7,6 @@ import com.devteam.generator.domain.GenTable;
 /**
  * Business service layer
  *
- * @author ruoyi
  */
 public interface IGenTableService
 {

@@ -10,8 +10,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Post table sys_post
- *
- * @author ruoyi
  */
 public class SysPost extends BaseEntity
 {

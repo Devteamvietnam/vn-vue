@@ -28,7 +28,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Department Information
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/dept")

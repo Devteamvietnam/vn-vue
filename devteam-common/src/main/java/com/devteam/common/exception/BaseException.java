@@ -6,7 +6,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Basic exception
  *
- * @author ruoyi
  */
 public class BaseException extends RuntimeException
 {

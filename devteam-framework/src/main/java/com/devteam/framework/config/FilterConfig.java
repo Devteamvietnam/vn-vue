@@ -13,8 +13,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Filter configuration
- *
- * @author ruoyi
  */
 @Configuration
 public class FilterConfig

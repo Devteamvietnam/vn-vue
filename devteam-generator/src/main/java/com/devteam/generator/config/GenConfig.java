@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 /**
  * Read code generation related configuration
  *
- * @author ruoyi
  */
 @Component
 @ConfigurationProperties(prefix = "gen")

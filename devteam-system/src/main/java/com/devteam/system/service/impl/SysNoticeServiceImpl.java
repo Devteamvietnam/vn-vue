@@ -10,8 +10,6 @@ import com.devteam.system.service.ISysNoticeService;
 
 /**
  * Announcement service layer implementation
- *
- * @author ruoyi
  */
 @Service
 public class SysNoticeServiceImpl implements ISysNoticeService

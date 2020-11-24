@@ -6,7 +6,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 /**
  * Deploy in a web container
  * 
- * @author ruoyi
  */
 public class DevteamServletInitializer extends SpringBootServletInitializer
 {

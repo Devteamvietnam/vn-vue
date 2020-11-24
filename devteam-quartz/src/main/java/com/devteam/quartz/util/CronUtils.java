@@ -7,8 +7,6 @@ import org.quartz.CronExpression;
 /**
  * cron expression tool class
  *
- * @author ruoyi
- *
  */
 public class CronUtils
 {

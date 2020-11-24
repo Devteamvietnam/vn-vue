@@ -10,8 +10,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Business table gen_table
- *
- * @author ruoyi
  */
 public class GenTable extends BaseEntity
 {

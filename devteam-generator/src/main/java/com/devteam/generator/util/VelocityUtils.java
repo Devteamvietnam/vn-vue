@@ -13,8 +13,6 @@ import com.devteam.generator.domain.GenTableColumn;
 
 /**
  * Template processing tools
- *
- * @author ruoyi
  */
 public class VelocityUtils
 {

@@ -11,8 +11,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Devteam is the first to implement custom permissions, ss is taken from the initials of Spring Security
- *
- * @author ruoyi
  */
 @Service("ss")
 public class PermissionService

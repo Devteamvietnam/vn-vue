@@ -18,8 +18,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Dictionary business layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysDictTypeServiceImpl implements ISysDictTypeService

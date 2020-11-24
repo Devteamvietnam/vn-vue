@@ -14,7 +14,6 @@ import com.devteam.common.utils.http.HttpHelper;
 /**
  * Build a request that can read inputStream repeatedly
  * 
- * @author ruoyi
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper
 {

@@ -6,8 +6,6 @@ import com.devteam.common.utils.ServletUtils;
 
 /**
  * Service related configuration
- *
- * @author ruoyi
  */
 @Component
 public class ServerConfig

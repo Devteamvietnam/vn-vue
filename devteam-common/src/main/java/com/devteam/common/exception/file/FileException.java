@@ -5,7 +5,6 @@ import com.devteam.common.exception.BaseException;
 /**
  * File information abnormal
  *
- * @author ruoyi
  */
 public class FileException extends BaseException
 {

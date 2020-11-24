@@ -5,8 +5,6 @@ import com.devteam.common.core.domain.model.LoginUser;
 
 /**
  * Online user service layer
- *
- * @author ruoyi
  */
 public interface ISysUserOnlineService
 {

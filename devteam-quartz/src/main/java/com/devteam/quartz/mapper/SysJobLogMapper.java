@@ -5,8 +5,6 @@ import com.devteam.quartz.domain.SysJobLog;
 
 /**
  * Scheduling task log information data layer
- *
- * @author ruoyi
  */
 public interface SysJobLogMapper
 {

@@ -11,8 +11,6 @@ import com.devteam.common.utils.Threads;
 
 /**
  * Thread pool configuration
- *
- * @author ruoyi
  **/
 @Configuration
 public class ThreadPoolConfig

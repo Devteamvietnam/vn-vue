@@ -2,8 +2,6 @@ package com.devteam.common.constant;
 
 /**
  * General constant information
- *
- * @author ruoyi
  */
 public class Constants
 {

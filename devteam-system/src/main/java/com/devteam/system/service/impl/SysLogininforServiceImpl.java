@@ -10,8 +10,6 @@ import com.devteam.system.service.ISysLogininforService;
 
 /**
  * System access log information service layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysLogininforServiceImpl implements ISysLogininforService

@@ -6,7 +6,6 @@ import com.devteam.generator.domain.GenTableColumn;
 /**
  * Business field Service layer
  *
- * @author ruoyi
  */
 public interface IGenTableColumnService
 {

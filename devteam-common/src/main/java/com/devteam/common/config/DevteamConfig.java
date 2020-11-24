@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 /**
  * Read project related configuration
  *
- * @author ruoyi
  */
 @Component
 @ConfigurationProperties(prefix = "devteam")

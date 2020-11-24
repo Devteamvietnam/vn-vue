@@ -11,7 +11,6 @@ import com.devteam.common.enums.OperatorType;
 /**
  * Customized operation log record annotation
  *
- * @author ruoyi
  *
  */
 @Target({ ElementType.PARAMETER, ElementType.METHOD })

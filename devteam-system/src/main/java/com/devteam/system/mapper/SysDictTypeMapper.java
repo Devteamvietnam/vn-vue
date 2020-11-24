@@ -6,8 +6,6 @@ import com.devteam.common.core.domain.entity.SysDictType;
 
 /**
  * Dictionary table data layer
- *
- * @author ruoyi
  */
 @Mapper
 public interface SysDictTypeMapper

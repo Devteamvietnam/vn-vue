@@ -8,8 +8,6 @@ import java.util.Properties;
 
 /**
  * Timing task configuration
- *
- * @author ruoyi
  */
 @Configuration
 public class ScheduleConfig

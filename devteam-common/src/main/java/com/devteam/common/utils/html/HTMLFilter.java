@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 /**
  * HTML filter, used to remove hidden dangers of XSS vulnerabilities.
  *
- * @author ruoyi
  */
 public final class HTMLFilter
 {
@@ -245,7 +244,7 @@ public final class HTMLFilter
             // try and form html
             //
             s = regexReplace(P_END_ARROW, "", s);
-            // 不追加结束标签
+         // Do not append the end tag
             s = regexReplace(P_BODY_TO_END, "<$1>", s);
             s = regexReplace(P_XML_CONTENT, "$1<$2", s);
 

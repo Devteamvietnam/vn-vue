@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Data source switching processing
- *
- * @author ruoyi
  */
 public class DynamicDataSourceContextHolder
 {

@@ -26,8 +26,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Mybatis support * matching scan package
- *
- * @author ruoyi
  */
 
 @Configuration
