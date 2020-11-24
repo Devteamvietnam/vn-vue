@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [Devteam] Package Webwar/jar
+echo [Devteam] Package build Webwar/jar
 echo.
 
 %~d0

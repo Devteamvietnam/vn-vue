@@ -60,13 +60,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Person charge" prop="leader">
+            <el-form-item label="Person leader" prop="leader">
               <el-input v-model="form.leader" placeholder="Please enter the person in charge" maxlength="20" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Contact" prop="phone">
-              <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="11" />
+              <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="10" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
