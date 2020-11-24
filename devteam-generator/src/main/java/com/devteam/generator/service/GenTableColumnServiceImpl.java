@@ -9,8 +9,6 @@ import com.devteam.generator.mapper.GenTableColumnMapper;
 
 /**
  * Business field service layer implementation
- *
- * @author ruoyi
  */
 @Service
 public class GenTableColumnServiceImpl implements IGenTableColumnService {

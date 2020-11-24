@@ -18,8 +18,6 @@ import com.devteam.framework.interceptor.RepeatSubmitInterceptor;
 /**
  * Determine whether the request URL and data are the same as the last time,
  * If it is the same as last time, the form is repeated. The effective time is within 10 seconds.
- *
- * @author ruoyi
  */
 @Component
 public class SameUrlDataInterceptor extends RepeatSubmitInterceptor

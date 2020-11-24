@@ -6,8 +6,6 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
  * Dynamic data source
- *
- * @author ruoyi
  */
 public class DynamicDataSource extends AbstractRoutingDataSource
 {

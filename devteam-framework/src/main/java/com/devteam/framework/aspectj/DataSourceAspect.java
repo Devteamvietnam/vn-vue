@@ -18,7 +18,6 @@ import com.devteam.framework.datasource.DynamicDataSourceContextHolder;
 /**
  * Multi-data source processing
  *
- * @author ruoyi
  */
 @Aspect
 @Order(1)

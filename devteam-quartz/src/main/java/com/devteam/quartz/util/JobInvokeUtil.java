@@ -10,8 +10,6 @@ import com.devteam.quartz.domain.SysJob;
 
 /**
  * Task execution tool
- *
- * @author ruoyi
  */
 public class JobInvokeUtil
 {

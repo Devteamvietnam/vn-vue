@@ -17,9 +17,6 @@ import com.devteam.quartz.domain.SysJob;
 
 /**
  * Timing task tools
- *
- * @author ruoyi
- *
  */
 public class ScheduleUtils
 {

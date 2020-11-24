@@ -21,7 +21,6 @@ import com.devteam.framework.security.handle.LogoutSuccessHandlerImpl;
 /**
  * spring security configuration
  *
- * @author ruoyi
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter

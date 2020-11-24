@@ -18,7 +18,6 @@ import com.devteam.common.core.domain.BaseEntity;
 /**
  * User object sys_user
  *
- * @author ruoyi
  */
 public class SysUser extends BaseEntity
 {

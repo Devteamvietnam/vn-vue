@@ -23,7 +23,6 @@ import com.devteam.framework.web.service.TokenService;
 /**
  * Login authentication
  *
- * @author ruoyi
  */
 @RestController
 public class SysLoginController

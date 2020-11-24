@@ -6,8 +6,6 @@ import com.devteam.common.constant.Constants;
 
 /**
  * VelocityEngine factory
- *
- * @author RuoYi
  */
 public class VelocityInitializer
 {

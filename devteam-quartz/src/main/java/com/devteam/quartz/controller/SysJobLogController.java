@@ -19,8 +19,6 @@ import com.devteam.quartz.service.ISysJobLogService;
 
 /**
  * Scheduling log operation processing
- *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/monitor/jobLog")

@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysConfig;
 
 /**
  * Parameter configuration data layer
- *
- * @author ruoyi
  */
 public interface SysConfigMapper
 {

@@ -12,7 +12,6 @@ import com.devteam.common.core.domain.BaseEntity;
 /**
  * Department table sys_dept
  *
- * @author ruoyi
  */
 public class SysDept extends BaseEntity
 {
@@ -117,7 +116,7 @@ public class SysDept extends BaseEntity
         this.leader = leader;
     }
 
-    @Size(min = 0, max = 11, message = "The length of the contact number cannot exceed 11 characters")
+    @Size(min = 0, max = 10, message = "The length of the contact number cannot exceed 10 characters")
     public String getPhone()
     {
         return phone;

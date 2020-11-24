@@ -12,8 +12,6 @@ import com.devteam.common.enums.DataSourceType;
  * Customize multi-data source switch annotation
  *
  * Priority: method first, class later, if the method covers the data source type on the class, the method shall prevail, otherwise the method shall prevail
- *
- * @author ruoyi
  */
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

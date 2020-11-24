@@ -4,8 +4,6 @@ import com.devteam.common.utils.ServletUtils;
 
 /**
  * Form data processing
- *
- * @author ruoyi
  */
 public class TableSupport
 {

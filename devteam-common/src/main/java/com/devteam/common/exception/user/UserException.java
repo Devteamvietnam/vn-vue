@@ -5,7 +5,6 @@ import com.devteam.common.exception.BaseException;
 /**
  * User information exception class
  * 
- * @author ruoyi
  */
 public class UserException extends BaseException
 {

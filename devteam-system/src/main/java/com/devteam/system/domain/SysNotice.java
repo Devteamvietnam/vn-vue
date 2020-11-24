@@ -8,8 +8,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Notification form sys_notice
- *
- * @author ruoyi
  */
 public class SysNotice extends BaseEntity
 {

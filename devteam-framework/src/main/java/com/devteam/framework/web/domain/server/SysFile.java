@@ -2,8 +2,6 @@ package com.devteam.framework.web.domain.server;
 
 /**
  * System file related information
- *
- * @author ruoyi
  */
 public class SysFile
 {

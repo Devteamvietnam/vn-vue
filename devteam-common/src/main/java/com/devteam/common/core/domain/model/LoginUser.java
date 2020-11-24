@@ -10,7 +10,6 @@ import com.devteam.common.core.domain.entity.SysUser;
 /**
  * Login user identity permissions
  *
- * @author ruoyi
  */
 public class LoginUser implements UserDetails
 {

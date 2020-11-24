@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [Devteam] Build
+echo [Devteam] Run devteam-admin
 echo.
 
 cd %~dp0

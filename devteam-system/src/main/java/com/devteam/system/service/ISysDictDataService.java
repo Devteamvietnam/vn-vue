@@ -5,8 +5,6 @@ import com.devteam.common.core.domain.entity.SysDictData;
 
 /**
  * Dictionary business layer
- *
- * @author ruoyi
  */
 public interface ISysDictDataService
 {

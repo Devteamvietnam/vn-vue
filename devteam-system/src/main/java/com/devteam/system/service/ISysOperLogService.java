@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysOperLog;
 
 /**
  * Operation log service layer
- *
- * @author ruoyi
  */
 public interface ISysOperLogService
 {

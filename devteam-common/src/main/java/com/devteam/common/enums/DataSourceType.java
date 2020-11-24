@@ -2,8 +2,6 @@ package com.devteam.common.enums;
 
 /**
  * data source
- *
- * @author ruoyi
  */
 public enum DataSourceType
 {

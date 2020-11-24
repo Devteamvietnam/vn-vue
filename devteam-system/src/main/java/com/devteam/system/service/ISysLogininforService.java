@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysLogininfor;
 
 /**
  * System access log information service layer
- *
- * @author ruoyi
  */
 public interface ISysLogininforService
 {

@@ -16,8 +16,6 @@ import com.devteam.quartz.util.CronUtils;
 
 /**
  * Timing task scheduling table sys_job
- *
- * @author ruoyi
  */
 public class SysJob extends BaseEntity implements Serializable
 {

@@ -21,7 +21,6 @@ import com.devteam.common.utils.poi.ExcelUtil;
 /**
  * Operation log record
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/monitor/operlog")

@@ -8,8 +8,6 @@ import com.devteam.common.utils.spring.SpringUtils;
 
 /**
  * Asynchronous task manager
- *
- * @author ruoyi
  */
 public class AsyncManager
 {

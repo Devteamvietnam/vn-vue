@@ -2,8 +2,6 @@ package com.devteam.framework.web.domain.server;
 
 /**
  * System related information
- *
- * @author ruoyi
  */
 public class Sys
 {

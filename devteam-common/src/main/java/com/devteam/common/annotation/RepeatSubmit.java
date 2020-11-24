@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 /**
  * Custom annotations prevent repeated submission of forms
  * 
- * @author ruoyi
  *
  */
 @Inherited

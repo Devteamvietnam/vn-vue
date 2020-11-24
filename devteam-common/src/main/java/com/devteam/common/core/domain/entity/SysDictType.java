@@ -10,8 +10,7 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Dictionary type table sys_dict_type
- *
- * @author ruoyi
+
  */
 public class SysDictType extends BaseEntity
 {

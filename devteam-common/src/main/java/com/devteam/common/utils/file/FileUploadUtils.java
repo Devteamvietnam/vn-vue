@@ -16,7 +16,6 @@ import com.devteam.common.utils.uuid.IdUtils;
 /**
  * File upload tools
  *
- * @author ruoyi
  */
 public class FileUploadUtils
 {

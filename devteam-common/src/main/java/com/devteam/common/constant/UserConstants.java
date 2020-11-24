@@ -3,7 +3,6 @@ package com.devteam.common.constant;
 /**
  * User constant information
  *
- * @author ruoyi
  */
 public class UserConstants
 {

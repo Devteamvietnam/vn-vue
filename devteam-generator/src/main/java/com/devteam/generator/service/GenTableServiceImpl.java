@@ -38,8 +38,6 @@ import com.devteam.generator.util.VelocityUtils;
 
 /**
  * Business service layer implementation
- *
- * @author ruoyi
  */
 @Service
 public class GenTableServiceImpl implements IGenTableService

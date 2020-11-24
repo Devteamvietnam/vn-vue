@@ -11,8 +11,6 @@ import com.devteam.common.utils.DictUtils;
 
 /**
  * Dictionary business layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysDictDataServiceImpl implements ISysDictDataService

@@ -3,7 +3,6 @@ package com.devteam.common.enums;
 /**
  * user status
  *
- * @author ruoyi
  */
 public enum UserStatus
 {

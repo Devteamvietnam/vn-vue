@@ -3,7 +3,6 @@ package com.devteam.common.exception.file;
 /**
  * File name overlength limit exception class
  *
- * @author ruoyi
  */
 public class FileNameLengthLimitExceededException extends FileException
 {

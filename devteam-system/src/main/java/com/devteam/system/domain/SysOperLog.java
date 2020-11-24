@@ -8,8 +8,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Operation log record table oper_log
- *
- * @author ruoyi
  */
 public class SysOperLog extends BaseEntity
 {

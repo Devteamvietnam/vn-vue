@@ -26,8 +26,6 @@ import com.devteam.framework.datasource.DynamicDataSource;
 
 /**
  * druid configuration multiple data sources
- *
- * @author ruoyi
  */
 @Configuration
 public class DruidConfig

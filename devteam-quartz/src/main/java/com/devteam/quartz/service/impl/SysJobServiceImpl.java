@@ -20,7 +20,6 @@ import com.devteam.quartz.util.ScheduleUtils;
 /**
  * Timing task scheduling information service layer
  *
- * @author ruoyi
  */
 @Service
 public class SysJobServiceImpl implements ISysJobService

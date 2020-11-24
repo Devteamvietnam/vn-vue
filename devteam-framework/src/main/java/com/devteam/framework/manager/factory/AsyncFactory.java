@@ -19,8 +19,6 @@ import eu.bitwalker.useragentutils.UserAgent;
 
 /**
  * Asynchronous factory (for generating tasks)
- *
- * @author ruoyi
  */
 public class AsyncFactory
 {

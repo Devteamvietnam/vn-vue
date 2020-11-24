@@ -20,8 +20,6 @@ import com.devteam.framework.web.service.TokenService;
 
 /**
  * Data filtering processing
- *
- * @author ruoyi
  */
 @Aspect
 @Component

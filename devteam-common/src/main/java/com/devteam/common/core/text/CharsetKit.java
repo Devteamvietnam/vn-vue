@@ -7,7 +7,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Character set tools
  *
- * @author ruoyi
  */
 public class CharsetKit
 {

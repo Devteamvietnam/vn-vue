@@ -9,8 +9,6 @@ import com.devteam.common.core.domain.entity.SysMenu;
 
 /**
  * Treeselect tree structure entity class
- *
- * @author ruoyi
  */
 public class TreeSelect implements Serializable
 {

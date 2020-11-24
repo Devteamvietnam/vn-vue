@@ -3,7 +3,6 @@ package com.devteam.common.core.domain.model;
 /**
  * User login object
  *
- * @author ruoyi
  */
 public class LoginBody
 {

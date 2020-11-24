@@ -6,7 +6,6 @@ import com.devteam.quartz.domain.SysJob;
 /**
  * Scheduling task information data layer
  *
- * @author ruoyi
  */
 public interface SysJobMapper
 {

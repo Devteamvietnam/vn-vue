@@ -15,8 +15,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Authentication failure processing class Return unauthorized
- *
- * @author ruoyi
  */
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint, Serializable

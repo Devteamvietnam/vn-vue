@@ -19,8 +19,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Global exception handler
- *
- * @author ruoyi
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler

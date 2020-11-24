@@ -6,8 +6,6 @@ import com.devteam.quartz.domain.SysJob;
 
 /**
  * Timing task processing (concurrent execution is prohibited)
- * 
- * @author ruoyi
  *
  */
 @DisallowConcurrentExecution

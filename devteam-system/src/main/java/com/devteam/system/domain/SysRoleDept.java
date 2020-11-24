@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * Role and department association sys_role_dept
- *
- * @author ruoyi
  */
 public class SysRoleDept
 {

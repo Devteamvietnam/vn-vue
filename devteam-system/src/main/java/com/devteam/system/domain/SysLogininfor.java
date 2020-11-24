@@ -8,8 +8,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * System access record table sys_logininfor
- *
- * @author ruoyi
  */
 public class SysLogininfor extends BaseEntity
 {

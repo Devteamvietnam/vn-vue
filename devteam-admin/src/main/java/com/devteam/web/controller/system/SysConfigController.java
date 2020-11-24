@@ -28,7 +28,6 @@ import com.devteam.common.utils.poi.ExcelUtil;
 /**
  * Parameter configuration information operation processing
  *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/config")

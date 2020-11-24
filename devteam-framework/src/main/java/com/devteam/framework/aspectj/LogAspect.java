@@ -33,7 +33,6 @@ import com.devteam.framework.web.service.TokenService;
 /**
  * Operation log record processing
  *
- * @author ruoyi
  */
 @Aspect
 @Component

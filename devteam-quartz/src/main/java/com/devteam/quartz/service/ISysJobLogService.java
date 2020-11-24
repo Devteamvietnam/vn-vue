@@ -5,8 +5,6 @@ import com.devteam.quartz.domain.SysJobLog;
 
 /**
  * Scheduled task scheduling log information service layer
- *
- * @author ruoyi
  */
 public interface ISysJobLogService
 {

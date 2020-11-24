@@ -3,7 +3,6 @@ package com.devteam.common.constant;
 /**
  * Return status code
  *
- * @author ruoyi
  */
 public class HttpStatus
 {

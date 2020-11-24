@@ -26,8 +26,6 @@ import com.devteam.common.utils.poi.ExcelUtil;
 
 /**
  * Post information operation processing
- *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/post")

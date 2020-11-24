@@ -3,7 +3,6 @@ package com.devteam.common.exception.user;
 /**
  * Verification code invalidation exception
  * 
- * @author ruoyi
  */
 public class CaptchaExpireException extends UserException
 {

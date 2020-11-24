@@ -9,7 +9,6 @@ import com.devteam.common.core.controller.BaseController;
 /**
  * swagger
  * 
- * @author ruoyi
  */
 @Controller
 @RequestMapping("/tool/swagger")

@@ -20,8 +20,6 @@ import com.devteam.framework.manager.factory.AsyncFactory;
 
 /**
  * Login verification method
- *
- * @author ruoyi
  */
 @Component
 public class SysLoginService

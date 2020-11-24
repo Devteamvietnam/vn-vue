@@ -8,8 +8,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Scheduled task scheduling log table sys_job_log
- *
- * @author ruoyi
  */
 public class SysJobLog extends BaseEntity
 {

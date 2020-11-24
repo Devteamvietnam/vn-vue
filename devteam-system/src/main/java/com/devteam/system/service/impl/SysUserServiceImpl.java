@@ -28,8 +28,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * User business layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService

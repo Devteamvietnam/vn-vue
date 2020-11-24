@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 /**
  * Custom export Excel data annotation
  *
- * @author ruoyi
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

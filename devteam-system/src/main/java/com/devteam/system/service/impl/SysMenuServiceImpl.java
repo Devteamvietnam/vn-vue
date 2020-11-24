@@ -27,8 +27,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Menu business layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysMenuServiceImpl implements ISysMenuService

@@ -3,7 +3,6 @@ package com.devteam.common.exception.job;
 /**
  * Abnormal planning strategy
  *
- * @author ruoyi
  */
 public class TaskException extends Exception
 {

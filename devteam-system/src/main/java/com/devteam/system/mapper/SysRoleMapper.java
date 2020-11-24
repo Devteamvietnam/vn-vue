@@ -5,8 +5,6 @@ import com.devteam.common.core.domain.entity.SysRole;
 
 /**
  * Role table data layer
- *
- * @author ruoyi
  */
 public interface SysRoleMapper
 {

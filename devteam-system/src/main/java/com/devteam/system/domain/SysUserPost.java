@@ -5,8 +5,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * User and post association sys_user_post
- *
- * @author ruoyi
  */
 public class SysUserPost
 {

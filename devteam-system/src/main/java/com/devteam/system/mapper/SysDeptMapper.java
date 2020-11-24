@@ -6,8 +6,6 @@ import com.devteam.common.core.domain.entity.SysDept;
 
 /**
  * Department management data layer
- *
- * @author ruoyi
  */
 public interface SysDeptMapper
 {

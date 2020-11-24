@@ -10,7 +10,6 @@ import com.devteam.quartz.service.ISysJobLogService;
 /**
  * Scheduled task scheduling log information service layer
  *
- * @author ruoyi
  */
 @Service
 public class SysJobLogServiceImpl implements ISysJobLogService

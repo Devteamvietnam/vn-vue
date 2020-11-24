@@ -18,7 +18,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Filter to prevent XSS attacks
  *
- * @author ruoyi
  */
 public class XssFilter implements Filter
 {

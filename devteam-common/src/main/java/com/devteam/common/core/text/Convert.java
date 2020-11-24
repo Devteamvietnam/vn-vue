@@ -10,8 +10,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Type converter
- *
- * @author ruoyi
  */
 public class Convert
 {

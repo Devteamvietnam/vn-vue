@@ -10,8 +10,6 @@ import com.devteam.common.core.domain.BaseEntity;
 
 /**
  * Parameter configuration table sys_config
- *
- * @author ruoyi
  */
 public class SysConfig extends BaseEntity
 {

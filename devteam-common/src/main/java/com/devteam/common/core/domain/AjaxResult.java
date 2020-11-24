@@ -6,8 +6,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Operation message reminder
- *
- * @author ruoyi
  */
 public class AjaxResult extends HashMap<String, Object>
 {
@@ -75,7 +73,7 @@ public class AjaxResult extends HashMap<String, Object>
      */
     public static AjaxResult success(Object data)
     {
-        return AjaxResult.success("operation successful", data);
+        return AjaxResult.success("Operation successful", data);
     }
 
     /**

@@ -4,18 +4,16 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.devteam.common.core.controller.BaseController;
 import com.devteam.common.core.domain.AjaxResult;
 import com.devteam.framework.web.domain.Server;
 
 /**
- * 服务器监控
- * 
- * @author ruoyi
+ * Server monitoring
+ *
  */
 @RestController
 @RequestMapping("/monitor/server")
-public class ServerController extends BaseController
+public class ServerController
 {
     @PreAuthorize("@ss.hasPermi('monitor:server:list')")
     @GetMapping()

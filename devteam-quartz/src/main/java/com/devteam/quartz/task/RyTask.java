@@ -6,7 +6,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Timing task scheduling test
  *
- * @author ruoyi
  */
 @Component("ryTask")
 public class RyTask

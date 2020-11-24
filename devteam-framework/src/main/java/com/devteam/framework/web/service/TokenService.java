@@ -23,7 +23,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 /**
  * Token verification processing
  *
- * @author ruoyi
  */
 @Component
 public class TokenService

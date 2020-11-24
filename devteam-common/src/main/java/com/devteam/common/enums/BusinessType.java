@@ -3,7 +3,6 @@ package com.devteam.common.enums;
 /**
  * Business operation type
  *
- * @author ruoyi
  */
 public enum BusinessType
 {

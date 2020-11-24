@@ -14,8 +14,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Post information service layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysPostServiceImpl implements ISysPostService

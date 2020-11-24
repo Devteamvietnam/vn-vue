@@ -5,8 +5,6 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
 /**
  * Verification code text generator
- *
- * @author ruoyi
  */
 public class KaptchaTextCreator extends DefaultTextCreator
 {

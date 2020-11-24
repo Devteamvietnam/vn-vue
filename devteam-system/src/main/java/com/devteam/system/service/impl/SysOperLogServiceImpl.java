@@ -10,8 +10,6 @@ import com.devteam.system.service.ISysOperLogService;
 
 /**
  * Operation log service layer processing
- *
- * @author ruoyi
  */
 @Service
 public class SysOperLogServiceImpl implements ISysOperLogService

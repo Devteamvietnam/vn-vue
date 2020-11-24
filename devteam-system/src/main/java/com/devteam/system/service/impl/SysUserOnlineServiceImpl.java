@@ -10,7 +10,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Online user service layer processing
  *
- * @author ruoyi
  */
 @Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService

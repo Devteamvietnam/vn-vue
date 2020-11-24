@@ -9,8 +9,6 @@ import com.devteam.common.core.domain.entity.SysMenu;
 
 /**
  * Menu business layer
- *
- * @author ruoyi
  */
 public interface ISysMenuService
 {

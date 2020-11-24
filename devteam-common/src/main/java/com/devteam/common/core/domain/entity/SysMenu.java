@@ -11,7 +11,6 @@ import com.devteam.common.core.domain.BaseEntity;
 /**
  * Menu permission table sys_menu
  *
- * @author ruoyi
  */
 public class SysMenu extends BaseEntity
 {

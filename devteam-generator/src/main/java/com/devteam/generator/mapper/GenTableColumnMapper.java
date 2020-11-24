@@ -5,8 +5,6 @@ import com.devteam.generator.domain.GenTableColumn;
 
 /**
  * Business field data layer
- *
- * @author ruoyi
  */
 public interface GenTableColumnMapper
 {

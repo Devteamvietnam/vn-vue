@@ -16,7 +16,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * File processing tools
  *
- * @author ruoyi
  */
 public class FileUtils extends org.apache.commons.io.FileUtils
 {

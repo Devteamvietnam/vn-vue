@@ -7,8 +7,6 @@ import com.devteam.quartz.domain.SysJob;
 
 /**
  * Timing task scheduling information information service layer
- *
- * @author ruoyi
  */
 public interface ISysJobService
 {

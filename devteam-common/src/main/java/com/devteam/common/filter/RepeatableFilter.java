@@ -14,7 +14,6 @@ import com.devteam.common.utils.StringUtils;
 /**
  * Repeatable filter
  * 
- * @author ruoyi
  */
 public class RepeatableFilter implements Filter
 {

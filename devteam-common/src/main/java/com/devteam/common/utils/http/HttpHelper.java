@@ -12,8 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * General http tool package
- *
- * @author ruoyi
+ 
  */
 public class HttpHelper
 {

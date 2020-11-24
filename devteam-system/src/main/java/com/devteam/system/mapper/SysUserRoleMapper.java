@@ -7,8 +7,6 @@ import com.devteam.system.domain.SysUserRole;
 
 /**
  * User and role association table Data layer
- *
- * @author ruoyi
  */
 public interface SysUserRoleMapper
 {

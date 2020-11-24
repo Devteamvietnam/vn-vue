@@ -6,8 +6,6 @@ import com.devteam.system.domain.SysPost;
 
 /**
  * Job information service layer
- *
- * @author ruoyi
  */
 public interface ISysPostService
 {

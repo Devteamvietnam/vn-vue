@@ -23,7 +23,6 @@ import io.swagger.annotations.ApiOperation;
 /**
  * swagger Test controller
  * 
- * @author ruoyi
  */
 @Api("User Information Management")
 @RestController

@@ -32,8 +32,6 @@ import com.devteam.framework.web.service.TokenService;
 
 /**
  * Role information
- *
- * @author ruoyi
  */
 @RestController
 @RequestMapping("/system/role")

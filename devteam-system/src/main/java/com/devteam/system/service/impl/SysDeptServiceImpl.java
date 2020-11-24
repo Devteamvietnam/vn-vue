@@ -20,8 +20,6 @@ import com.devteam.common.utils.StringUtils;
 
 /**
  * Department management service realization
- *
- * @author ruoyi
  */
 @Service
 public class SysDeptServiceImpl implements ISysDeptService

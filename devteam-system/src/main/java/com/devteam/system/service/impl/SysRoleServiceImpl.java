@@ -26,7 +26,6 @@ import com.devteam.common.utils.spring.SpringUtils;
 /**
  * Role business layer processing
  *
- * @author ruoyi
  */
 @Service
 public class SysRoleServiceImpl implements ISysRoleService
