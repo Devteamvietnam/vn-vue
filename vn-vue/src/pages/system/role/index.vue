@@ -38,12 +38,12 @@
     </el-row>
 
     <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" align="center" />
-      <el-table-column label="Id" prop="roleId" width="120" />
+      <el-table-column type="selection" width="60" align="center" />
+      <el-table-column sortable label="Id" prop="roleId" width="150" />
       <el-table-column label="Name" prop="roleName" :show-overflow-tooltip="true" width="150" />
       <el-table-column label="Permission" prop="roleKey" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="Sort" prop="roleSort" width="100" />
-      <el-table-column label="Status" align="center" width="100">
+      <el-table-column label="Sort" prop="roleSort" width="130" />
+      <el-table-column label="Status" align="center" width="130">
         <template slot-scope="scope">
           <el-switch v-model="scope.row.status" active-value="0" inactive-value="1" @change="handleStatusChange(scope.row)"></el-switch>
         </template>
@@ -55,9 +55,9 @@
       </el-table-column>
       <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']">Edit</el-button>
+         <!--  <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:role:edit']">Edit</el-button> -->
           <el-button size="mini" type="text" icon="el-icon-circle-check" @click="handleDataScope(scope.row)" v-hasPermi="['system:role:edit']">Permission</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']">Delete</el-button>
+         <!-- <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:role:remove']">Delete</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -98,8 +98,8 @@
     </el-dialog>
 
     <!-- Assign role data permissions dialog box -->
-    <el-dialog :title="title" :visible.sync="openDataScope" width="600px" append-to-body>
-      <el-form :model="form" label-width="100px">
+    <el-dialog :title="title" :visible.sync="openDataScope" width="700px" append-to-body>
+      <el-form :model="form" label-width="120px">
         <el-form-item label="Name">
           <el-input v-model="form.roleName" :disabled="true" />
         </el-form-item>
@@ -144,7 +144,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // role table data

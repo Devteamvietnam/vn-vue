@@ -104,7 +104,7 @@ export default {
       // Mask layer
       loading: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // table tree data
       deptList: [],
       // Department tree options

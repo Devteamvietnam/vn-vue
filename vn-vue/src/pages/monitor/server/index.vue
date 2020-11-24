@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row>
-      <el-col :span="12" class="card-box">
+      <el-col :span="24" class="card-box">
         <el-card>
           <div slot="header"><span>CPU</span></div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
@@ -43,7 +43,7 @@
         </el-card>
       </el-col>
 
-      <el-col :span="12" class="card-box">
+      <el-col :span="24" class="card-box">
         <el-card>
           <div slot="header"><span>Memory</span></div>
           <div class="el-table el-table--enable-row-hover el-table--medium">
