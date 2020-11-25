@@ -19,8 +19,8 @@
       </el-row>
 
       <div slot="footer">
-        <el-button @click="close"> cancel </el-button>
-        <el-button type="primary" @click="handelConfirm"> determine </el-button>
+        <el-button @click="close"> Cancel </el-button>
+        <el-button type="primary" @click="handelConfirm"> Determine </el-button>
       </div>
     </el-dialog>
   </div>

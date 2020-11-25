@@ -83,7 +83,7 @@
     </el-row>
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="130px">
         <el-row>
           <el-col :span="12">
@@ -169,7 +169,7 @@
     </el-dialog>
 
     <!-- User import dialog box -->
-    <el-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="upload.title" :visible.sync="upload.open" width="400px" append-to-body>
       <el-upload ref="upload" :limit="1" accept=".xlsx, .xls" :headers="upload.headers" :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading" :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
@@ -196,10 +196,12 @@ import { getToken } from "@/utils/auth"
 import { treeselect } from "@/services/api/system/dept"
 import Treeselect from "@riophae/vue-treeselect"
 import "@riophae/vue-treeselect/dist/vue-treeselect.css"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "User",
   components: { Treeselect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -425,7 +427,7 @@ export default {
     },
     /** Reset password button operation */
     handleResetPwd(row) {
-      this.$prompt('Please enter "' + row.userName + '" new password', "prompt", {
+      this.$prompt('Please enter "' + row.userName + '" new password', "Prompt", {
         confirmButtonText: "OK",
         cancelButtonText: "Cancel",
       })

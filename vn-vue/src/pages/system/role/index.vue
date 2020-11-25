@@ -65,7 +65,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify role configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-form-item label="Name" prop="roleName">
           <el-input v-model="form.roleName" placeholder="Please enter the role name" />
@@ -98,8 +98,8 @@
     </el-dialog>
 
     <!-- Assign role data permissions dialog box -->
-    <el-dialog :title="title" :visible.sync="openDataScope" width="700px" append-to-body>
-      <el-form :model="form" label-width="120px">
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="openDataScope" width="700px" append-to-body>
+      <el-form :model="form" label-width="130px">
         <el-form-item label="Name">
           <el-input v-model="form.roleName" :disabled="true" />
         </el-form-item>
@@ -127,12 +127,14 @@
 </template>
 
 <script>
-import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from "@/services/api/system/role";
-import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/services/api/system/menu";
-import { treeselect as deptTreeselect, roleDeptTreeselect } from "@/services/api/system/dept";
+import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from "@/services/api/system/role"
+import { treeselect as menuTreeselect, roleMenuTreeselect } from "@/services/api/system/menu"
+import { treeselect as deptTreeselect, roleDeptTreeselect } from "@/services/api/system/dept"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Role",
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

@@ -54,7 +54,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify announcement dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="780px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="780px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
@@ -92,11 +92,14 @@
 </template>
 
 <script>
-import { listNotice, getNotice, delNotice, addNotice, updateNotice, exportNotice } from "@/services/api/system/notice";
-import Editor from "@/components/Editor";
+import { listNotice, getNotice, delNotice, addNotice, updateNotice, exportNotice } from "@/services/api/system/notice"
+import Editor from "@/components/Editor"
+import elDragDialog from '@/components/el-drag-dialog'
+
 
 export default {
   name: "Notice",
+  directives: { elDragDialog },
   components: {
     Editor,
   },

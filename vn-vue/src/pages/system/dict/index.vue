@@ -69,7 +69,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog  v-el-drag-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="Name" prop="dictName">
           <el-input v-model="form.dictName" placeholder="Please enter the name of the dictionary" />
@@ -95,10 +95,12 @@
 </template>
 
 <script>
-import { listType, getType, delType, addType, updateType, exportType, clearCache } from "@/services/api/system/dict/type";
+import { listType, getType, delType, addType, updateType, exportType, clearCache } from "@/services/api/system/dict/type"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Dict",
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
