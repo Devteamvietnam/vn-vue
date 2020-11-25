@@ -64,7 +64,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="Name" prop="configName">
           <el-input v-model="form.configName" placeholder="Please enter the parameter name" />
@@ -93,10 +93,11 @@
 </template>
 
 <script>
-import { listConfig, getConfig, delConfig, addConfig, updateConfig, exportConfig, clearCache } from "@/services/api/system/config";
-
+import { listConfig, getConfig, delConfig, addConfig, updateConfig, exportConfig, clearCache } from "@/services/api/system/config"
+import elDragDialog from '@/components/el-drag-dialog'
 export default {
   name: "Config",
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

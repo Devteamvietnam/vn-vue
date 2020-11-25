@@ -62,11 +62,11 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify timed task dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="job name" prop="jobName">
+            <el-form-item label="Job name" prop="jobName">
               <el-input v-model="form.jobName" placeholder="Please enter the name of the job" />
             </el-form-item>
           </el-col>
@@ -130,7 +130,7 @@
     </el-dialog>
 
     <!-- Detailed task log -->
-    <el-dialog title="Task details" :visible.sync="openView" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog title="Task details" :visible.sync="openView" width="700px" append-to-body>
       <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-row>
           <el-col :span="12">
@@ -180,10 +180,12 @@
 </template>
 
 <script>
-import { listJob, getJob, delJob, addJob, updateJob, exportJob, runJob, changeJobStatus } from "@/services/api/monitor/job";
+import { listJob, getJob, delJob, addJob, updateJob, exportJob, runJob, changeJobStatus } from "@/services/api/monitor/job"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Job",
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

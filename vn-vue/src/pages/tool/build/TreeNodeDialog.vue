@@ -61,10 +61,10 @@
           type="primary"
           @click="handelConfirm"
         >
-          determine
+          Determine
         </el-button>
         <el-button @click="close">
-          cancel
+          Cancel
         </el-button>
       </div>
     </el-dialog>

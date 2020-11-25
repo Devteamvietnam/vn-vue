@@ -59,7 +59,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Detailed schedule log -->
-    <el-dialog title="Schedule log details" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog title="Schedule log details" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" label-width="100px" size="mini">
         <el-row>
           <el-col :span="12">
@@ -95,10 +95,11 @@
 </template>
 
 <script>
-import { listJobLog, delJobLog, exportJobLog, cleanJobLog } from "@/services/api/monitor/jobLog";
-
+import { listJobLog, delJobLog, exportJobLog, cleanJobLog } from "@/services/api/monitor/jobLog"
+import elDragDialog from '@/components/el-drag-dialog'
 export default {
   name: "JobLog",
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

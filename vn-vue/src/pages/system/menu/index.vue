@@ -48,7 +48,7 @@
     </el-table>
 
     <!-- Add or modify menu dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="24">
@@ -142,14 +142,16 @@
 </template>
 
 <script>
-import { listMenu, getMenu, delMenu, addMenu, updateMenu } from "@/services/api/system/menu";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-import IconSelect from "@/components/IconSelect";
+import { listMenu, getMenu, delMenu, addMenu, updateMenu } from "@/services/api/system/menu"
+import Treeselect from "@riophae/vue-treeselect"
+import "@riophae/vue-treeselect/dist/vue-treeselect.css"
+import IconSelect from "@/components/IconSelect"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Menu",
   components: { Treeselect, IconSelect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

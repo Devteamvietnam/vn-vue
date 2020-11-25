@@ -41,7 +41,7 @@
     </el-table>
 
     <!-- Add or modify department dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="24" v-if="form.parentId !== 0">
@@ -92,13 +92,15 @@
 </template>
 
 <script>
-import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/services/api/system/dept";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from "@/services/api/system/dept"
+import Treeselect from "@riophae/vue-treeselect"
+import "@riophae/vue-treeselect/dist/vue-treeselect.css"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Dept",
   components: { Treeselect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer

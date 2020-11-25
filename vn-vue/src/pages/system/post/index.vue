@@ -56,7 +56,7 @@
     <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
 
     <!-- Add or modify post dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="Name" prop="postName">
           <el-input v-model="form.postName" placeholder="Please enter the post name" />
@@ -85,10 +85,12 @@
 </template>
 
 <script>
-import { listPost, getPost, delPost, addPost, updatePost, exportPost } from "@/services/api/system/post";
+import { listPost, getPost, delPost, addPost, updatePost, exportPost } from "@/services/api/system/post"
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: "Post",
+   directives: { elDragDialog },
   data() {
     return {
       // Mask layer
