@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.devteam.system.mapper.SysWareMapper">
+
+	<resultMap type="SysWare" id="SysWareResult">
+		<id     property="wareId"        column="ware_id"       />
+		<result property="wareCode"      column="ware_code"     />
+		<result property="wareName"      column="ware_name"     />
+		<result property="wareSort"      column="ware_sort"     />
+		<result property="status"        column="status"        />
+		<result property="createBy"      column="create_by"     />
+		<result property="createTime"    column="create_time"   />
+		<result property="updateBy"      column="update_by"     />
+		<result property="updateTime"    column="update_time"   />
+		<result property="remark"        column="remark"        />
+	</resultMap>
+	
+	<sql id="selectWareVo">
+        select ware_id, ware_code, ware_name, ware_sort, status, create_by, create_time, remark 
+		from sys_ware
+    </sql>
+	
+	<select id="selectWareList" parameterType="SysWare" resultMap="SysWareResult">
+	    <include refid="selectWareVo"/>
+		<where>
+			<if test="wareCode != null and wareCode != ''">
+				AND ware_code like concat('%', #{wareCode}, '%')
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+			<if test="wareName != null and wareName != ''">
+				AND ware_name like concat('%', #{wareName}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectWareAll" resultMap="SysWareResult">
+		<include refid="selectWareVo"/>
+	</select>
+	
+	<select id="selectWareById" parameterType="Long" resultMap="SysWareResult">
+		<include refid="selectWareVo"/>
+		where ware_id = #{wareId}
+	</select>
+	
+	<select id="selectWareListByUserId" parameterType="Long" resultType="Integer">
+		select p.ware_id
+        from sys_ware p
+	        left join sys_user_ware up on up.ware_id = p.ware_id
+	        left join sys_user u on u.user_id = up.user_id
+	    where u.user_id = #{userId}
+	</select>
+	
+	<select id="selectWaresByUserName" parameterType="String" resultMap="SysWareResult">
+		select p.ware_id, p.ware_name, p.ware_code
+		from sys_ware p
+			 left join sys_user_ware up on up.ware_id = p.ware_id
+			 left join sys_user u on u.ware_id = up.ware_id
+		where u.user_name = #{userName}
+	</select>
+	
+	<select id="checkWareNameUnique" parameterType="String" resultMap="SysWareResult">
+		<include refid="selectWareVo"/>
+		 where ware_name=#{wareName} limit 1
+	</select>
+	
+	<select id="checkWareCodeUnique" parameterType="String" resultMap="SysWareResult">
+		<include refid="selectWareVo"/>
+		 where ware_code=#{wareCode} limit 1
+	</select>
+	
+	<update id="updateWare" parameterType="SysWare">
+ 		update sys_ware
+ 		<set>
+ 			<if test="wareCode != null and wareCode != ''">ware_code = #{wareCode},</if>
+ 			<if test="wareName != null and wareName != ''">ware_name = #{wareName},</if>
+ 			<if test="wareSort != null and wareSort != ''">ware_sort = #{wareSort},</if>
+ 			<if test="status != null and status != ''">status = #{status},</if>
+ 			<if test="remark != null">remark = #{remark},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where ware_id = #{wareId}
+	</update>
+ 	
+ 	<insert id="insertWare" parameterType="SysWare" useGeneratedKeys="true" keyProperty="wareId">
+ 		insert into sys_ware(
+ 			<if test="wareId != null and wareId != 0">ware_id,</if>
+ 			<if test="wareCode != null and wareCode != ''">ware_code,</if>
+ 			<if test="wareName != null and wareName != ''">ware_name,</if>
+ 			<if test="wareSort != null and wareSort != ''">ware_sort,</if>
+ 			<if test="status != null and status != ''">status,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="wareId != null and wareId != 0">#{wareId},</if>
+ 			<if test="wareCode != null and wareCode != ''">#{wareCode},</if>
+ 			<if test="wareName != null and wareName != ''">#{wareName},</if>
+ 			<if test="wareSort != null and wareSort != ''">#{wareSort},</if>
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+	<delete id="deleteWareById" parameterType="Long">
+		delete from sys_ware where ware_id = #{wareId}
+	</delete>
+	
+	<delete id="deleteWareByIds" parameterType="Long">
+ 		delete from sys_ware where ware_id in
+ 		<foreach collection="array" item="wareId" open="(" separator="," close=")">
+ 			#{wareId}
+        </foreach> 
+ 	</delete>
+
+</mapper> 
