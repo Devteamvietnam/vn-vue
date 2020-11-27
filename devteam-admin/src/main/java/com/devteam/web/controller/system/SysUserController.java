@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.devteam.system.service.ISysPostService;
 import com.devteam.system.service.ISysRoleService;
 import com.devteam.system.service.ISysUserService;
+import com.devteam.system.service.ISysWareService;
 import com.devteam.common.annotation.Log;
 import com.devteam.common.constant.UserConstants;
 import com.devteam.common.core.controller.BaseController;
@@ -49,6 +50,9 @@ public class SysUserController extends BaseController
 
     @Autowired
     private ISysPostService postService;
+    
+    @Autowired
+    private ISysWareService wareService;
 
     @Autowired
     private TokenService tokenService;
@@ -106,11 +110,13 @@ public class SysUserController extends BaseController
         List<SysRole> roles = roleService.selectRoleAll();
         ajax.put("roles", SysUser.isAdmin(userId)? roles: roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         ajax.put("posts", postService.selectPostAll());
+        ajax.put("wares", wareService.selectWareAll());
         if (StringUtils.isNotNull(userId))
         {
             ajax.put(AjaxResult.DATA_TAG, userService.selectUserById(userId));
             ajax.put("postIds", postService.selectPostListByUserId(userId));
             ajax.put("roleIds", roleService.selectRoleListByUserId(userId));
+            ajax.put("wareIds", wareService.selectWareListByUserId(userId));
         }
         return ajax;
     }

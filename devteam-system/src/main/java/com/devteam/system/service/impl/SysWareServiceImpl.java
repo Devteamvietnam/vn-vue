@@ -10,7 +10,7 @@ import com.devteam.common.exception.CustomException;
 import com.devteam.common.utils.StringUtils;
 import com.devteam.system.domain.SysWare;
 import com.devteam.system.mapper.SysUserWareMapper;
-import com.devteam.system.mapper.SysWareHouseMapper;
+import com.devteam.system.mapper.SysWareMapper;
 import com.devteam.system.service.ISysWareService;
 
 /**
@@ -21,7 +21,7 @@ import com.devteam.system.service.ISysWareService;
 public class SysWareServiceImpl implements ISysWareService {
 	
 	@Autowired
-	private SysWareHouseMapper wareMapper;
+	private SysWareMapper wareMapper;
 	
 	@Autowired
 	private SysUserWareMapper userWareMapper;

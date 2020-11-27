@@ -9,7 +9,7 @@ import com.devteam.system.domain.SysWare;
  * @author jungj
  *
  */
-public interface SysWareHouseMapper {
+public interface SysWareMapper {
 
 	   /**
      * Query warehouse data collection
