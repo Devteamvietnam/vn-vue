@@ -146,8 +146,15 @@
               </el-select>
             </el-form-item>
           </el-col>
+            <el-col :span="12">
+            <el-form-item label="Ware">
+              <el-select v-model="form.wareIds" multiple placeholder="Please select">
+                <el-option v-for="item in wareOptions" :key="item.wareId" :label="item.wareName" :value="item.wareId" :disabled="item.status == 1"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
-            <el-form-item label="role">
+            <el-form-item label="Role">
               <el-select v-model="form.roleIds" multiple placeholder="Please select">
                 <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId" :disabled="item.status == 1"></el-option>
               </el-select>
@@ -236,6 +243,8 @@ export default {
       sexOptions: [],
       // Position options
       postOptions: [],
+      // ware options
+      wareOptions: [],
       // role options
       roleOptions: [],
       // form parameters
@@ -342,7 +351,7 @@ export default {
     // User status modification
     handleStatusChange(row) {
       let text = row.status === "0" ? "Enable" : "Disable";
-      this.$confirm('Confirm to "' + text + '""' + row.userName + '"User?', "Warning", {
+      this.$confirm('Confirm to "' + text + '" "' + row.userName + '"User?', "Warning", {
         confirmButtonText: "OK",
         cancelButtonText: "Cancel",
         type: "warning",
@@ -351,7 +360,7 @@ export default {
           return changeUserStatus(row.userId, row.status);
         })
         .then(() => {
-          this.msgSuccess(text + "success");
+          this.msgSuccess(text  +  "Success");
         })
         .catch(function () {
           row.status = row.status === "0" ? "1" : "0";
@@ -367,6 +376,7 @@ export default {
       this.form = {
         userId: undefined,
         deptId: undefined,
+        wareId: undefined,
         userName: undefined,
         nickName: undefined,
         password: undefined,
@@ -403,6 +413,7 @@ export default {
       this.getTreeselect();
       getUser().then((response) => {
         this.postOptions = response.posts;
+        this.wareOptions = response.wares;
         this.roleOptions = response.roles;
         this.open = true;
         this.title = "Add Personnel";
@@ -417,6 +428,7 @@ export default {
       getUser(userId).then((response) => {
         this.form = response.data;
         this.postOptions = response.posts;
+        this.wareOptions = response.wares;
         this.roleOptions = response.roles;
         this.form.postIds = response.postIds;
         this.form.roleIds = response.roleIds;
@@ -509,7 +521,7 @@ export default {
       this.upload.open = false;
       this.upload.isUploading = false;
       this.$refs.upload.clearFiles();
-      this.$alert(response.msg, "import result", { dangerouslyUseHTMLString: true });
+      this.$alert(response.msg, "Import result", { dangerouslyUseHTMLString: true });
       this.getList();
     },
     // Submit upload file
