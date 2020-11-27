@@ -38,7 +38,7 @@
       <el-table-column label="Number" align="center" prop="wareId" width="140"/>
       <el-table-column label="Code" align="center" prop="wareCode" width="130" />
       <el-table-column label="Name" align="center" prop="wareName" />
-      <el-table-column sortable label="sorting" align="center" prop="wareSort" />
+      <el-table-column sortable label="Sorting" align="center" prop="wareSort" />
       <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
       <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
@@ -222,14 +222,14 @@ export default {
     },
     /** Delete button operation */
     handleDelete(row) {
-      const wareId = row.wareId || this.ids;
-      this.$confirm('Are you sure to delete the data item with the post number "' + postIds + '"?', "Warning", {
+      const wareIds = row.wareId || this.ids;
+      this.$confirm('Are you sure to delete the data item with the ware number "' + wareIds + '"?', "Warning", {
         confirmButtonText: "OK",
         cancelButtonText: "Cancel",
         type: "warning",
       })
         .then(function () {
-          return delWare(wareId);
+          return delWare(wareIds);
         })
         .then(() => {
           this.getList();

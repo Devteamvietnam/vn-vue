@@ -146,13 +146,6 @@
               </el-select>
             </el-form-item>
           </el-col>
-            <el-col :span="12">
-            <el-form-item label="Ware">
-              <el-select v-model="form.wareIds" multiple placeholder="Please select">
-                <el-option v-for="item in wareOptions" :key="item.wareId" :label="item.wareName" :value="item.wareId" :disabled="item.status == 1"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
           <el-col :span="12">
             <el-form-item label="Role">
               <el-select v-model="form.roleIds" multiple placeholder="Please select">
@@ -243,8 +236,6 @@ export default {
       sexOptions: [],
       // Position options
       postOptions: [],
-      // ware options
-      wareOptions: [],
       // role options
       roleOptions: [],
       // form parameters
@@ -387,6 +378,7 @@ export default {
         remark: undefined,
         postIds: [],
         roleIds: [],
+        wareIds: [],
       };
       this.resetForm("form");
     },
@@ -413,7 +405,6 @@ export default {
       this.getTreeselect();
       getUser().then((response) => {
         this.postOptions = response.posts;
-        this.wareOptions = response.wares;
         this.roleOptions = response.roles;
         this.open = true;
         this.title = "Add Personnel";
@@ -428,7 +419,6 @@ export default {
       getUser(userId).then((response) => {
         this.form = response.data;
         this.postOptions = response.posts;
-        this.wareOptions = response.wares;
         this.roleOptions = response.roles;
         this.form.postIds = response.postIds;
         this.form.roleIds = response.roleIds;

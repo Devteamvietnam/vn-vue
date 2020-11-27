@@ -38,7 +38,7 @@
       <el-table-column label="Number" align="center" prop="postId" width="140"/>
       <el-table-column label="Code" align="center" prop="postCode" width="130" />
       <el-table-column label="Name" align="center" prop="postName" />
-      <el-table-column sortable label="sorting" align="center" prop="postSort" />
+      <el-table-column sortable label="Sorting" align="center" prop="postSort" />
       <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
       <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
