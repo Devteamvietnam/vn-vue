@@ -75,7 +75,7 @@ export const constantRoutes = [
         path:'profile',
         component: (resolve) => require(['@/pages/system/user/profile/index'], resolve),
         name:'Profile',
-        meta: {title:'personal center', icon:'user'}
+        meta: {title:'Personal center', icon:'user'}
       }
     ]
   },
