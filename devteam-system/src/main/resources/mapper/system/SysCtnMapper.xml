@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.devteam.system.mapper.SysCtnMapper">
+
+	<resultMap type="SysCtn" id="SysCtnResult">
+		<id     property="ctnId"     column="ctn_id"     />
+		<result property="parentId"   column="parent_id"   />
+		<result property="ancestors"  column="ancestors"   />
+		<result property="ctnName"   column="ctn_name"   />
+		<result property="orderNum"   column="order_num"   />
+		<result property="leader"     column="leader"      />
+		<result property="phone"      column="phone"       />
+		<result property="email"      column="email"       />
+		<result property="status"     column="status"      />
+		<result property="delFlag"    column="del_flag"    />
+		<result property="parentName" column="parent_name" />
+		<result property="createBy"   column="create_by"   />
+		<result property="createTime" column="create_time" />
+		<result property="updateBy"   column="update_by"   />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	<sql id="selectCtnVo">
+        select d.ctn_id, d.parent_id, d.ancestors, d.ctn_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time 
+        from sys_ctn d
+    </sql>
+    
+	<select id="selectCtnList" parameterType="SysCtn" resultMap="SysCtnResult">
+        <include refid="selectCtnVo"/>
+        where d.del_flag = '0'
+        <if test="parentId != null and parentId != 0">
+			AND parent_id = #{parentId}
+		</if>
+		<if test="ctnName != null and ctnName != ''">
+			AND ctn_name like concat('%', #{ctnName}, '%')
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status}
+		</if>
+		${params.dataScope}
+		order by d.parent_id, d.order_num
+    </select>
+    
+    <select id="selectCtnListByRoleId" resultType="Integer">
+		select d.ctn_id
+		from sys_ctn d
+            left join sys_role_ctn rd on d.ctn_id = rd.ctn_id
+        where rd.role_id = #{roleId}
+            <if test="ctnCheckStrictly">
+              and d.ctn_id not in (select d.parent_id from sys_ctn d inner join sys_role_ctn rd on d.ctn_id = rd.ctn_id and rd.role_id = #{roleId})
+            </if>
+		order by d.parent_id, d.order_num
+	</select>
+    
+    <select id="selectCtnById" parameterType="Long" resultMap="SysCtnResult">
+		<include refid="selectCtnVo"/>
+		where ctn_id = #{ctnId}
+	</select>
+    
+    <select id="checkCtnExistUser" parameterType="Long" resultType="int">
+		select count(1) from sys_user where dept_id = #{ctnId} and del_flag = '0'
+	</select>
+	
+	<select id="hasChildByCtnId" parameterType="Long" resultType="int">
+		select count(1) from sys_ctn
+		where del_flag = '0' and parent_id = #{ctnId} limit 1
+	</select>
+	
+	<select id="selectChildrenCtnById" parameterType="Long" resultMap="SysCtnResult">
+		select * from sys_ctn where find_in_set(#{ctnId}, ancestors)
+	</select>
+	
+	<select id="selectNormalChildrenCtnById" parameterType="Long" resultType="int">
+		select count(*) from sys_ctn where status = 0 and del_flag = '0' and find_in_set(#{ctnId}, ancestors)
+	</select>
+	
+	<select id="checkCtnNameUnique" resultMap="SysCtnResult">
+	    <include refid="selectCtnVo"/>
+		where ctn_name=#{ctnName} and parent_id = #{parentId} limit 1
+	</select>
+    
+    <insert id="insertCtn" parameterType="SysCtn">
+ 		insert into sys_ctn(
+ 			<if test="ctnId != null and ctnId != 0">ctn_id,</if>
+ 			<if test="parentId != null and parentId != 0">parent_id,</if>
+ 			<if test="ctnName != null and ctnName != ''">ctn_name,</if>
+ 			<if test="ancestors != null and ancestors != ''">ancestors,</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num,</if>
+ 			<if test="leader != null and leader != ''">leader,</if>
+ 			<if test="phone != null and phone != ''">phone,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="status != null">status,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="ctnId != null and ctnId != 0">#{ctnId},</if>
+ 			<if test="parentId != null and parentId != 0">#{parentId},</if>
+ 			<if test="ctnName != null and ctnName != ''">#{ctnName},</if>
+ 			<if test="ancestors != null and ancestors != ''">#{ancestors},</if>
+ 			<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+ 			<if test="leader != null and leader != ''">#{leader},</if>
+ 			<if test="phone != null and phone != ''">#{phone},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="status != null">#{status},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+	<update id="updateCtn" parameterType="SysCtn">
+ 		update sys_ctn
+ 		<set>
+ 			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+ 			<if test="ctnName != null and ctnName != ''">ctn_name = #{ctnName},</if>
+ 			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+ 			<if test="leader != null">leader = #{leader},</if>
+ 			<if test="phone != null">phone = #{phone},</if>
+ 			<if test="email != null">email = #{email},</if>
+ 			<if test="status != null and status != ''">status = #{status},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where ctn_id = #{ctnId}
+	</update>
+	
+	<update id="updateCtnChildren" parameterType="java.util.List">
+	    update sys_ctn set ancestors =
+	    <foreach collection="ctns" item="item" index="index"
+	        separator=" " open="case ctn_id" close="end">
+	        when #{item.ctnId} then #{item.ancestors}
+	    </foreach>
+	    where dept_id in
+	    <foreach collection="ctns" item="item" index="index"
+	        separator="," open="(" close=")">
+	        #{item.ctnId}
+	    </foreach>
+	</update>
+	 
+	 <update id="updateCtnStatus" parameterType="SysCtn">
+ 	    update sys_ctn
+ 	    <set>
+ 	        <if test="status != null and status != ''">status = #{status},</if>
+ 	        <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 	        update_time = sysdate()
+        </set>
+ 	    where ctn_id in (${ancestors})
+	</update>
+	
+	<delete id="deleteCtnById" parameterType="Long">
+		update sys_ctn set del_flag = '2' where ctn_id = #{ctnId}
+	</delete>
+
+</mapper> 
