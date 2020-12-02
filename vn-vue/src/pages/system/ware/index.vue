@@ -1,22 +1,37 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="70px">
-      <el-form-item label="Code" prop="wareCode">
-        <el-input v-model="queryParams.wareCode" placeholder="Please enter the ware code" clearable size="small" @keyup.enter.native="handleQuery" />
-      </el-form-item>
-      <el-form-item label="Name" prop="wareName">
-        <el-input v-model="queryParams.wareName" placeholder="Please enter the name of the ware" clearable size="small" @keyup.enter.native="handleQuery" />
-      </el-form-item>
-      <el-form-item label="Status" prop="status">
-        <el-select v-model="queryParams.status" placeholder="Ware status" clearable size="small">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
-      </el-form-item>
-    </el-form>
+    <el-row :gutter="20">
+      <!--Department Data-->
+      <el-col :span="4" :xs="24">
+        <div class="head-container">
+          <el-input v-model="deptName" placeholder="The department name" clearable size="small" prefix-icon="el-icon-search" style="margin-bottom: 20px" />
+        </div>
+        <div class="head-container">
+          <el-tree :data="deptOptions" :props="defaultProps" :expand-on-click-node="false" :filter-node-method="filterNode" ref="tree" default-expand-all @node-click="handleNodeClick" />
+        </div>
+      </el-col>
+      <!--wareHouse Data-->
+      <el-col :span="20" :xs="24">
+        <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="100px">
+          <el-form-item label="Code" prop="wareCode">
+              <el-input v-model="queryParams.wareCode" placeholder="Please enter the ware code" clearable size="small" @keyup.enter.native="handleQuery" />
+          </el-form-item>
+          <el-form-item label="Name" prop="wareName">
+            <el-input v-model="queryParams.wareName" placeholder="Please enter the name of the ware" clearable size="small" @keyup.enter.native="handleQuery" />
+          </el-form-item>
+          <el-form-item label="Status" prop="status">
+            <el-select v-model="queryParams.status" placeholder="Ware status" clearable size="small" style="width: 240px">
+              <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="Time">
+            <el-date-picker v-model="dateRange" size="small" style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="Start date" end-placeholder="End date"></el-date-picker>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
+            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+          </el-form-item>
+        </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
@@ -33,27 +48,35 @@
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-    <el-table v-loading="loading" :data="wareList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="60" align="center" />
-      <el-table-column label="Number" align="center" prop="wareId" width="140"/>
-      <el-table-column label="Code" align="center" prop="wareCode" width="130" />
-      <el-table-column label="Name" align="center" prop="wareName" />
-      <el-table-column sortable label="Sorting" align="center" prop="wareSort" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.createTime) }}</span>
-        </template>
-      </el-table-column>
-    <!--  <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+
+        <el-table v-loading="loading" :data="wareList" @selection-change="handleSelectionChange">
+          <el-table-column  type="selection" width="55" align="center" />
+          <el-table-column sortable label="Number" align="center" prop="wareId" />
+          <el-table-column label="Code" align="center" prop="wareCode" :show-overflow-tooltip="true" />
+          <el-table-column label="Name" align="center" prop="wareName" :show-overflow-tooltip="true" />
+        <!--   <el-table-column label="Department" align="center" prop="dept.deptName" :show-overflow-tooltip="true" /> -->
+          <el-table-column label="Sorting" align="center" prop="wareSort" width="120" />
+          <el-table-column label="Status" align="center">
+            <template slot-scope="scope">
+              <el-switch v-model="scope.row.status" active-value="0" inactive-value="1" @change="handleStatusChange(scope.row)"></el-switch>
+            </template>
+          </el-table-column>
+          <el-table-column label="Createtime" align="center" prop="createTime" width="160">
+            <template slot-scope="scope">
+              <span>{{ parseTime(scope.row.createTime) }}</span>
+            </template>
+          </el-table-column>
+          <!--  <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:post:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:post:remove']">Delete</el-button>
         </template>
       </el-table-column> -->
-    </el-table>
+        </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+        <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+      </el-col>
+    </el-row>
 
     <!-- Add or modify post dialog box -->
     <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
@@ -87,13 +110,14 @@
 <script>
 import { listWare, getWare, delWare, addWare, updateWare, exportWare } from "@/services/api/system/ware"
 import elDragDialog from '@/components/el-drag-dialog'
-import { treeselect } from "@/services/api/system/dept"
+import { treeselectWare } from "@/services/api/system/deptWare"
 import Treeselect from "@riophae/vue-treeselect"
 import "@riophae/vue-treeselect/dist/vue-treeselect.css"
 
 export default {
-  name: "Post",
-   directives: { elDragDialog },
+  name: "Ware",
+  components: { Treeselect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -108,24 +132,39 @@ export default {
       showSearch: false,
       // Total number
       total: 0,
-      // Ware table data
-      wareList: [],
       // Pop-up layer title
       title: "",
+      // Department tree options
+      deptOptions: undefined,
       // Whether to display the pop-up layer
       open: false,
+      // Department name
+      deptName: undefined,
+      // date range
+      dateRange: [],
+      // Ware table data
+      wareList: [],
       // State data dictionary
       statusOptions: [],
+      // Position options
+      postOptions: [],
+      // role options
+      roleOptions: [],
+      // form parameters
+      form: {},
+      defaultProps: {
+        children: "children",
+        label: "label",
+      },
       // query parameters
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        wareCode: undefined,
-        wareName: undefined,
+        userName: undefined,
+        phonenumber: undefined,
         status: undefined,
+        deptId: undefined,
       },
-      // form parameters
-      form: {},
       // form validation
       rules: {
         wareName: [{ required: true, message: "Ware name cannot be empty", trigger: "blur" }],
@@ -134,25 +173,63 @@ export default {
       },
     };
   },
+  watch: {
+    // Filter department tree by name
+    deptName(val) {
+      this.$refs.tree.filter(val);
+    },
+  },
   created() {
     this.getList();
+    this.getTreeselect();
     this.getDicts("sys_normal_disable").then((response) => {
       this.statusOptions = response.data;
     });
   },
+
   methods: {
-    /** Query ware list */
+    /** Query user list */
     getList() {
       this.loading = true;
-      listWare(this.queryParams).then((response) => {
+      listWare(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
         this.wareList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
     },
-    // Job status dictionary translation
-    statusFormat(row, column) {
-      return this.selectDictLabel(this.statusOptions, row.status);
+    /** Query the department drop-down tree structure */
+    getTreeselect() {
+      treeselectWare().then((response) => {
+        this.deptOptions = response.data;
+      });
+    },
+    // Filter nodes
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.label.indexOf(value) !== -1;
+    },
+    // node click event
+    handleNodeClick(data) {
+      this.queryParams.deptId = data.id;
+      this.getList();
+    },
+    // User status modification
+    handleStatusChange(row) {
+      let text = row.status === "0" ? "Enable" : "Disable";
+      this.$confirm('Confirm to "' + text + '" "' + row.userName + '"User?', "Warning", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "warning",
+      })
+        .then(function () {
+          return changeUserStatus(row.userId, row.status);
+        })
+        .then(() => {
+          this.msgSuccess(text  +  "Success");
+        })
+        .catch(function () {
+          row.status = row.status === "0" ? "1" : "0";
+        });
     },
     // Cancel button
     cancel() {
@@ -173,17 +250,18 @@ export default {
     },
     /** Search button operation */
     handleQuery() {
-      this.queryParams.pageNum = 1;
+      this.queryParams.page = 1;
       this.getList();
     },
     /** Reset button operation */
     resetQuery() {
+      this.dateRange = [];
       this.resetForm("queryForm");
       this.handleQuery();
     },
     // Multiple selection box to select data
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.wareId);
+      this.ids = selection.map((item) => item.userId);
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
@@ -196,9 +274,11 @@ export default {
     /** Modify button operation */
     handleUpdate(row) {
       this.reset();
+      this.getTreeselect();
       const wareId = row.wareId || this.ids;
       getWare(wareId).then((response) => {
         this.form = response.data;
+        this.form = response.rolesId;
         this.open = true;
         this.title = "Modify Post";
       });
@@ -242,17 +322,21 @@ export default {
     /** Export button operation */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm("Are you sure to export all post data items?", "Warning", {
+      this.$confirm("Are you sure to export all user data items?", "Warning", {
         confirmButtonText: "OK",
         cancelButtonText: "Cancel",
         type: "warning",
       })
         .then(function () {
-          return exportPost(queryParams);
+          return exportWare(queryParams);
         })
         .then((response) => {
           this.download(response.msg);
         });
+    },
+    // Submit upload file
+    submitFileForm() {
+      this.$refs.upload.submit();
     },
   },
 };
