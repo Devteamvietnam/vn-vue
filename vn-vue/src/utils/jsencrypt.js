@@ -14,6 +14,7 @@ const privateKey ='MIIBnjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIPJwEGaGxGxcCA
   'lz86ESOzrB4R26AE9JAj9LKaTRO5v6gnWnKi8CbPHd4IGO3cpKjzx5r2iVd87AKJ\n' +
   'hj+OBZGwgJEE54LF7fxiJL+SKr3C/g/lLJbCh6XETIRyNDGLv904H8VPPv3Gt9QZ\n' +
   'uWQB9BGxuSuC7fTDp9L4RNVNaBTK31VuP/rmTS2dAoErxQ=='
+// Private Key Devteam
 
 // encryption
 export function encrypt(txt) {

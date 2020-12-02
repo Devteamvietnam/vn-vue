@@ -19,7 +19,7 @@ export function checkPermi(value) {
     }
     return true
   } else {
-    console.error(`need roles! Like checkPermi="['system:user:add','system:user:edit']"`)
+    console.error(`Need roles! Like checkPermi="['system:user:add','system:user:edit']"`)
     return false
   }
 }
@@ -43,7 +43,7 @@ export function checkRole(value) {
     }
     return true
   } else {
-    console.error(`need roles! Like checkRole="['admin','editor']"`)
+    console.error(`Need roles! Like checkRole="['admin','editor']"`)
     return false
   }
 }
