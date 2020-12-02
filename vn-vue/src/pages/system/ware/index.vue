@@ -87,6 +87,9 @@
 <script>
 import { listWare, getWare, delWare, addWare, updateWare, exportWare } from "@/services/api/system/ware"
 import elDragDialog from '@/components/el-drag-dialog'
+import { treeselect } from "@/services/api/system/dept"
+import Treeselect from "@riophae/vue-treeselect"
+import "@riophae/vue-treeselect/dist/vue-treeselect.css"
 
 export default {
   name: "Post",
