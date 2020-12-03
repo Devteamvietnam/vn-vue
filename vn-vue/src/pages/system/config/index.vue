@@ -1,59 +1,175 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="Name" prop="configName">
-        <el-input v-model="queryParams.configName" placeholder="Please enter the parameter name" clearable size="small" style="width: 240px" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.configName"
+          placeholder="Please enter the parameter name"
+          clearable
+          size="small"
+          style="width: 240px"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Key" prop="configKey">
-        <el-input v-model="queryParams.configKey" placeholder="Please enter the parameter key name" clearable size="small" style="width: 240px" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.configKey"
+          placeholder="Please enter the parameter key name"
+          clearable
+          size="small"
+          style="width: 240px"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Built-in" prop="configType">
-        <el-select v-model="queryParams.configType" placeholder="System built-in" clearable size="small">
-          <el-option v-for="dict in typeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.configType"
+          placeholder="System built-in"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in typeOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="Time">
-        <el-date-picker v-model="dateRange" size="small" style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="start date" end-placeholder="end date"></el-date-picker>
+        <el-date-picker
+          v-model="dateRange"
+          size="small"
+          style="width: 240px"
+          value-format="yyyy-MM-dd"
+          type="daterange"
+          range-separator="-"
+          start-placeholder="start date"
+          end-placeholder="end date"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:config:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:config:add']"
+          >New</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['system:config:edit']">Edit</el-button>
+        <el-button
+          type="success"
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['system:config:edit']"
+          >Edit</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:config:remove']">Delete</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['system:config:remove']"
+          >Delete</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['system:config:export']">Export</el-button>
+        <el-button
+          type="warning"
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['system:config:export']"
+          >Export</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-refresh" size="mini" @click="handleClearCache" v-hasPermi="['system:config:remove']">Clean up cache</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-refresh"
+          size="mini"
+          @click="handleClearCache"
+          v-hasPermi="['system:config:remove']"
+          >Clean up cache</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="configList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="60" align="center" />
       <el-table-column label="id" align="center" prop="configId" width="80" />
-      <el-table-column label="Name" align="center" prop="configName" :show-overflow-tooltip="true" />
-      <el-table-column label="Key name" align="center" prop="configKey" :show-overflow-tooltip="true" />
+      <el-table-column
+        label="Name"
+        align="center"
+        prop="configName"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Key name"
+        align="center"
+        prop="configKey"
+        :show-overflow-tooltip="true"
+      />
       <el-table-column label="Key value" align="center" prop="configValue" />
-      <el-table-column label="System built-in" align="center" prop="configType" :formatter="typeFormat" />
-      <el-table-column label="Remarks" align="center" prop="remark" :show-overflow-tooltip="true" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="180">
+      <el-table-column
+        label="System built-in"
+        align="center"
+        prop="configType"
+        :formatter="typeFormat"
+      />
+      <el-table-column
+        label="Remarks"
+        align="center"
+        prop="remark"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Create time"
+        align="center"
+        prop="createTime"
+        width="180"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-     <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:config:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:config:remove']">Delete</el-button>
@@ -61,27 +177,57 @@
       </el-table-column> -->
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="600px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="100px">
         <el-form-item label="Name" prop="configName">
-          <el-input v-model="form.configName" placeholder="Please enter the parameter name" />
+          <el-input
+            v-model="form.configName"
+            placeholder="Please enter the parameter name"
+          />
         </el-form-item>
         <el-form-item label="Key Name" prop="configKey">
-          <el-input v-model="form.configKey" placeholder="Please enter the parameter key name" />
+          <el-input
+            v-model="form.configKey"
+            placeholder="Please enter the parameter key name"
+          />
         </el-form-item>
         <el-form-item label="Key value" prop="configValue">
-          <el-input v-model="form.configValue" placeholder="Please enter the parameter key value" />
+          <el-input
+            v-model="form.configValue"
+            placeholder="Please enter the parameter key value"
+          />
         </el-form-item>
-        <el-form-item label="Built-in"  prop="configType">
+        <el-form-item label="Built-in" prop="configType">
           <el-radio-group v-model="form.configType">
-            <el-radio v-for="dict in typeOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+            <el-radio
+              v-for="dict in typeOptions"
+              :key="dict.dictValue"
+              :label="dict.dictValue"
+              >{{ dict.dictLabel }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Remarks" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="Please enter the content" />
+          <el-input
+            v-model="form.remark"
+            type="textarea"
+            placeholder="Please enter the content"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -93,8 +239,16 @@
 </template>
 
 <script>
-import { listConfig, getConfig, delConfig, addConfig, updateConfig, exportConfig, clearCache } from "@/services/api/system/config"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  listConfig,
+  getConfig,
+  delConfig,
+  addConfig,
+  updateConfig,
+  exportConfig,
+  clearCache,
+} from "@/services/api/system/config";
+import elDragDialog from "@/components/el-drag-dialog";
 export default {
   name: "Config",
   directives: { elDragDialog },
@@ -134,9 +288,27 @@ export default {
       form: {},
       // form validation
       rules: {
-        configName: [{ required: true, message: "Parameter name cannot be empty", trigger: "blur" }],
-        configKey: [{ required: true, message: "Parameter key name cannot be empty", trigger: "blur" }],
-        configValue: [{ required: true, message: "Parameter key value cannot be empty", trigger: "blur" }],
+        configName: [
+          {
+            required: true,
+            message: "Parameter name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        configKey: [
+          {
+            required: true,
+            message: "Parameter key name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        configValue: [
+          {
+            required: true,
+            message: "Parameter key value cannot be empty",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
@@ -150,11 +322,13 @@ export default {
     /** Query parameter list */
     getList() {
       this.loading = true;
-      listConfig(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
-        this.configList = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
+      listConfig(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.configList = response.rows;
+          this.total = response.total;
+          this.loading = false;
+        }
+      );
     },
     // Parameter system built-in dictionary translation
     typeFormat(row, column) {
@@ -233,11 +407,17 @@ export default {
     /** Delete button operation */
     handleDelete(row) {
       const configIds = row.configId || this.ids;
-      this.$confirm('Are you sure to delete the data item with the parameter number "' + configIds + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item with the parameter number "' +
+          configIds +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delConfig(configIds);
         })
@@ -249,11 +429,15 @@ export default {
     /** Export button operation */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm("Are you sure to export all parameter data items?", "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        "Are you sure to export all parameter data items?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return exportConfig(queryParams);
         })

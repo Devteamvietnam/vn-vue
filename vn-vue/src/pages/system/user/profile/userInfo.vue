@@ -23,45 +23,57 @@
 </template>
 
 <script>
-import {updateUserProfile} from "@/services/api/system/user";
+import { updateUserProfile } from "@/services/api/system/user";
 
 export default {
   props: {
     user: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
       // form validation
       rules: {
         nickName: [
-          {required: true, message: "User nickname cannot be empty", trigger: "blur"}
+          {
+            required: true,
+            message: "User nickname cannot be empty",
+            trigger: "blur",
+          },
         ],
         email: [
-          {required: true, message: "Email address cannot be empty", trigger: "blur" },
+          {
+            required: true,
+            message: "Email address cannot be empty",
+            trigger: "blur",
+          },
           {
             type: "email",
             message: "'Please enter the correct email address",
-            trigger: ["blur", "change"]
-          }
+            trigger: ["blur", "change"],
+          },
         ],
         phonenumber: [
-          {required: true, message: "Mobile phone number cannot be empty", trigger: "blur" },
+          {
+            required: true,
+            message: "Mobile phone number cannot be empty",
+            trigger: "blur",
+          },
           {
             // pattern: /^1[3|4|5|6|7|8|9][0-9]\d{0}$/,
             message: "Please enter the correct mobile phone number",
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
     submit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs["form"].validate((valid) => {
         if (valid) {
-          updateUserProfile(this.user).then(response => {
+          updateUserProfile(this.user).then((response) => {
             this.msgSuccess("Modified successfully");
           });
         }
@@ -70,7 +82,7 @@ export default {
     close() {
       this.$store.dispatch("tagsView/delView", this.$route);
       this.$router.push({ path: "/index" });
-    }
-  }
+    },
+  },
 };
 </script>

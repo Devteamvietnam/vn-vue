@@ -25,7 +25,9 @@
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="tree" /> Department
-                <div class="pull-right" v-if="user.dept">{{ user.dept.deptName }} / {{ postGroup }}</div>
+                <div class="pull-right" v-if="user.dept">
+                  {{ user.dept.deptName }} / {{ postGroup }}
+                </div>
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="peoples" /> Role

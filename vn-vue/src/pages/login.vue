@@ -1,28 +1,75 @@
 <template>
   <div class="login">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+    >
       <h3 class="title">{{ name }}</h3>
       <el-form-item prop="username">
-        <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="Username">
-          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+        <el-input
+          v-model="loginForm.username"
+          type="text"
+          auto-complete="off"
+          placeholder="Username"
+        >
+          <svg-icon
+            slot="prefix"
+            icon-class="user"
+            class="el-input__icon input-icon"
+          />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.password" @keyup.native="checkCapslock" @blur="capsTooltip = false" type="password" auto-complete="off" show-password placeholder="Password" @keyup.enter.native="handleLogin">
-          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+        <el-input
+          v-model="loginForm.password"
+          @keyup.native="checkCapslock"
+          @blur="capsTooltip = false"
+          type="password"
+          auto-complete="off"
+          show-password
+          placeholder="Password"
+          @keyup.enter.native="handleLogin"
+        >
+          <svg-icon
+            slot="prefix"
+            icon-class="password"
+            class="el-input__icon input-icon"
+          />
         </el-input>
       </el-form-item>
       <el-form-item prop="code">
-        <el-input v-model="loginForm.code" auto-complete="off" placeholder="Code" style="width: 63%" @keyup.enter.native="handleLogin">
-          <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
+        <el-input
+          v-model="loginForm.code"
+          auto-complete="off"
+          placeholder="Code"
+          style="width: 63%"
+          @keyup.enter.native="handleLogin"
+        >
+          <svg-icon
+            slot="prefix"
+            icon-class="validCode"
+            class="el-input__icon input-icon"
+          />
         </el-input>
         <div class="login-code">
           <img :src="codeUrl" @click="getCode" class="login-code-img" />
         </div>
       </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin: 0px 0px 25px 0px">Remember</el-checkbox>
+      <el-checkbox
+        v-model="loginForm.rememberMe"
+        style="margin: 0px 0px 25px 0px"
+        >Remember</el-checkbox
+      >
       <el-form-item style="width: 100%">
-        <el-button :loading="loading" size="medium" type="primary" style="width: 100%" @click.native.prevent="handleLogin">
+        <el-button
+          :loading="loading"
+          size="medium"
+          type="primary"
+          style="width: 100%"
+          @click.native.prevent="handleLogin"
+        >
           <span v-if="!loading">Log in</span>
           <span v-else>Login...</span>
         </el-button>
@@ -56,9 +103,27 @@ export default {
         uuid: "",
       },
       loginRules: {
-        username: [{ required: true, trigger: "blur", message: "Username cannot be empty" }],
-        password: [{ required: true, trigger: "blur", message: "Password cannot be empty" }],
-        code: [{ required: true, trigger: "change", message: "Verification code cannot be empty" }],
+        username: [
+          {
+            required: true,
+            trigger: "blur",
+            message: "Username cannot be empty",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            trigger: "blur",
+            message: "Password cannot be empty",
+          },
+        ],
+        code: [
+          {
+            required: true,
+            trigger: "change",
+            message: "Verification code cannot be empty",
+          },
+        ],
       },
       loading: false,
       redirect: undefined,
@@ -93,7 +158,8 @@ export default {
       const rememberMe = Cookies.get("rememberMe");
       this.loginForm = {
         username: username === undefined ? this.loginForm.username : username,
-        password: password === undefined ? this.loginForm.password : decrypt(password),
+        password:
+          password === undefined ? this.loginForm.password : decrypt(password),
         rememberMe: rememberMe === undefined ? false : Boolean(rememberMe),
       };
     },
@@ -103,7 +169,9 @@ export default {
           this.loading = true;
           if (this.loginForm.rememberMe) {
             Cookies.set("username", this.loginForm.username, { expires: 30 });
-            Cookies.set("rememberMe", this.loginForm.rememberMe, { expires: 30 });
+            Cookies.set("rememberMe", this.loginForm.rememberMe, {
+              expires: 30,
+            });
           } else {
             Cookies.remove("username");
             Cookies.remove("rememberMe");

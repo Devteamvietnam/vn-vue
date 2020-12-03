@@ -1,59 +1,162 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+    >
       <el-form-item label="Name" prop="menuName">
-        <el-input v-model="queryParams.menuName" placeholder="Please enter the name of the menu" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.menuName"
+          placeholder="Please enter the name of the menu"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Status" prop="status">
-        <el-select v-model="queryParams.status" placeholder="Menu status" clearable size="small">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.status"
+          placeholder="Menu status"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:menu:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:menu:add']"
+          >New</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="menuList" row-key="menuId" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-      <el-table-column prop="menuName" label="Name" :show-overflow-tooltip="true" width="160"></el-table-column>
+    <el-table
+      v-loading="loading"
+      :data="menuList"
+      row-key="menuId"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+    >
+      <el-table-column
+        prop="menuName"
+        label="Name"
+        :show-overflow-tooltip="true"
+        width="160"
+      ></el-table-column>
       <el-table-column prop="icon" label="Icon" align="center" width="100">
         <template slot-scope="scope">
           <svg-icon :icon-class="scope.row.icon" />
         </template>
       </el-table-column>
-      <el-table-column prop="orderNum" label="Sort" width="60"></el-table-column>
-      <el-table-column prop="perms" label="Authority identification" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column prop="component" label="Component path" :show-overflow-tooltip="true"></el-table-column>
-      <el-table-column prop="status" label="Status" :formatter="statusFormat" width="80"></el-table-column>
+      <el-table-column
+        prop="orderNum"
+        label="Sort"
+        width="60"
+      ></el-table-column>
+      <el-table-column
+        prop="perms"
+        label="Authority identification"
+        :show-overflow-tooltip="true"
+      ></el-table-column>
+      <el-table-column
+        prop="component"
+        label="Component path"
+        :show-overflow-tooltip="true"
+      ></el-table-column>
+      <el-table-column
+        prop="status"
+        label="Status"
+        :formatter="statusFormat"
+        width="80"
+      ></el-table-column>
       <el-table-column label="Create time" align="center" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="Operation"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:menu:edit']">Edit</el-button>
-          <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)" v-hasPermi="['system:menu:add']">New</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:menu:remove']">Delete</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['system:menu:edit']"
+            >Edit</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-plus"
+            @click="handleAdd(scope.row)"
+            v-hasPermi="['system:menu:add']"
+            >New</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['system:menu:remove']"
+            >Delete</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
     <!-- Add or modify menu dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="700px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="24">
             <el-form-item label="Category">
-              <treeselect v-model="form.parentId" :options="menuOptions" :normalizer="normalizer" :show-count="true" placeholder="Select the upper menu" />
+              <treeselect
+                v-model="form.parentId"
+                :options="menuOptions"
+                :normalizer="normalizer"
+                :show-count="true"
+                placeholder="Select the upper menu"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -67,23 +170,50 @@
           </el-col>
           <el-col :span="24">
             <el-form-item v-if="form.menuType != 'F'" label="Icon">
-              <el-popover placement="bottom-start" width="460" trigger="click" @show="$refs['iconSelect'].reset()">
+              <el-popover
+                placement="bottom-start"
+                width="460"
+                trigger="click"
+                @show="$refs['iconSelect'].reset()"
+              >
                 <IconSelect ref="iconSelect" @selected="selected" />
-                <el-input slot="reference" v-model="form.icon" placeholder="click to select icon" readonly>
-                  <svg-icon v-if="form.icon" slot="prefix" :icon-class="form.icon" class="el-input__icon" style="height: 32px; width: 16px" />
-                  <i v-else slot="prefix" class="el-icon-search el-input__icon" />
+                <el-input
+                  slot="reference"
+                  v-model="form.icon"
+                  placeholder="click to select icon"
+                  readonly
+                >
+                  <svg-icon
+                    v-if="form.icon"
+                    slot="prefix"
+                    :icon-class="form.icon"
+                    class="el-input__icon"
+                    style="height: 32px; width: 16px"
+                  />
+                  <i
+                    v-else
+                    slot="prefix"
+                    class="el-icon-search el-input__icon"
+                  />
                 </el-input>
               </el-popover>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Name" prop="menuName">
-              <el-input v-model="form.menuName" placeholder="Please enter the menu name" />
+              <el-input
+                v-model="form.menuName"
+                placeholder="Please enter the menu name"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Snort" prop="orderNum">
-              <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
+              <el-input-number
+                v-model="form.orderNum"
+                controls-position="right"
+                :min="0"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -95,31 +225,55 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.menuType != 'F'" label="Route address" prop="path">
-              <el-input v-model="form.path" placeholder="Please enter the routing address" />
+            <el-form-item
+              v-if="form.menuType != 'F'"
+              label="Route address"
+              prop="path"
+            >
+              <el-input
+                v-model="form.path"
+                placeholder="Please enter the routing address"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12" v-if="form.menuType == 'C'">
             <el-form-item label="Component path" prop="component">
-              <el-input v-model="form.component" placeholder="Please enter the component path" />
+              <el-input
+                v-model="form.component"
+                placeholder="Please enter the component path"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.menuType != 'M'" label="Permission ID">
-              <el-input v-model="form.perms" placeholder="Please authorize identification" maxlength="50" />
+              <el-input
+                v-model="form.perms"
+                placeholder="Please authorize identification"
+                maxlength="50"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.menuType != 'F'" label="Display status">
               <el-radio-group v-model="form.visible">
-                <el-radio v-for="dict in visibleOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+                <el-radio
+                  v-for="dict in visibleOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictValue"
+                  >{{ dict.dictLabel }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item v-if="form.menuType != 'F'" label="Menu Status">
               <el-radio-group v-model="form.status">
-                <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+                <el-radio
+                  v-for="dict in statusOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictValue"
+                  >{{ dict.dictLabel }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -142,11 +296,17 @@
 </template>
 
 <script>
-import { listMenu, getMenu, delMenu, addMenu, updateMenu } from "@/services/api/system/menu"
-import Treeselect from "@riophae/vue-treeselect"
-import "@riophae/vue-treeselect/dist/vue-treeselect.css"
-import IconSelect from "@/components/IconSelect"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  listMenu,
+  getMenu,
+  delMenu,
+  addMenu,
+  updateMenu,
+} from "@/services/api/system/menu";
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import IconSelect from "@/components/IconSelect";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "Menu",
@@ -179,9 +339,27 @@ export default {
       form: {},
       // form validation
       rules: {
-        menuName: [{ required: true, message: "Menu name cannot be empty", trigger: "blur" }],
-        orderNum: [{ required: true, message: "Menu order cannot be empty", trigger: "blur" }],
-        path: [{ required: true, message: "Routing address cannot be empty", trigger: "blur" }],
+        menuName: [
+          {
+            required: true,
+            message: "Menu name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        orderNum: [
+          {
+            required: true,
+            message: "Menu order cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        path: [
+          {
+            required: true,
+            message: "Routing address cannot be empty",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
@@ -315,11 +493,17 @@ export default {
     },
     /** Delete button operation */
     handleDelete(row) {
-      this.$confirm('Are you sure to delete the data item with the name "' + row.menuName + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item with the name "' +
+          row.menuName +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delMenu(row.menuId);
         })
