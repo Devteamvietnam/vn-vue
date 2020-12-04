@@ -1,86 +1,222 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="Name" prop="dictType">
         <el-select v-model="queryParams.dictType" size="small">
-          <el-option v-for="item in typeOptions" :key="item.dictId" :label="item.dictName" :value="item.dictType" />
+          <el-option
+            v-for="item in typeOptions"
+            :key="item.dictId"
+            :label="item.dictName"
+            :value="item.dictType"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="Label" prop="dictLabel">
-        <el-input v-model="queryParams.dictLabel" placeholder="Please enter a dictionary tag" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.dictLabel"
+          placeholder="Please enter a dictionary tag"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Status" prop="status">
-        <el-select v-model="queryParams.status" placeholder="data status" clearable size="small">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.status"
+          placeholder="data status"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:dict:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:dict:add']"
+          >New</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['system:dict:edit']">Edit</el-button>
+        <el-button
+          type="success"
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['system:dict:edit']"
+          >Edit</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:dict:remove']">Delete</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['system:dict:remove']"
+          >Delete</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['system:dict:export']">Export</el-button>
+        <el-button
+          type="warning"
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['system:dict:export']"
+          >Export</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="dataList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="dataList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="30" align="center" />
       <el-table-column label="Coding" align="center" prop="dictCode" />
       <el-table-column label="Label" align="center" prop="dictLabel" />
       <el-table-column label="Key value" align="center" prop="dictValue" />
       <el-table-column label="Sort" align="center" prop="dictSort" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="Remarks" align="center" prop="remark" :show-overflow-tooltip="true" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="180">
+      <el-table-column
+        label="Status"
+        align="center"
+        prop="status"
+        :formatter="statusFormat"
+      />
+      <el-table-column
+        label="Remarks"
+        align="center"
+        prop="remark"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Create time"
+        align="center"
+        prop="createTime"
+        width="180"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="operation"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:dict:edit']">Edit</el-button>
-          <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:dict:remove']">Delete</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['system:dict:edit']"
+            >Edit</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['system:dict:remove']"
+            >Delete</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="500px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="Type">
           <el-input v-model="form.dictType" :disabled="true" />
         </el-form-item>
         <el-form-item label="Label" prop="dictLabel">
-          <el-input v-model="form.dictLabel" placeholder="Please enter the data label" />
+          <el-input
+            v-model="form.dictLabel"
+            placeholder="Please enter the data label"
+          />
         </el-form-item>
         <el-form-item label="Key value" prop="dictValue">
-          <el-input v-model="form.dictValue" placeholder="Please enter the data key value" />
+          <el-input
+            v-model="form.dictValue"
+            placeholder="Please enter the data key value"
+          />
         </el-form-item>
         <el-form-item label="Sort" prop="dictSort">
-          <el-input-number v-model="form.dictSort" controls-position="right" :min="0" />
+          <el-input-number
+            v-model="form.dictSort"
+            controls-position="right"
+            :min="0"
+          />
         </el-form-item>
         <el-form-item label="Status" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+            <el-radio
+              v-for="dict in statusOptions"
+              :key="dict.dictValue"
+              :label="dict.dictValue"
+              >{{ dict.dictLabel }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Remarks" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="Please enter content"></el-input>
+          <el-input
+            v-model="form.remark"
+            type="textarea"
+            placeholder="Please enter content"
+          ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -92,9 +228,16 @@
 </template>
 
 <script>
-import { listData, getData, delData, addData, updateData, exportData } from "@/services/api/system/dict/data"
-import { listType, getType } from "@/services/api/system/dict/type"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  listData,
+  getData,
+  delData,
+  addData,
+  updateData,
+  exportData,
+} from "@/services/api/system/dict/data";
+import { listType, getType } from "@/services/api/system/dict/type";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "Data",
@@ -137,9 +280,27 @@ export default {
       form: {},
       // form validation
       rules: {
-        dictLabel: [{ required: true, message: "Data tag cannot be empty", trigger: "blur" }],
-        dictValue: [{ required: true, message: "Data key value cannot be empty", trigger: "blur" }],
-        dictSort: [{ required: true, message: "Data sequence cannot be empty", trigger: "blur" }],
+        dictLabel: [
+          {
+            required: true,
+            message: "Data tag cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        dictValue: [
+          {
+            required: true,
+            message: "Data key value cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        dictSort: [
+          {
+            required: true,
+            message: "Data sequence cannot be empty",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
@@ -253,11 +414,17 @@ export default {
     /** Delete button operation */
     handleDelete(row) {
       const dictCodes = row.dictCode || this.ids;
-      this.$confirm('Are you sure to delete the data item whose dictionary code is "' + dictCodes + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item whose dictionary code is "' +
+          dictCodes +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delData(dictCodes);
         })

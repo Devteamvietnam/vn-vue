@@ -1,51 +1,149 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="70px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+      label-width="70px"
+    >
       <el-form-item label="Code" prop="postCode">
-        <el-input v-model="queryParams.postCode" placeholder="Please enter the post code" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.postCode"
+          placeholder="Please enter the post code"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Name" prop="postName">
-        <el-input v-model="queryParams.postName" placeholder="Please enter the name of the post" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.postName"
+          placeholder="Please enter the name of the post"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Status" prop="status">
-        <el-select v-model="queryParams.status" placeholder="post status" clearable size="small">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.status"
+          placeholder="post status"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:post:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:post:add']"
+          >New</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['system:post:edit']">Edit</el-button>
+        <el-button
+          type="success"
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['system:post:edit']"
+          >Edit</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:post:remove']">Delete</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['system:post:remove']"
+          >Delete</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['system:post:export']">Export</el-button>
+        <el-button
+          type="warning"
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['system:post:export']"
+          >Export</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
-    <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="postList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="60" align="center" />
-      <el-table-column label="Number" align="center" prop="postId" width="140"/>
-      <el-table-column label="Code" align="center" prop="postCode" width="130" />
+      <el-table-column
+        label="Number"
+        align="center"
+        prop="postId"
+        width="140"
+      />
+      <el-table-column
+        label="Code"
+        align="center"
+        prop="postCode"
+        width="130"
+      />
       <el-table-column label="Name" align="center" prop="postName" />
-      <el-table-column sortable label="Sorting" align="center" prop="postSort" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="180">
+      <el-table-column
+        sortable
+        label="Sorting"
+        align="center"
+        prop="postSort"
+      />
+      <el-table-column
+        label="Status"
+        align="center"
+        prop="status"
+        :formatter="statusFormat"
+      />
+      <el-table-column
+        label="Create time"
+        align="center"
+        prop="createTime"
+        width="180"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-    <!--  <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+      <!--  <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:post:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:post:remove']">Delete</el-button>
@@ -53,27 +151,58 @@
       </el-table-column> -->
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- Add or modify post dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="700px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="Name" prop="postName">
-          <el-input v-model="form.postName" placeholder="Please enter the post name" />
+          <el-input
+            v-model="form.postName"
+            placeholder="Please enter the post name"
+          />
         </el-form-item>
         <el-form-item label="Code" prop="postCode">
-          <el-input v-model="form.postCode" placeholder="Please enter the code name" />
+          <el-input
+            v-model="form.postCode"
+            placeholder="Please enter the code name"
+          />
         </el-form-item>
         <el-form-item label="Order" prop="postSort">
-          <el-input-number v-model="form.postSort" controls-position="right" :min="0" />
+          <el-input-number
+            v-model="form.postSort"
+            controls-position="right"
+            :min="0"
+          />
         </el-form-item>
         <el-form-item label="Status" prop="status">
           <el-radio-group v-model="form.status">
-            <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+            <el-radio
+              v-for="dict in statusOptions"
+              :key="dict.dictValue"
+              :label="dict.dictValue"
+              >{{ dict.dictLabel }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Remarks" prop="remark">
-          <el-input v-model="form.remark" type="textarea" placeholder="Please enter the content" />
+          <el-input
+            v-model="form.remark"
+            type="textarea"
+            placeholder="Please enter the content"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -85,12 +214,19 @@
 </template>
 
 <script>
-import { listPost, getPost, delPost, addPost, updatePost, exportPost } from "@/services/api/system/post"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  listPost,
+  getPost,
+  delPost,
+  addPost,
+  updatePost,
+  exportPost,
+} from "@/services/api/system/post";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "Post",
-   directives: { elDragDialog },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -125,9 +261,27 @@ export default {
       form: {},
       // form validation
       rules: {
-        postName: [{ required: true, message: "Post name cannot be empty", trigger: "blur" }],
-        postCode: [{ required: true, message: "Post code cannot be empty", trigger: "blur" }],
-        postSort: [{ required: true, message: "The post sequence cannot be empty", trigger: "blur" }],
+        postName: [
+          {
+            required: true,
+            message: "Post name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        postCode: [
+          {
+            required: true,
+            message: "Post code cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        postSort: [
+          {
+            required: true,
+            message: "The post sequence cannot be empty",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },
@@ -223,11 +377,17 @@ export default {
     /** Delete button operation */
     handleDelete(row) {
       const postIds = row.postId || this.ids;
-      this.$confirm('Are you sure to delete the data item with the post number "' + postIds + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item with the post number "' +
+          postIds +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delPost(postIds);
         })

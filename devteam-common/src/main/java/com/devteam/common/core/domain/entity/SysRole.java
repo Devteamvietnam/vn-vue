@@ -42,8 +42,6 @@ public class SysRole extends BaseEntity
     /** Whether the department tree selection items are displayed in association (0: parent and child are not displayed in association with each other 1: parent and child are displayed in association with each other) */
     private boolean deptCheckStrictly;
     
-    /** Whether the CTN tree selection items are displayed in association (0: parent and child are not displayed in association with each other 1: parent and child are displayed in association with each other) */
-    private boolean ctnCheckStrictly;
 
     /** Role status (0 normal and 1 disabled) */
     @Excel(name = "role status", readConverterExp = "0=normal, 1=disabled")
@@ -155,13 +153,6 @@ public class SysRole extends BaseEntity
     {
         this.deptCheckStrictly = deptCheckStrictly;
     }
-	public boolean isCtnCheckStrictly() {
-		return ctnCheckStrictly;
-	}
-
-	public void setCtnCheckStrictly(boolean ctnCheckStrictly) {
-		this.ctnCheckStrictly = ctnCheckStrictly;
-	}
 
     public String getStatus()
     {
@@ -223,7 +214,6 @@ public class SysRole extends BaseEntity
             .append("dataScope", getDataScope())
             .append("menuCheckStrictly", isMenuCheckStrictly())
             .append("deptCheckStrictly", isDeptCheckStrictly())
-            .append("ctnCheckStrictly", isCtnCheckStrictly())
             .append("status", getStatus())
             .append("delFlag", getDelFlag())
             .append("createBy", getCreateBy())
@@ -233,5 +223,4 @@ public class SysRole extends BaseEntity
             .append("remark", getRemark())
             .toString();
     }
-
 }

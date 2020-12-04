@@ -1,83 +1,207 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+    >
       <el-form-item label="Name" prop="deptName">
-        <el-input v-model="queryParams.deptName" placeholder="Please enter the department name" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.deptName"
+          placeholder="Please enter the department name"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Status" prop="status">
-        <el-select v-model="queryParams.status" placeholder="Department Status" clearable size="small">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.status"
+          placeholder="Department Status"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:dept:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:dept:add']"
+          >New</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="deptList" row-key="deptId" default-expand-all :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
-      <el-table-column prop="deptName" label="Name" width="260"></el-table-column>
-      <el-table-column prop="orderNum" label="Sort" width="200"></el-table-column>
-      <el-table-column prop="status" label="Status" :formatter="statusFormat" width="100"></el-table-column>
-      <el-table-column label="Create time" align="center" prop="createTime" width="200">
+    <el-table
+      v-loading="loading"
+      :data="deptList"
+      row-key="deptId"
+      default-expand-all
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+    >
+      <el-table-column
+        prop="deptName"
+        label="Name"
+        width="260"
+      ></el-table-column>
+      <el-table-column
+        prop="orderNum"
+        label="Sort"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="status"
+        label="Status"
+        :formatter="statusFormat"
+        width="100"
+      ></el-table-column>
+      <el-table-column
+        label="Create time"
+        align="center"
+        prop="createTime"
+        width="200"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="Operation"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:dept:edit']">Edit</el-button>
-          <el-button size="mini" type="text" icon="el-icon-plus" @click="handleAdd(scope.row)" v-hasPermi="['system:dept:add']">New</el-button>
-          <el-button v-if="scope.row.parentId != 0" size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:dept:remove']">Delete</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['system:dept:edit']"
+            >Edit</el-button
+          >
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-plus"
+            @click="handleAdd(scope.row)"
+            v-hasPermi="['system:dept:add']"
+            >New</el-button
+          >
+          <el-button
+            v-if="scope.row.parentId != 0"
+            size="mini"
+            type="text"
+            icon="el-icon-delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['system:dept:remove']"
+            >Delete</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
     <!-- Add or modify department dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="700px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="24" v-if="form.parentId !== 0">
             <el-form-item label="Department" prop="parentId">
-              <treeselect v-model="form.parentId" :options="deptOptions" :normalizer="normalizer" placeholder="Select the superior department" />
+              <treeselect
+                v-model="form.parentId"
+                :options="deptOptions"
+                :normalizer="normalizer"
+                placeholder="Select the superior department"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Name" prop="deptName">
-              <el-input v-model="form.deptName" placeholder="Please enter the department name" />
+              <el-input
+                v-model="form.deptName"
+                placeholder="Please enter the department name"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Sort" prop="orderNum">
-              <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
+              <el-input-number
+                v-model="form.orderNum"
+                controls-position="right"
+                :min="0"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Person leader" prop="leader">
-              <el-input v-model="form.leader" placeholder="Please enter the person in charge" maxlength="20" />
+              <el-input
+                v-model="form.leader"
+                placeholder="Please enter the person in charge"
+                maxlength="20"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Contact" prop="phone">
-              <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="10" />
+              <el-input
+                v-model="form.phone"
+                placeholder="Please enter the phone number"
+                maxlength="10"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Email" prop="email">
-              <el-input v-model="form.email" placeholder="Please enter the email" maxlength="50" />
+              <el-input
+                v-model="form.email"
+                placeholder="Please enter the email"
+                maxlength="50"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Status">
               <el-radio-group v-model="form.status">
-                <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+                <el-radio
+                  v-for="dict in statusOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictValue"
+                  >{{ dict.dictLabel }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -92,10 +216,17 @@
 </template>
 
 <script>
-import { listDeptWare, getDeptWare, delDeptWare, addDeptWare, updateDeptWare, listDeptWareExcludeChild } from "@/services/api/system/deptWare"
-import Treeselect from "@riophae/vue-treeselect"
-import "@riophae/vue-treeselect/dist/vue-treeselect.css"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  listDeptWare,
+  getDeptWare,
+  delDeptWare,
+  addDeptWare,
+  updateDeptWare,
+  listDeptWareExcludeChild,
+} from "@/services/api/system/deptWare";
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "DeptWare",
@@ -130,9 +261,27 @@ export default {
       },
       // form validation
       rules: {
-        parentId: [{ required: true, message: "The superior department cannot be empty", trigger: "blur" }],
-        deptName: [{ required: true, message: "Department name cannot be empty", trigger: "blur" }],
-        orderNum: [{ required: true, message: "Display sort cannot be empty", trigger: "blur" }],
+        parentId: [
+          {
+            required: true,
+            message: "The superior department cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        deptName: [
+          {
+            required: true,
+            message: "Department name cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        orderNum: [
+          {
+            required: true,
+            message: "Display sort cannot be empty",
+            trigger: "blur",
+          },
+        ],
         email: [
           {
             type: "email",
@@ -255,11 +404,17 @@ export default {
     },
     /** Delete button operation */
     handleDelete(row) {
-      this.$confirm('Are you sure to delete the data item with the name "' + row.deptName + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item with the name "' +
+          row.deptName +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delDeptWare(row.deptId);
         })

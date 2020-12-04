@@ -7,7 +7,12 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Visitors</div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to
+            :start-val="0"
+            :end-val="102400"
+            :duration="2600"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -18,7 +23,12 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">News</div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to
+            :start-val="0"
+            :end-val="81212"
+            :duration="3000"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -29,7 +39,12 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Amount</div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to
+            :start-val="0"
+            :end-val="9280"
+            :duration="3200"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -40,7 +55,12 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Order</div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to
+            :start-val="0"
+            :end-val="13600"
+            :duration="3600"
+            class="card-panel-num"
+          />
         </div>
       </div>
     </el-col>
@@ -48,7 +68,7 @@
 </template>
 
 <script>
-import CountTo from "vue-count-to"
+import CountTo from "vue-count-to";
 
 export default {
   components: {

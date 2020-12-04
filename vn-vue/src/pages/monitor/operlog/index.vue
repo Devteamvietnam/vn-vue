@@ -1,88 +1,235 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="100px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+      label-width="100px"
+    >
       <el-form-item label="Module" prop="title">
-        <el-input v-model="queryParams.title" placeholder="Please enter the system module" clearable style="width: 240px" size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.title"
+          placeholder="Please enter the system module"
+          clearable
+          style="width: 240px"
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Operator" prop="operName">
-        <el-input v-model="queryParams.operName" placeholder="Please enter the operator" clearable style="width: 240px" size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.operName"
+          placeholder="Please enter the operator"
+          clearable
+          style="width: 240px"
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Type" prop="businessType">
-        <el-select v-model="queryParams.businessType" placeholder="Operation type" clearable size="small" style="width: 240px">
-          <el-option v-for="dict in typeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.businessType"
+          placeholder="Operation type"
+          clearable
+          size="small"
+          style="width: 240px"
+        >
+          <el-option
+            v-for="dict in typeOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="status" prop="Status">
-        <el-select v-model="queryParams.status" placeholder="operation Status" clearable size="small" style="width: 240px">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.status"
+          placeholder="operation Status"
+          clearable
+          size="small"
+          style="width: 240px"
+        >
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="Time">
-        <el-date-picker v-model="dateRange" size="small" style="width: 240px" value-format="yyyy-MM-dd" type="daterange" range-separator="-" start-placeholder="start date" end-placeholder="end date"></el-date-picker>
+        <el-date-picker
+          v-model="dateRange"
+          size="small"
+          style="width: 240px"
+          value-format="yyyy-MM-dd"
+          type="daterange"
+          range-separator="-"
+          start-placeholder="start date"
+          end-placeholder="end date"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['monitor:operlog:remove']">Delete</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['monitor:operlog:remove']"
+          >Delete</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleClean" v-hasPermi="['monitor:operlog:remove']">Empty</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          @click="handleClean"
+          v-hasPermi="['monitor:operlog:remove']"
+          >Empty</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" icon="el-icon-download" size="mini" @click="handleExport" v-hasPermi="['system:config:export']">Export</el-button>
+        <el-button
+          type="warning"
+          icon="el-icon-download"
+          size="mini"
+          @click="handleExport"
+          v-hasPermi="['system:config:export']"
+          >Export</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="list" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="list"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="30" align="center" />
       <el-table-column label="logId" align="center" prop="operId" />
       <el-table-column label="Module" align="center" prop="title" />
-      <el-table-column label="Type" align="center" prop="businessType" :formatter="typeFormat" />
+      <el-table-column
+        label="Type"
+        align="center"
+        prop="businessType"
+        :formatter="typeFormat"
+      />
       <el-table-column label="Method" align="center" prop="requestMethod" />
       <el-table-column label="Operator" align="center" prop="operName" />
-      <el-table-column label="Host" align="center" prop="operIp" width="130" :show-overflow-tooltip="true" />
-      <el-table-column label="Location" align="center" prop="operLocation" :show-overflow-tooltip="true" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
+      <el-table-column
+        label="Host"
+        align="center"
+        prop="operIp"
+        width="130"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Location"
+        align="center"
+        prop="operLocation"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Status"
+        align="center"
+        prop="status"
+        :formatter="statusFormat"
+      />
       <el-table-column label="Time" align="center" prop="operTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.operTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="Operation"
+        align="center"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="scope">
-          <el-button size="mini" type="text" icon="el-icon-view" @click="view(scope.row, scope.index)" v-hasPermi="['monitor:operlog:query']">Detailed</el-button>
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-view"
+            @click="view(scope.row, scope.index)"
+            v-hasPermi="['monitor:operlog:query']"
+            >Detailed</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- Operation log details -->
-    <el-dialog v-el-drag-dialog title="Detailed operation log" :visible.sync="open" width="700px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      title="Detailed operation log"
+      :visible.sync="open"
+      width="700px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" label-width="100px" size="mini">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="Operation module:">{{ form.title }} / {{ typeFormat(form) }}</el-form-item>
-            <el-form-item label="Login information:">{{ form.operName }} / {{ form.operIp }} / {{ form.operLocation }}</el-form-item>
+            <el-form-item label="Operation module:"
+              >{{ form.title }} / {{ typeFormat(form) }}</el-form-item
+            >
+            <el-form-item label="Login information:"
+              >{{ form.operName }} / {{ form.operIp }} /
+              {{ form.operLocation }}</el-form-item
+            >
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Request address:">{{ form.operUrl }}</el-form-item>
-            <el-form-item label="Request method:">{{ form.requestMethod }}</el-form-item>
+            <el-form-item label="Request address:">{{
+              form.operUrl
+            }}</el-form-item>
+            <el-form-item label="Request method:">{{
+              form.requestMethod
+            }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Operation method:">{{ form.method }}</el-form-item>
+            <el-form-item label="Operation method:">{{
+              form.method
+            }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Request parameter:">{{ form.operParam }}</el-form-item>
+            <el-form-item label="Request parameter:">{{
+              form.operParam
+            }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Return parameters:">{{ form.jsonResult }}</el-form-item>
+            <el-form-item label="Return parameters:">{{
+              form.jsonResult
+            }}</el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Operation status:">
@@ -91,10 +238,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Operation time:">{{ parseTime(form.operTime) }}</el-form-item>
+            <el-form-item label="Operation time:">{{
+              parseTime(form.operTime)
+            }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Exception information:" v-if="form.status === 1">{{ form.errorMsg }}</el-form-item>
+            <el-form-item
+              label="Exception information:"
+              v-if="form.status === 1"
+              >{{ form.errorMsg }}</el-form-item
+            >
           </el-col>
         </el-row>
       </el-form>
@@ -106,8 +259,13 @@
 </template>
 
 <script>
-import { list, delOperlog, cleanOperlog, exportOperlog } from "@/services/api/monitor/operlog"
-import elDragDialog from '@/components/el-drag-dialog'
+import {
+  list,
+  delOperlog,
+  cleanOperlog,
+  exportOperlog,
+} from "@/services/api/monitor/operlog";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "Operlog",
@@ -160,11 +318,13 @@ export default {
     /** Query login log */
     getList() {
       this.loading = true;
-      list(this.addDateRange(this.queryParams, this.dateRange)).then((response) => {
-        this.list = response.rows;
-        this.total = response.total;
-        this.loading = false;
-      });
+      list(this.addDateRange(this.queryParams, this.dateRange)).then(
+        (response) => {
+          this.list = response.rows;
+          this.total = response.total;
+          this.loading = false;
+        }
+      );
     },
     // Operation log status dictionary translation
     statusFormat(row, column) {
@@ -198,11 +358,17 @@ export default {
     /** Delete button operation */
     handleDelete(row) {
       const operIds = row.operId || this.ids;
-      this.$confirm('Are you sure to delete the data item whose log number is "' + operIds + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item whose log number is "' +
+          operIds +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delOperlog(operIds);
         })
@@ -213,11 +379,15 @@ export default {
     },
     /** Clear button operation */
     handleClean() {
-      this.$confirm("Are you sure to clear all operation log data items?", "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        "Are you sure to clear all operation log data items?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return cleanOperlog();
         })
@@ -229,11 +399,15 @@ export default {
     /** Export button operation */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm("Are you sure to export all operation log data items?", "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        "Are you sure to export all operation log data items?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return exportOperlog(queryParams);
         })

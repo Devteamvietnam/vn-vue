@@ -1,49 +1,142 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryForm"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="Title" prop="noticeTitle">
-        <el-input v-model="queryParams.noticeTitle" placeholder="Please enter the title of the announcement" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.noticeTitle"
+          placeholder="Please enter the title of the announcement"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Operator" prop="createBy">
-        <el-input v-model="queryParams.createBy" placeholder="Please enter the operator" clearable size="small" @keyup.enter.native="handleQuery" />
+        <el-input
+          v-model="queryParams.createBy"
+          placeholder="Please enter the operator"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="Type" prop="noticeType">
-        <el-select v-model="queryParams.noticeType" placeholder="Announcement Type" clearable size="small">
-          <el-option v-for="dict in typeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+        <el-select
+          v-model="queryParams.noticeType"
+          placeholder="Announcement Type"
+          clearable
+          size="small"
+        >
+          <el-option
+            v-for="dict in typeOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">Search</el-button>
-        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">Reset</el-button>
+        <el-button
+          type="cyan"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleQuery"
+          >Search</el-button
+        >
+        <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+          >Reset</el-button
+        >
       </el-form-item>
     </el-form>
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAdd" v-hasPermi="['system:notice:add']">New</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+          v-hasPermi="['system:notice:add']"
+          >New</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="success" icon="el-icon-edit" size="mini" :disabled="single" @click="handleUpdate" v-hasPermi="['system:notice:edit']">Edit</el-button>
+        <el-button
+          type="success"
+          icon="el-icon-edit"
+          size="mini"
+          :disabled="single"
+          @click="handleUpdate"
+          v-hasPermi="['system:notice:edit']"
+          >Edit</el-button
+        >
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" icon="el-icon-delete" size="mini" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:notice:remove']">Delete</el-button>
+        <el-button
+          type="danger"
+          icon="el-icon-delete"
+          size="mini"
+          :disabled="multiple"
+          @click="handleDelete"
+          v-hasPermi="['system:notice:remove']"
+          >Delete</el-button
+        >
       </el-col>
-      <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        :showSearch.sync="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="noticeList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="noticeList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="60" align="center" />
       <el-table-column label="id" align="center" prop="noticeId" width="150" />
-      <el-table-column label="Title" align="center" prop="noticeTitle" :show-overflow-tooltip="true" />
-      <el-table-column label="Type" align="center" prop="noticeType" :formatter="typeFormat" width="150" />
-      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" width="150" />
-      <el-table-column label="Creator" align="center" prop="createBy" width="150" />
-      <el-table-column label="Create time" align="center" prop="createTime" width="150">
+      <el-table-column
+        label="Title"
+        align="center"
+        prop="noticeTitle"
+        :show-overflow-tooltip="true"
+      />
+      <el-table-column
+        label="Type"
+        align="center"
+        prop="noticeType"
+        :formatter="typeFormat"
+        width="150"
+      />
+      <el-table-column
+        label="Status"
+        align="center"
+        prop="status"
+        :formatter="statusFormat"
+        width="150"
+      />
+      <el-table-column
+        label="Creator"
+        align="center"
+        prop="createBy"
+        width="150"
+      />
+      <el-table-column
+        label="Create time"
+        align="center"
+        prop="createTime"
+        width="150"
+      >
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime, "{y}-{m}-{d}") }}</span>
         </template>
       </el-table-column>
-     <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:notice:edit']">Edit</el-button>
           <el-button size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:notice:remove']">Delete</el-button>
@@ -51,28 +144,53 @@
       </el-table-column> -->
     </el-table>
 
-    <pagination v-show="total > 0" :total="total" :page.sync="queryParams.pageNum" :limit.sync="queryParams.pageSize" @pagination="getList" />
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="queryParams.pageNum"
+      :limit.sync="queryParams.pageSize"
+      @pagination="getList"
+    />
 
     <!-- Add or modify announcement dialog box -->
-    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="780px" append-to-body>
+    <el-dialog
+      v-el-drag-dialog
+      :title="title"
+      :visible.sync="open"
+      width="780px"
+      append-to-body
+    >
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="Title" prop="noticeTitle">
-              <el-input v-model="form.noticeTitle" placeholder="Please enter the title of the announcement" />
+              <el-input
+                v-model="form.noticeTitle"
+                placeholder="Please enter the title of the announcement"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Notice" prop="noticeType">
               <el-select v-model="form.noticeType" placeholder="Please select">
-                <el-option v-for="dict in typeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue"></el-option>
+                <el-option
+                  v-for="dict in typeOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictLabel"
+                  :value="dict.dictValue"
+                ></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="Status">
               <el-radio-group v-model="form.status">
-                <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+                <el-radio
+                  v-for="dict in statusOptions"
+                  :key="dict.dictValue"
+                  :label="dict.dictValue"
+                  >{{ dict.dictLabel }}</el-radio
+                >
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -92,10 +210,16 @@
 </template>
 
 <script>
-import { listNotice, getNotice, delNotice, addNotice, updateNotice, exportNotice } from "@/services/api/system/notice"
-import Editor from "@/components/Editor"
-import elDragDialog from '@/components/el-drag-dialog'
-
+import {
+  listNotice,
+  getNotice,
+  delNotice,
+  addNotice,
+  updateNotice,
+  exportNotice,
+} from "@/services/api/system/notice";
+import Editor from "@/components/Editor";
+import elDragDialog from "@/components/el-drag-dialog";
 
 export default {
   name: "Notice",
@@ -139,8 +263,20 @@ export default {
       form: {},
       // form validation
       rules: {
-        noticeTitle: [{ required: true, message: "Announcement title cannot be empty", trigger: "blur" }],
-        noticeType: [{ required: true, message: "Announcement type cannot be empty", trigger: "change" }],
+        noticeTitle: [
+          {
+            required: true,
+            message: "Announcement title cannot be empty",
+            trigger: "blur",
+          },
+        ],
+        noticeType: [
+          {
+            required: true,
+            message: "Announcement type cannot be empty",
+            trigger: "change",
+          },
+        ],
       },
     };
   },
@@ -242,11 +378,17 @@ export default {
     /** Delete button operation */
     handleDelete(row) {
       const noticeIds = row.noticeId || this.ids;
-      this.$confirm('Are you sure to delete the data item with the notice number "' + noticeIds + '"?', "Warning", {
-        confirmButtonText: "OK",
-        cancelButtonText: "Cancel",
-        type: "warning",
-      })
+      this.$confirm(
+        'Are you sure to delete the data item with the notice number "' +
+          noticeIds +
+          '"?',
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        }
+      )
         .then(function () {
           return delNotice(noticeIds);
         })

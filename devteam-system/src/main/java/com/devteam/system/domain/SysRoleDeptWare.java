@@ -3,17 +3,13 @@ package com.devteam.system.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-/**
- * Role and ctn association sys_role_ctn
- */
+public class SysRoleDeptWare {
 
-public class SysRoleCtn {
-
-    /** Role ID */
+	   /** Role ID */
     private Long roleId;
    
     /** Department ID */
-    private Long ctnId;
+    private Long deptId;
 
     public Long getRoleId()
     {
@@ -25,21 +21,21 @@ public class SysRoleCtn {
         this.roleId = roleId;
     }
 
-    public Long getCtnId()
+    public Long getDeptId()
     {
-        return ctnId;
+        return deptId;
     }
 
-    public void setCtnId(Long ctnId)
+    public void setDeptId(Long deptId)
     {
-        this.ctnId = ctnId;
+        this.deptId = deptId;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("roleId", getRoleId())
-            .append("ctnId", getCtnId())
+            .append("deptId", getDeptId())
             .toString();
     }
 }

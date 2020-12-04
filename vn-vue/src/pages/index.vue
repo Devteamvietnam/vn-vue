@@ -32,13 +32,27 @@
           </div>
 
           <div class="body">
-            <p><i class="el-icon-s-promotion"></i> Official website: <el-link href="https://devteamvietnam.com" target="_blank">https://devteamvietnam.com</el-link></p>
+            <p>
+              <i class="el-icon-s-promotion"></i> Official website:
+              <el-link href="https://devteamvietnam.com" target="_blank"
+                >https://devteamvietnam.com</el-link
+              >
+            </p>
             <i class="el-icon-user-solid"></i> Gmail : devteamvietnam@gmail.com
             <p class="el-icon-user-solid">Mail dev: jungjihoonkr97@gmail.com</p>
             <p class="el-icon-mobile-phone">Phone 0337303666</p>
             <a href="https://devteamvietnam.com" target="_blank"></a>
-            <p><i class="el-icon-chat-dot-round"></i> Facebook: <a href="javascript:;">/ *Ivan</a></p>
-            <p><i class="el-icon-money"></i> Github:<a href="javascript:;" class="Alipay Information">/ *Ivan</a></p>
+            <p>
+              <i class="el-icon-chat-dot-round"></i> Facebook:
+              <a href="javascript:;">/ *Ivan</a>
+            </p>
+            <p>
+              <i class="el-icon-money"></i> Github:<a
+                href="javascript:;"
+                class="Alipay Information"
+                >/ *Ivan</a
+              >
+            </p>
           </div>
         </el-card>
       </el-col>
@@ -50,22 +64,37 @@
           <el-collapse accordion>
             <el-collapse-item title="v1.0.0-2020-11-17">
               <ol>
-                <li>Added menu and data permissions (expand/collapse select all/unselect all parent-child linkage)</li>
+                <li>
+                  Added menu and data permissions (expand/collapse select
+                  all/unselect all parent-child linkage)
+                </li>
                 <li>Allow users to assign to department parent node</li>
                 <li>The menu adds whether to cache keep-alive or not</li>
               </ol>
             </el-collapse-item>
-              <el-collapse-item title="v1.3.0-2020-11-24">
+            <el-collapse-item title="v1.3.0-2020-11-24">
               <ol>
-                <li>Added menu and data permissions (expand/collapse select all/unselect all parent-child linkage)</li>
+                <li>
+                  Added menu and data permissions (expand/collapse select
+                  all/unselect all parent-child linkage)
+                </li>
                 <li>Allow users to assign to department parent node</li>
                 <li>The menu adds whether to cache keep-alive or not</li>
                 <li>Table operation column spacing adjustment</li>
-                <li>Restricted system built-in parameters are not allowed to be deleted</li>
-                <li>Optimized rich text components, supports custom height and image conflict issues</li>
+                <li>
+                  Restricted system built-in parameters are not allowed to be
+                  deleted
+                </li>
+                <li>
+                  Optimized rich text components, supports custom height and
+                  image conflict issues
+                </li>
                 <li>Rich text toolbar style alignment</li>
                 <li>Import excel shaping value verification optimization</li>
-                <li>Fixed the issue of fixed tab routing not refreshing when tabs are closed all</li>
+                <li>
+                  Fixed the issue of fixed tab routing not refreshing when tabs
+                  are closed all
+                </li>
                 <li>Fixed error Java > 9</li>
                 <li>Fixed query Database dept error user permissions</li>
               </ol>
@@ -74,7 +103,7 @@
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="8">
-       <todo-list />
+        <todo-list />
       </el-col>
     </el-row>
   </div>
@@ -86,7 +115,7 @@ import LineChart from "./dashboard/LineChart";
 import RaddarChart from "./dashboard/RaddarChart";
 import PieChart from "./dashboard/PieChart";
 import BarChart from "./dashboard/BarChart";
-import TodoList from './dashboard/TodoList'
+import TodoList from "./dashboard/TodoList";
 
 const lineChartData = {
   newVisitis: {
@@ -115,7 +144,7 @@ export default {
     RaddarChart,
     PieChart,
     BarChart,
-    TodoList
+    TodoList,
   },
   data() {
     return {
