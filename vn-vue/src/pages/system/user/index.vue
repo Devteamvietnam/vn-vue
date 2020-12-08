@@ -664,7 +664,6 @@ export default {
       this.form = {
         userId: undefined,
         deptId: undefined,
-        wareId: undefined,
         userName: undefined,
         nickName: undefined,
         password: undefined,
@@ -675,7 +674,6 @@ export default {
         remark: undefined,
         postIds: [],
         roleIds: [],
-        wareIds: [],
       };
       this.resetForm("form");
     },
