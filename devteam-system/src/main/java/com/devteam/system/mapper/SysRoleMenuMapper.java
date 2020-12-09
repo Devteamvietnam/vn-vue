@@ -24,6 +24,15 @@ public interface SysRoleMenuMapper
      * @return result
      */
     public int deleteRoleMenuByRoleId(Long roleId);
+    
+    /**
+     * Batch delete role menu associated information
+     * 
+     * @param ids ID of the data to be deleted
+     * @return result
+     */
+    public  int  deleteRoleMenu ( Long [] ids );
+
 
     /**
      * Add role menu information in batches

@@ -362,6 +362,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return result
      */
     @Override
+    @Transactional
     public int deleteUserById(Long userId)
     {
         // Delete user and role association
@@ -378,12 +379,17 @@ public class SysUserServiceImpl implements ISysUserService
      * @return result
      */
     @Override
+    @Transactional
     public int deleteUserByIds(Long[] userIds)
     {
         for (Long userId: userIds)
         {
             checkUserAllowed(new SysUser(userId));
         }
+        // Delete user and role association
+        userRoleMapper . deleteUserRole(userIds);
+        // Delete user and post association
+        userPostMapper . deleteUserPost(userIds);
         return userMapper.deleteUserByIds(userIds);
     }
 

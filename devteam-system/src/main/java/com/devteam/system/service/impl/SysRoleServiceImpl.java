@@ -290,8 +290,13 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return result
      */
     @Override
+    @Transactional
     public int deleteRoleById(Long roleId)
     {
+        // Delete the role and menu association
+        roleMenuMapper . deleteRoleMenuByRoleId(roleId);
+        // Delete role and department association
+        roleDeptMapper . deleteRoleDeptByRoleId(roleId);
         return roleMapper.deleteRoleById(roleId);
     }
 
@@ -302,6 +307,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return result
      */
     @Override
+    @Transactional
     public int deleteRoleByIds(Long[] roleIds)
     {
         for (Long roleId: roleIds)
@@ -313,6 +319,10 @@ public class SysRoleServiceImpl implements ISysRoleService
                 throw new CustomException(String.format("%1$s has been allocated and cannot be deleted", role.getRoleName()));
             }
         }
+        // Delete the role and menu association
+        roleMenuMapper . deleteRoleMenu(roleIds);
+        // Delete role and department association
+        roleDeptMapper . deleteRoleDept(roleIds);
         return roleMapper.deleteRoleByIds(roleIds);
     }
 }
