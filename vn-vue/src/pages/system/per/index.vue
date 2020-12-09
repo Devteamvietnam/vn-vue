@@ -103,7 +103,7 @@
               icon="el-icon-plus"
               size="mini"
               @click="handleAdd"
-              v-hasPermi="['system:user:add']"
+              v-hasPermi="['system:per:add']"
               >New</el-button
             >
           </el-col>
@@ -114,7 +114,7 @@
               size="mini"
               :disabled="single"
               @click="handleUpdate"
-              v-hasPermi="['system:user:edit']"
+              v-hasPermi="['system:per:edit']"
               >Edit</el-button
             >
           </el-col>
@@ -125,7 +125,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleDelete"
-              v-hasPermi="['system:user:remove']"
+              v-hasPermi="['system:per:remove']"
               >Delete</el-button
             >
           </el-col>
@@ -135,7 +135,7 @@
               icon="el-icon-upload2"
               size="mini"
               @click="handleImport"
-              v-hasPermi="['system:user:import']"
+              v-hasPermi="['system:per:import']"
               >Import</el-button
             >
           </el-col>
@@ -145,7 +145,7 @@
               icon="el-icon-download"
               size="mini"
               @click="handleExport"
-              v-hasPermi="['system:user:export']"
+              v-hasPermi="['system:per:export']"
               >Export</el-button
             >
           </el-col>
@@ -163,7 +163,7 @@
           <el-table-column type="selection" width="55" align="center" />
           <el-table-column sortable label="id" align="center" prop="userId" />
           <el-table-column
-            label="User Login"
+            label="Name's"
             align="center"
             prop="userName"
             :show-overflow-tooltip="true"
@@ -206,23 +206,14 @@
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
           </el-table-column>
-          <el-table-column
-            label="Action"
+            <el-table-column
+            label="Updatetime"
             align="center"
-            width="160"
-            class-name="small-padding fixed-width"
+            prop="updateTime"
+            width="120"
           >
             <template slot-scope="scope">
-              <!-- <el-button size="mini" type="text" icon="el-icon-edit" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']">Edit</el-button> -->
-              <!-- <el-button v-if="scope.row.userId !== 1" size="mini" type="text" icon="el-icon-delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">Delete</el-button> -->
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-key"
-                @click="handleResetPwd(scope.row)"
-                v-hasPermi="['system:user:resetPwd']"
-                >Reset</el-button
-              >
+              <span>{{ parseTime(scope.row.updateTime) }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -272,7 +263,7 @@
               <el-input
                 v-model="form.phonenumber"
                 placeholder="Please enter the phone number"
-                maxlength="11"
+                maxlength="10"
               />
             </el-form-item>
           </el-col>
@@ -290,26 +281,12 @@
           <el-col :span="12">
             <el-form-item
               v-if="form.userId == undefined"
-              label="User Login"
+              label="Name's"
               prop="userName"
             >
               <el-input
                 v-model="form.userName"
-                placeholder="Please enter the user name"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item
-              v-if="form.userId == undefined"
-              label="User password"
-              prop="password"
-            >
-              <el-input
-                show-password
-                v-model="form.password"
-                placeholder="Please enter the user password"
-                type="password"
+                placeholder="Please enter the name's"
               />
             </el-form-item>
           </el-col>
@@ -450,7 +427,7 @@ import {
   resetUserPwd,
   changeUserStatus,
   importTemplate,
-} from "@/services/api/system/user";
+} from "@/services/api/system/per";
 import { getToken } from "@/utils/auth";
 import { treeselect } from "@/services/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
@@ -516,7 +493,7 @@ export default {
         // Set the upload request header
         headers: { Authorization: "Bearer " + getToken() },
         // Uploaded address
-        url: process.env.VUE_APP_BASE_API + "/system/user/importData",
+        url: process.env.VUE_APP_BASE_API + "/system/per/importData",
       },
       // query parameters
       queryParams: {
@@ -598,9 +575,6 @@ export default {
     });
     this.getDicts("sys_user_sex").then((response) => {
       this.sexOptions = response.data;
-    });
-    this.getConfigKey("sys.user.initPassword").then((response) => {
-      this.initPassword = response.msg;
     });
   },
 
@@ -702,7 +676,7 @@ export default {
         this.postOptions = response.posts;
         this.roleOptions = response.roles;
         this.open = true;
-        this.title = "Add Personnel";
+        this.title = "Add Human Resource Management";
         this.form.password = this.initPassword;
       });
     },
@@ -718,28 +692,9 @@ export default {
         this.form.postIds = response.postIds;
         this.form.roleIds = response.roleIds;
         this.open = true;
-        this.title = "Modify User";
+        this.title = "Modify Human Resource Management";
         this.form.password = "";
       });
-    },
-    /** Reset password button operation */
-    handleResetPwd(row) {
-      this.$prompt(
-        'Please enter "' + row.userName + '" new password',
-        "Prompt",
-        {
-          confirmButtonText: "OK",
-          cancelButtonText: "Cancel",
-        }
-      )
-        .then(({ value }) => {
-          resetUserPwd(row.userId, value).then((response) => {
-            this.msgSuccess(
-              "Modified successfully, the new password is:" + value
-            );
-          });
-        })
-        .catch(() => {});
     },
     /** Submit button */
     submitForm: function () {
