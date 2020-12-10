@@ -161,7 +161,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column sortable label="id" align="center" prop="userId" />
+          <!-- <el-table-column sortable label="id" align="center" prop="userId" /> -->
           <el-table-column
             label="Name's"
             align="center"
@@ -204,16 +204,6 @@
           >
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
-            </template>
-          </el-table-column>
-            <el-table-column
-            label="Updatetime"
-            align="center"
-            prop="updateTime"
-            width="120"
-          >
-            <template slot-scope="scope">
-              <span>{{ parseTime(scope.row.updateTime) }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -427,12 +417,12 @@ import {
   resetUserPwd,
   changeUserStatus,
   importTemplate,
-} from "@/services/api/system/per";
-import { getToken } from "@/utils/auth";
-import { treeselect } from "@/services/api/system/dept";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-import elDragDialog from "@/components/el-drag-dialog";
+} from "@/services/api/system/per"
+import { getToken } from "@/utils/auth"
+import { treeselect } from "@/services/api/system/dept"
+import Treeselect from "@riophae/vue-treeselect"
+import "@riophae/vue-treeselect/dist/vue-treeselect.css"
+import elDragDialog from "@/components/el-drag-dialog"
 
 export default {
   name: "User",
@@ -677,7 +667,6 @@ export default {
         this.roleOptions = response.roles;
         this.open = true;
         this.title = "Add Human Resource Management";
-        this.form.password = this.initPassword;
       });
     },
     /** Modify button operation */
@@ -693,7 +682,6 @@ export default {
         this.form.roleIds = response.roleIds;
         this.open = true;
         this.title = "Modify Human Resource Management";
-        this.form.password = "";
       });
     },
     /** Submit button */

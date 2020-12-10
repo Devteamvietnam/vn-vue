@@ -123,7 +123,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="60" align="center" />
-      <el-table-column sortable label="Id" prop="roleId" width="150" />
+      
       <el-table-column
         label="Name"
         prop="roleName"

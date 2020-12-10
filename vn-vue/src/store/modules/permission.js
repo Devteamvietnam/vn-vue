@@ -33,7 +33,7 @@ const permission = {
 function filterAsyncRouter(asyncRouterMap) {
   return asyncRouterMap.filter(route => {
     if (route.component) {
-      // Layout component special treatment
+      // Layout ParentView component special processing
       if (route.component ==='Layout') {
         route.component = Layout
       } else {

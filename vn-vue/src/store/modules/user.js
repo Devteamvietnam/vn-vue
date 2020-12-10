@@ -51,7 +51,7 @@ const user = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(res => {
         const user = res.user
-        const avatar = user.avatar == ""? require("@/assets/image/avatar.jpg"): process.env.VUE_APP_BASE_API + user.avatar;
+        const avatar = user.avatar == ""? require("@/assets/image/avatar.png"): process.env.VUE_APP_BASE_API + user.avatar;
         if (res.roles && res.roles.length > 0) {// verify that the returned roles is a non-empty array
           commit('SET_ROLES', res.roles)
           commit('SET_PERMISSIONS', res.permissions)
