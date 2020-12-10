@@ -82,7 +82,7 @@ export function changeUserStatus(userId, status) {
 // Query user personal information
 export function getUserProfile() {
   return request({
-    url:'/system/per/profile',
+    url:'/system/user/profile',
     method:'get'
   })
 }
@@ -90,29 +90,16 @@ export function getUserProfile() {
 // Modify user personal information
 export function updateUserProfile(data) {
   return request({
-    url:'/system/per/profile',
+    url:'/system/user/profile',
     method:'put',
     data: data
-  })
-}
-
-// User password reset
-export function updateUserPwd(oldPassword, newPassword) {
-  const data = {
-    oldPassword,
-    newPassword
-  }
-  return request({
-    url:'/system/per/profile/updatePwd',
-    method:'put',
-    params: data
   })
 }
 
 // upload user avatar
 export function uploadAvatar(data) {
   return request({
-    url:'/system/per/profile/avatar',
+    url:'/system/per/avatar',
     method:'post',
     data: data
   })
@@ -121,7 +108,7 @@ export function uploadAvatar(data) {
 // Download user import template
 export function importTemplate() {
   return request({
-    url:'/system/per/importTemplate',
+    url:'/system/user/importTemplate',
     method:'get'
   })
 }

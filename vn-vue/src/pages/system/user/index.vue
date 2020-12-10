@@ -161,7 +161,7 @@
           @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55" align="center" />
-          <el-table-column sortable label="id" align="center" prop="userId" />
+          <!--<el-table-column sortable label="id" align="center" prop="userId" /> -->
           <el-table-column
             label="User Login"
             align="center"

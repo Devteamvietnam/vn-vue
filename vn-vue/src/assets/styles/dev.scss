@@ -238,3 +238,7 @@
 	position: relative;
 	float: right;
 }
+/*  el-tabs provides scrolling mechanism  */
+.el-tabs__content  {
+	overflow-x : scroll;
+}

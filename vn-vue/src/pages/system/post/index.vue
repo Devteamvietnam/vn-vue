@@ -109,12 +109,6 @@
     >
       <el-table-column type="selection" width="60" align="center" />
       <el-table-column
-        label="Number"
-        align="center"
-        prop="postId"
-        width="140"
-      />
-      <el-table-column
         label="Code"
         align="center"
         prop="postCode"
