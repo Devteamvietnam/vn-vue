@@ -110,15 +110,12 @@ public class SysProfileController extends BaseController
     {
         if (!file.isEmpty())
         {
-            LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
             String avatar = FileUploadUtils.upload(DevteamConfig.getAvatarPath(), file);
-            if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
+            if (userService.updateUserAvatar( avatar, avatar))
             {
                 AjaxResult ajax = AjaxResult.success();
                 ajax.put("imgUrl", avatar);
-                // Update cached user avatar
-                loginUser.getUser().setAvatar(avatar);
-                tokenService.setLoginUser(loginUser);
+         
                 return ajax;
             }
         }
