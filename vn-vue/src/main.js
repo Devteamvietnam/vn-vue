@@ -21,6 +21,7 @@ import RightToolbar from "@/components/RightToolbar"
 // fix languages 
 import enLang from'element-ui/lib/locale/lang/en'
 
+
 // global method mount
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey

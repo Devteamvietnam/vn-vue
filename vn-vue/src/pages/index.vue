@@ -1,5 +1,25 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="dashboard-editor-container">      
+      <div class="title">{{ timeFix }}，{{ name }}，{{ welcome }}</div>
+      <br/>
+    <el-row :gutter="32">
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <raddar-chart />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <pie-chart />
+        </div>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="8">
+        <div class="chart-wrapper">
+          <bar-chart />
+        </div>
+      </el-col>
+    </el-row>
+
     <!-- Introduce -->
     <el-divider />
     <el-row :gutter="20">
@@ -88,37 +108,18 @@
 </template>
 
 <script>
-import PanelGroup from "./dashboard/PanelGroup";
-import LineChart from "./dashboard/LineChart";
-import RaddarChart from "./dashboard/RaddarChart";
-import PieChart from "./dashboard/PieChart";
-import BarChart from "./dashboard/BarChart";
-import TodoList from "./dashboard/TodoList";
-
-const lineChartData = {
-  newVisitis: {
-    expectedData: [100, 120, 161, 134, 105, 160, 165],
-    actualData: [120, 82, 91, 154, 162, 140, 145],
-  },
-  messages: {
-    expectedData: [200, 192, 120, 144, 160, 130, 140],
-    actualData: [180, 160, 151, 106, 145, 150, 130],
-  },
-  purchases: {
-    expectedData: [80, 100, 121, 104, 105, 90, 100],
-    actualData: [120, 90, 100, 138, 142, 130, 130],
-  },
-  shoppings: {
-    expectedData: [130, 140, 141, 142, 145, 150, 160],
-    actualData: [120, 82, 91, 154, 162, 140, 130],
-  },
-};
+import { timeFix } from '@/utils/util'
+import { welcome } from '@/utils/util'
+import RaddarChart from "./dashboard/RaddarChart"
+import PieChart from "./dashboard/PieChart"
+import BarChart from "./dashboard/BarChart"
+import TodoList from "./dashboard/TodoList"
+import { mapState } from 'vuex'
+import { mapGetters } from "vuex"
 
 export default {
   name: "Index",
   components: {
-    PanelGroup,
-    LineChart,
     RaddarChart,
     PieChart,
     BarChart,
@@ -128,8 +129,12 @@ export default {
     return {
       // Version number
       version: "1.0.0",
-      lineChartData: lineChartData.newVisitis,
+      timeFix: timeFix(),
+      welcome: welcome(),
     };
+  },
+  computed: {
+    ...mapGetters(["name", "avatar", "device"]),
   },
   methods: {
     handleSetLineChartData(type) {
@@ -153,6 +158,11 @@ export default {
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
+}
+.title {
+  font: 1em sans-serif;
+  font-size: 100%;
+  text-align: center;
 }
 .home {
   blockquote {
