@@ -39,6 +39,7 @@
     "core-js": "^3.7.0",
     "echarts": "^4.9.0",
     "element-ui": "^2.14.1",
+    "enquire.js": "^2.1.6",
     "file-saver": "^2.0.2",
     "fuse.js": "^6.4.3",
     "js-beautify": "^1.13.0",
