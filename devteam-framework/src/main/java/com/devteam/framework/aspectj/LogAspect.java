@@ -209,6 +209,7 @@ public class LogAspect
      * @param o Object information.
      * @return If it is an object that needs to be filtered, it returns true; otherwise, it returns false.
      */
+    @SuppressWarnings ("rawtypes")
     public boolean isFilterObject(final Object o)
     {
         return o instanceof MultipartFile || o instanceof HttpServletRequest || o instanceof HttpServletResponse;
