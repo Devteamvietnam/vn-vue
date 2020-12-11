@@ -128,11 +128,13 @@ public class SysUserController extends BaseController
         {
             return AjaxResult.error("New user'" + user.getUserName() + "'Failed, login account already exists");
         }
-        else if (UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
+        else  if ( StringUtils . isNotEmpty(user . getPhonenumber())
+                &&  UserConstants.NOT_UNIQUE.equals(userService . checkEmailUnique(user)))
         {
             return AjaxResult.error("New user'" + user.getUserName() + "'Failed, mobile phone number already exists");
         }
-        else if (UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
+        else  if ( StringUtils . isNotEmpty(user . getEmail())
+                &&  UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
             return AjaxResult.error("New user'" + user.getUserName() + "'Failed, the email account already exists");
         }
@@ -150,11 +152,13 @@ public class SysUserController extends BaseController
     public AjaxResult edit(@Validated @RequestBody SysUser user)
     {
         userService.checkUserAllowed(user);
-        if (UserConstants.NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
+        if ( StringUtils . isNotEmpty(user . getPhonenumber())
+                &&  UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
             return AjaxResult.error("Modify user'" + user.getUserName() + "'Failed, mobile phone number already exists");
         }
-        else if (UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
+        else  if ( StringUtils . isNotEmpty(user . getEmail())
+                &&  UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
             return AjaxResult.error("Modify user'" + user.getUserName() + "'Failed, the email account already exists");
         }
