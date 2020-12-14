@@ -101,7 +101,7 @@ public class SysProfileController extends BaseController
         return AjaxResult.error("Change the password is abnormal, please contact the administrator");
     }
 
-    /**
+     /**
      * Avatar upload
      */
     @Log(title = "User Avatar", businessType = BusinessType.UPDATE)
@@ -110,12 +110,15 @@ public class SysProfileController extends BaseController
     {
         if (!file.isEmpty())
         {
+        	LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
             String avatar = FileUploadUtils.upload(DevteamConfig.getAvatarPath(), file);
-            if (userService.updateUserAvatar( avatar, avatar))
+            if (userService.updateUserAvatar(loginUser.getUsername(), avatar))
             {
                 AjaxResult ajax = AjaxResult.success();
                 ajax.put("imgUrl", avatar);
-         
+               // Update the cached user avatar
+                loginUser.getUser().setAvatar(avatar);
+                tokenService.setLoginUser(loginUser);
                 return ajax;
             }
         }
