@@ -6,6 +6,11 @@
       :rules="loginRules"
       class="login-form"
     >
+      <div class="App">
+      <header class="App-header">
+        <img src="@/assets/images/avatar.png" class="App-logo" alt="logo" />
+      </header>
+    </div>
       <h3 class="title">{{ name }}</h3>
       <el-form-item prop="username">
         <el-input
@@ -86,6 +91,7 @@
 import { getCodeImg } from "@/services/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
+
 
 export default {
   name: "Login",
@@ -210,6 +216,49 @@ export default {
   margin: 0px auto 30px auto;
   text-align: center;
   color: #707070;
+}
+.App {
+  text-align: center;
+}
+
+@media only  screen and (min-width: 768px) {
+  .App-logo {
+  height: 30vmin;
+  pointer-events: none;
+  }
+}
+
+.App-logo {
+  height: 25vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .login-form {
