@@ -19,6 +19,8 @@
       left: 0;
       z-index: 1001;
       overflow: hidden;
+      -webkit-box-shadow: 2px 0 6px rgba(0,21,41,.35);
+      box-shadow: 2px 0 6px rgba(0,21,41,.35);
   
       // reset element-ui css
       .horizontal-collapse-transition {
@@ -73,11 +75,11 @@
       .submenu-title-noDropdown,
       .el-submenu__title {
         &:hover {
-          background-color: $menuHover !important;
+          background-color: rgba(0, 0, 0, 0.06) !important;
         }
       }
   
-      .is-active>.el-submenu__title {
+      & .theme-dark .is-active>.el-submenu__title {
         color: $subMenuActiveText !important;
       }
   
@@ -87,7 +89,7 @@
         background-color: $subMenuBg !important;
   
         &:hover {
-          background-color: $subMenuHover !important;
+          background-color: rgba(0, 0, 0, 0.06) !important;
         }
       }
     }
@@ -199,7 +201,7 @@
     .el-menu-item {
       &:hover {
         // you can use $subMenuHover
-        background-color: $menuHover !important;
+        background-color: rgba(0, 0, 0, 0.06) !important;
       }
     }
   
