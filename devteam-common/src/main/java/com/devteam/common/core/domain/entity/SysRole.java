@@ -8,10 +8,13 @@ import com.devteam.common.annotation.Excel;
 import com.devteam.common.annotation.Excel.ColumnType;
 import com.devteam.common.core.domain.BaseEntity;
 
+import lombok.Data;
+
 /**
  * Role table sys_role
  *
  */
+@Data
 public class SysRole extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -119,90 +122,6 @@ public class SysRole extends BaseEntity
         return roleSort;
     }
 
-    public void setRoleSort(String roleSort)
-    {
-        this.roleSort = roleSort;
-    }
-
-    public String getDataScope()
-    {
-        return dataScope;
-    }
-
-    public void setDataScope(String dataScope)
-    {
-        this.dataScope = dataScope;
-    }
-
-    public boolean isMenuCheckStrictly()
-    {
-        return menuCheckStrictly;
-    }
-
-    public void setMenuCheckStrictly(boolean menuCheckStrictly)
-    {
-        this.menuCheckStrictly = menuCheckStrictly;
-    }
-
-    public boolean isDeptCheckStrictly()
-    {
-        return deptCheckStrictly;
-    }
-
-    public void setDeptCheckStrictly(boolean deptCheckStrictly)
-    {
-        this.deptCheckStrictly = deptCheckStrictly;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getDelFlag()
-    {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag)
-    {
-        this.delFlag = delFlag;
-    }
-
-    public boolean isFlag()
-    {
-        return flag;
-    }
-
-    public void setFlag(boolean flag)
-    {
-        this.flag = flag;
-    }
-
-    public Long[] getMenuIds()
-    {
-        return menuIds;
-    }
-
-    public void setMenuIds(Long[] menuIds)
-    {
-        this.menuIds = menuIds;
-    }
-
-    public Long[] getDeptIds()
-    {
-        return deptIds;
-    }
-
-    public void setDeptIds(Long[] deptIds)
-    {
-        this.deptIds = deptIds;
-    }
     
     @Override
     public String toString() {

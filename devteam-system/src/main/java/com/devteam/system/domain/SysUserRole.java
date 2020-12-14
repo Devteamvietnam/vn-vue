@@ -3,9 +3,12 @@ package com.devteam.system.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import lombok.Data;
+
 /**
  * User and role association sys_user_role
  */
+@Data
 public class SysUserRole
 {
     /** User ID */

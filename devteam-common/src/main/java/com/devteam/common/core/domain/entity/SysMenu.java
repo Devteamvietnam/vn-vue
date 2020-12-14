@@ -8,10 +8,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.devteam.common.core.domain.BaseEntity;
 
+import lombok.Data;
+
 /**
  * Menu permission table sys_menu
  *
  */
+@Data
 public class SysMenu extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -77,32 +80,6 @@ public class SysMenu extends BaseEntity
     {
         return menuName;
     }
-
-    public void setMenuName(String menuName)
-    {
-        this.menuName = menuName;
-    }
-
-    public String getParentName()
-    {
-        return parentName;
-    }
-
-    public void setParentName(String parentName)
-    {
-        this.parentName = parentName;
-    }
-
-    public Long getParentId()
-    {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId)
-    {
-        this.parentId = parentId;
-    }
-
     @NotBlank(message = "The display order cannot be empty")
     public String getOrderNum()
     {
@@ -131,30 +108,7 @@ public class SysMenu extends BaseEntity
         return component;
     }
 
-    public void setComponent(String component)
-    {
-        this.component = component;
-    }
-
-    public String getIsFrame()
-    {
-        return isFrame;
-    }
-
-    public void setIsFrame(String isFrame)
-    {
-        this.isFrame = isFrame;
-    }
-
-    public String getIsCache()
-    {
-        return isCache;
-    }
-
-    public void setIsCache(String isCache)
-    {
-        this.isCache = isCache;
-    }
+ 
 
     @NotBlank(message = "The menu type cannot be empty")
     public String getMenuType()
@@ -167,25 +121,7 @@ public class SysMenu extends BaseEntity
         this.menuType = menuType;
     }
 
-    public String getVisible()
-    {
-        return visible;
-    }
-
-    public void setVisible(String visible)
-    {
-        this.visible = visible;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
+  
 
     @Size(min = 0, max = 100, message = "The length of the authorization identifier cannot exceed 100 characters")
     public String getPerms()
@@ -193,30 +129,6 @@ public class SysMenu extends BaseEntity
         return perms;
     }
 
-    public void setPerms(String perms)
-    {
-        this.perms = perms;
-    }
-
-    public String getIcon()
-    {
-        return icon;
-    }
-
-    public void setIcon(String icon)
-    {
-        this.icon = icon;
-    }
-
-    public List<SysMenu> getChildren()
-    {
-        return children;
-    }
-
-    public void setChildren(List<SysMenu> children)
-    {
-        this.children = children;
-    }
     
     @Override
     public String toString() {

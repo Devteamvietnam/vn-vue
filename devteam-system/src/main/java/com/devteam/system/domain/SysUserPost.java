@@ -1,11 +1,16 @@
 package com.devteam.system.domain;
 
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+
+import lombok.Data;
 
 /**
  * User and post association sys_user_post
  */
+@Data
 public class SysUserPost
 {
     /** User ID */

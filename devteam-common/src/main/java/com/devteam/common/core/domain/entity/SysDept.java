@@ -9,10 +9,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.devteam.common.core.domain.BaseEntity;
 
+import lombok.Data;
+
 /**
  * Department table sys_dept
  *
  */
+@Data
 public class SysDept extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -53,35 +56,6 @@ public class SysDept extends BaseEntity
     /** sub-department */
     private List<SysDept> children = new ArrayList<SysDept>();
 
-    public Long getDeptId()
-    {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId)
-    {
-        this.deptId = deptId;
-    }
-
-    public Long getParentId()
-    {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId)
-    {
-        this.parentId = parentId;
-    }
-
-    public String getAncestors()
-    {
-        return ancestors;
-    }
-
-    public void setAncestors(String ancestors)
-    {
-        this.ancestors = ancestors;
-    }
 
     @NotBlank(message = "Department name cannot be empty")
     @Size(min = 0, max = 30, message = "The length of the department name cannot exceed 30 characters")
@@ -89,32 +63,12 @@ public class SysDept extends BaseEntity
     {
         return deptName;
     }
-
-    public void setDeptName(String deptName)
-    {
-        this.deptName = deptName;
-    }
-
     @NotBlank(message = "The display order cannot be empty")
     public String getOrderNum()
     {
         return orderNum;
     }
 
-    public void setOrderNum(String orderNum)
-    {
-        this.orderNum = orderNum;
-    }
-
-    public String getLeader()
-    {
-        return leader;
-    }
-
-    public void setLeader(String leader)
-    {
-        this.leader = leader;
-    }
 
     @Size(min = 0, max = 10, message = "The length of the contact number cannot exceed 10 characters")
     public String getPhone()
@@ -122,10 +76,6 @@ public class SysDept extends BaseEntity
         return phone;
     }
 
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
 
     @Email(message = "The email format is incorrect")
     @Size(min = 0, max = 50, message = "The length of the mailbox cannot exceed 50 characters")
@@ -134,50 +84,6 @@ public class SysDept extends BaseEntity
         return email;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getDelFlag()
-    {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag)
-    {
-        this.delFlag = delFlag;
-    }
-
-    public String getParentName()
-    {
-        return parentName;
-    }
-
-    public void setParentName(String parentName)
-    {
-        this.parentName = parentName;
-    }
-
-    public List<SysDept> getChildren()
-    {
-        return children;
-    }
-
-    public void setChildren(List<SysDept> children)
-    {
-        this.children = children;
-    }
 
     @Override
     public String toString() {

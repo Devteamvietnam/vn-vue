@@ -1,14 +1,20 @@
 package com.devteam.system.domain;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.devteam.common.core.domain.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.Data;
 
 /**
  * Notification form sys_notice
  */
+@Data
 public class SysNotice extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -50,35 +56,7 @@ public class SysNotice extends BaseEntity
         return noticeTitle;
     }
 
-    public void setNoticeType(String noticeType)
-    {
-        this.noticeType = noticeType;
-    }
 
-    public String getNoticeType()
-    {
-        return noticeType;
-    }
-
-    public void setNoticeContent(String noticeContent)
-    {
-        this.noticeContent = noticeContent;
-    }
-
-    public String getNoticeContent()
-    {
-        return noticeContent;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
-    public String getStatus()
-    {
-        return status;
-    }
 
     @Override
     public String toString() {
