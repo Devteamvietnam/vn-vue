@@ -1,18 +1,11 @@
 package com.devteam.system.domain;
 
-import java.util.Date;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import lombok.Data;
 
 /**
  * User and post association sys_user_post
  */
-@Data
 public class SysPerPost
 {
     /** User ID */

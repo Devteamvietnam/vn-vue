@@ -1,7 +1,5 @@
 package com.devteam.common.core.domain.entity;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,13 +8,9 @@ import com.devteam.common.annotation.Excel;
 import com.devteam.common.annotation.Excel.ColumnType;
 import com.devteam.common.core.domain.BaseEntity;
 
-import lombok.Data;
-
 /**
  * Dictionary type table sys_dict_type
-
  */
-@Data
 public class SysDictType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -66,6 +60,20 @@ public class SysDictType extends BaseEntity
         return dictType;
     }
     
+    public void setDictType(String dictType)
+    {
+        this.dictType = dictType;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
     
     @Override
     public String toString() {

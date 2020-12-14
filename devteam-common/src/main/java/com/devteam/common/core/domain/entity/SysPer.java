@@ -1,5 +1,6 @@
 package com.devteam.common.core.domain.entity;
 
+import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,14 +13,10 @@ import com.devteam.common.annotation.Excel.Type;
 import com.devteam.common.annotation.Excels;
 import com.devteam.common.core.domain.BaseEntity;
 
-import lombok.Data;
-
-
 /**
  * User object sys_per
  *
  */
-@Data
 public class SysPer extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -162,6 +159,103 @@ public class SysPer extends BaseEntity
     public String getPhonenumber()
     {
         return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber)
+    {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getSex()
+    {
+        return sex;
+    }
+
+    public void setSex(String sex)
+    {
+        this.sex = sex;
+    }
+
+    public String getAvatar()
+    {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar)
+    {
+        this.avatar = avatar;
+    }
+
+
+    public String getSalt()
+    {
+        return salt;
+    }
+
+    public void setSalt(String salt)
+    {
+        this.salt = salt;
+    }
+
+    public String getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+
+    public String getDelFlag()
+    {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag)
+    {
+        this.delFlag = delFlag;
+    }
+
+
+    public SysDept getDept()
+    {
+        return dept;
+    }
+
+    public void setDept(SysDept dept)
+    {
+        this.dept = dept;
+    }
+
+    public List<SysRole> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles)
+    {
+        this.roles = roles;
+    }
+
+    public Long[] getRoleIds()
+    {
+        return roleIds;
+    }
+
+    public void setRoleIds(Long[] roleIds)
+    {
+        this.roleIds = roleIds;
+    }
+
+    public Long[] getPostIds()
+    {
+        return postIds;
+    }
+
+    public void setPostIds(Long[] postIds)
+    {
+        this.postIds = postIds;
     }
 
     @Override

@@ -5,16 +5,12 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.Data;
-
 import com.devteam.common.core.domain.entity.SysUser;
 
 /**
  * Login user identity permissions
  *
  */
-@Data
 public class LoginUser implements UserDetails
 {
     private static final long serialVersionUID = 1L;
