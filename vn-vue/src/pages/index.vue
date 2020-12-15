@@ -101,7 +101,11 @@
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="8">
-        <todo-list />
+      <div class="App">
+      <header class="App-header">
+        <img src="@/assets/images/avatar.png" class="App-logo" alt="logo" />
+      </header>
+     </div>
       </el-col>
     </el-row>
   </div>
@@ -113,7 +117,6 @@ import { welcome } from '@/utils/util'
 import RaddarChart from "./dashboard/RaddarChart"
 import PieChart from "./dashboard/PieChart"
 import BarChart from "./dashboard/BarChart"
-import TodoList from "./dashboard/TodoList"
 import { mapState } from 'vuex'
 import { mapGetters } from "vuex"
 
@@ -123,7 +126,6 @@ export default {
     RaddarChart,
     PieChart,
     BarChart,
-    TodoList,
   },
   data() {
     return {
@@ -157,6 +159,49 @@ export default {
     background: #fff;
     padding: 16px 16px 0;
     margin-bottom: 32px;
+  }
+}
+.App {
+  text-align: center;
+}
+
+@media only  screen and (min-width: 768px) {
+  .App-logo {
+  height: 30vmin;
+  pointer-events: none;
+  }
+}
+
+.App-logo {
+  height: 25vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 .title {

@@ -102,7 +102,7 @@ export default {
       capsTooltip: false,
       cookiePassword: "",
       loginForm: {
-        username: "ivan",
+        username: "",
         password: "",
         rememberMe: false,
         code: "",
@@ -221,7 +221,7 @@ export default {
   text-align: center;
 }
 
-@media only  screen and (min-width: 768px) {
+@media (max-width: 768px) {
   .App-logo {
   height: 30vmin;
   pointer-events: none;
