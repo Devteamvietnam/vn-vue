@@ -152,12 +152,12 @@ public class SysUserController extends BaseController
     public AjaxResult edit(@Validated @RequestBody SysUser user)
     {
         userService.checkUserAllowed(user);
-        if ( StringUtils . isNotEmpty(user . getPhonenumber())
+        if ( StringUtils.isNotEmpty(user . getPhonenumber())
                 &&  UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
             return AjaxResult.error("Modify user'" + user.getUserName() + "'Failed, mobile phone number already exists");
         }
-        else  if ( StringUtils . isNotEmpty(user . getEmail())
+        else  if ( StringUtils.isNotEmpty(user.getEmail())
                 &&  UserConstants.NOT_UNIQUE.equals(userService.checkEmailUnique(user)))
         {
             return AjaxResult.error("Modify user'" + user.getUserName() + "'Failed, the email account already exists");
