@@ -1,13 +1,13 @@
-import router from './router'
-import store from './store'
-import { Message } from 'element-ui'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import { getToken } from '@/utils/auth'
+import router from'./router'
+import store from'./store'
+import {Message} from'element-ui'
+import NProgress from'nprogress'
+import'nprogress/nprogress.css'
+import {getToken} from'@/utils/auth'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/login', '/auth-redirect', '/bind', '/register']
+const whiteList = ['/login','/auth-redirect','/bind','/register']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
@@ -23,28 +23,18 @@ router.beforeEach((to, from, next) => {
           // Pull user_info
           const roles = res.roles
           store.dispatch('GenerateRoutes', {roles }).then(accessRoutes => {
-          // Test the default static page
-          // store.dispatch('permission/generateRoutes', {roles }).then(accessRoutes => {
             // Generate an accessible routing table based on roles permissions
             router.addRoutes(accessRoutes) // dynamically add accessible routing table
             next({ ...to, replace: true }) // hack method to ensure that addRoutes is completed
           })
-        })
-          .catch(err => {
-            store.dispatch('FedLogOut').then(() => {
+        }).catch(err => {
+            store.dispatch('LogOut').then(() => {
               Message.error(err)
               next({ path:'/' })
             })
           })
       } else {
         next()
-        //If there is no need to dynamically change permissions, you can directly delete the permission judgment below by next() ↓
-        // if (hasPermission(store.getters.roles, to.meta.roles)) {
-        // next()
-        // } else {
-        // next({ path:'/401', replace: true, query: {noGoBack: true }})
-        // }
-        //Can be deleted ↑
       }
     }
   } else {
