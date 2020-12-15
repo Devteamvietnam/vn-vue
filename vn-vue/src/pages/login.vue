@@ -190,7 +190,7 @@ export default {
                 message: "Login Successfully!",
                 type: "success",
               });
-              this.$router.push({ path: this.redirect || "/" });
+              this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
             })
             .catch(() => {
               this.loading = false;
