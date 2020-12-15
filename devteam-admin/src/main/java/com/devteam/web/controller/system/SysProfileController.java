@@ -70,7 +70,7 @@ public class SysProfileController extends BaseController {
             tokenService.setLoginUser(loginUser);
             return AjaxResult.success();
         }
-        return AjaxResult.error("If you modify personal information abnormally, please contact the administrator");
+        return AjaxResult.error("If you modify personal information fail!, please contact the administrator");
     }
 
     /**
