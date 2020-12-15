@@ -30,8 +30,8 @@ import com.devteam.framework.web.service.TokenService;
  */
 @RestController
 @RequestMapping("/system/user/profile")
-public class SysProfileController extends BaseController
-{
+public class SysProfileController extends BaseController {
+	
     @Autowired
     private ISysUserService userService;
 
@@ -98,7 +98,7 @@ public class SysProfileController extends BaseController
             tokenService.setLoginUser(loginUser);
             return AjaxResult.success();
         }
-        return AjaxResult.error("Change the password is abnormal, please contact the administrator");
+        return AjaxResult.error("Change the password is fail!, please contact the administrator");
     }
 
      /**
@@ -122,6 +122,6 @@ public class SysProfileController extends BaseController
                 return ajax;
             }
         }
-        return AjaxResult.error("Uploading picture is abnormal, please contact the administrator");
+        return AjaxResult.error("Uploading picture is fail!, please contact the administrator");
     }
 }
