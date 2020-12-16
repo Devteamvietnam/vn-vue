@@ -1,5 +1,6 @@
 package com.devteam.web.controller.system;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -73,7 +74,10 @@ public class SysDictDataController extends BaseController
     @GetMapping(value = "/type/{dictType}")
     public AjaxResult dictType(@PathVariable String dictType)
     {
-        return AjaxResult.success(dictTypeService.selectDictDataByType(dictType));
+		List<SysDictData> data = dictTypeService.selectDictDataByType(dictType);
+		if (data ==  null )
+			data =  new  ArrayList<> ();
+		return  AjaxResult . success(data);
     }
 
     /**
