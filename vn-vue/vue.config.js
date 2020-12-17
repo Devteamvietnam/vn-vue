@@ -17,15 +17,20 @@ module.exports = {
   // Deploy the URL in the production environment and development environment.
   // By default, Vue CLI will assume that your application is deployed on the root path of a domain name
   // If the application is deployed on a subpath, you need to specify this subpath with this option. For example, if your application is deployed at https://devteamvietnam/admin/, set baseUrl to /admin/.
-  publicPath: process.env.NODE_ENV === "production"? "/": "/",
+  publicPath: '',
+
   // In npm run build or yarn build, the directory name of the generated file (must be consistent with the production environment path of baseUrl) (default dist)
   outputDir:'dist',
+
   // Used to place the generated static resources (js, css, img, fonts); (after the project is packaged, the static resources will be placed in this folder)
   assetsDir:'static',
+
   // Whether to enable eslint save detection, valid value: ture | false |'error'
   lintOnSave: process.env.NODE_ENV ==='development',
+
   // If you don't need the source map of the production environment, you can set it to false to speed up the production environment construction.
   productionSourceMap: false,
+
   // webpack-dev-server related configuration
   devServer: {
     host: '0.0.0.0',
@@ -43,6 +48,7 @@ module.exports = {
     },
     disableHostCheck: true
   },
+
   configureWebpack: {
     name: name,
     resolve: {
@@ -51,6 +57,7 @@ module.exports = {
       }
     }
   },
+
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
@@ -114,5 +121,9 @@ module.exports = {
           }
         }
       )
+  },
+
+  pluginOptions: {
+    cordovaPath: 'src-cordova'
   }
 }
