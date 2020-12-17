@@ -272,7 +272,7 @@
               <el-input
                 v-model="form.phonenumber"
                 placeholder="Please enter the phone number"
-                maxlength="11"
+                maxlength="10"
               />
             </el-form-item>
           </el-col>

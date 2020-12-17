@@ -25,3 +25,10 @@ pnpm-debug.log*
 # lock file
 yarn.lock
 package-lock.json
+
+#Electron-builder output
+/dist_electron
+# Cordova
+/src-cordova/platforms
+/src-cordova/plugins
+/public/cordova.js
