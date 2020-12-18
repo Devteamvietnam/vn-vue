@@ -6,7 +6,7 @@ import store from '@/store'
  * @returns {Boolean}
  */
 export function checkPermi(value) {
-  if (value && value instanceof Array && value.length> 0) {
+  if (value && value instanceof Array && value.length > 0) {
     const permissions = store.getters && store.getters.permissions
     const permissionDatas = value
 
@@ -19,7 +19,7 @@ export function checkPermi(value) {
     }
     return true
   } else {
-    console.error(`Need roles! Like checkPermi="['system:user:add','system:user:edit']"`)
+    console.error(`need roles! Like checkPermi="['system:user:add','system:user:edit']"`)
     return false
   }
 }
@@ -30,7 +30,7 @@ export function checkPermi(value) {
  * @returns {Boolean}
  */
 export function checkRole(value) {
-  if (value && value instanceof Array && value.length> 0) {
+  if (value && value instanceof Array && value.length > 0) {
     const roles = store.getters && store.getters.roles
     const permissionRoles = value
 
@@ -43,7 +43,7 @@ export function checkRole(value) {
     }
     return true
   } else {
-    console.error(`Need roles! Like checkRole="['admin','editor']"`)
+    console.error(`need roles! Like checkRole="['admin','editor']"`)
     return false
   }
 }

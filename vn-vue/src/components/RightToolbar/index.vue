@@ -1,8 +1,8 @@
-<!-- @author Ivan/   huangmx 20201117-->
+<!-- @author Jihoon -->
 <template>
   <div class="top-right-btn">
     <el-row>
-      <el-tooltip class="item" effect="dark" :content="showSearch ? 'Hide search' : 'Show search'" placement="top">
+      <el-tooltip class="item" effect="dark" :content="showSearch?'Hide search':'Show search'" placement="top">
         <el-button size="mini" circle icon="el-icon-search" @click="toggleSearch()" />
       </el-tooltip>
       <el-tooltip class="item" effect="dark" content="refresh" placement="top">
@@ -13,26 +13,26 @@
 </template>
 <script>
 export default {
-  name: "RightToolbar",
-  data() {
-    return {};
-  },
+  name: 'RightToolbar',
   props: {
     showSearch: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
+  },
+  data() {
+    return {}
   },
 
   methods: {
-    //search for
+    // search for
     toggleSearch() {
-      this.$emit("update:showSearch", !this.showSearch);
+      this.$emit('update:showSearch', !this.showSearch)
     },
-    //Refresh
+    // refresh
     refresh() {
-      this.$emit("queryTable");
-    },
-  },
-};
+      this.$emit('queryTable')
+    }
+  }
+}
 </script>

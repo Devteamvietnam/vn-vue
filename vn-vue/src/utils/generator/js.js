@@ -13,7 +13,6 @@ const inheritAttrs = {
   dialog: 'inheritAttrs: false,'
 }
 
-
 export function makeUpJs(conf, type) {
   confGlobal = conf = JSON.parse(JSON.stringify(conf))
   const dataList = []
@@ -133,8 +132,8 @@ function buildRules(conf, ruleList) {
   const rules = []
   if (trigger[conf.tag]) {
     if (conf.required) {
-      const type = isArray(conf.defaultValue)?'type: \'array\',':''
-      let message = isArray(conf.defaultValue)? `Please select at least one ${conf.vModel}`: conf.placeholder
+      const type = isArray(conf.defaultValue) ? 'type: \'array\',' : ''
+      let message = isArray(conf.defaultValue) ? `Please select at least one ${conf.vModel}` : conf.placeholder
       if (message === undefined) message = `${conf.label} cannot be empty`
       rules.push(`{ required: true, ${type} message:'${message}', trigger:'${trigger[conf.tag]}' }`)
     }
@@ -167,7 +166,7 @@ function buildProps(conf, propsList) {
 }
 
 function buildBeforeUpload(conf) {
-  const unitNum = units[conf.sizeUnit]; let rightSizeCode =''; let acceptCode =''; const
+  const unitNum = units[conf.sizeUnit]; let rightSizeCode = ''; let acceptCode = ''; const
     returnList = []
   if (conf.fileSize) {
     rightSizeCode = `let isRightSize = file.size / ${unitNum} <${conf.fileSize}
@@ -188,7 +187,7 @@ function buildBeforeUpload(conf) {
     ${acceptCode}
     return ${returnList.join('&&')}
   },`
-  return returnList.length? str:''
+  return returnList.length ? str : ''
 }
 
 function buildSubmitUpload(conf) {

@@ -1,122 +1,121 @@
 <template>
-  <div class="editor" ref="editor" :style="styles"></div>
+  <div ref="editor" class="editor" :style="styles" />
 </template>
 
 <script>
-import Quill from "quill"
-import "quill/dist/quill.core.css"
-import "quill/dist/quill.snow.css"
-import "quill/dist/quill.bubble.css"
+import Quill from 'quill'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 
 export default {
-  name: "Editor",
+  name: 'Editor',
   props: {
     /* The content of the editor */
     value: {
       type: String,
-      default: "",
+      default: ''
     },
     /* height */
     height: {
       type: Number,
-      default: null,
+      default: null
     },
     /* Minimum height */
     minHeight: {
       type: Number,
-      default: null,
-    },
+      default: null
+    }
   },
   data() {
     return {
       Quill: null,
-      currentValue: "",
+      currentValue: '',
       options: {
-        theme: "snow",
+        theme: 'snow',
         bounds: document.body,
-        debug: "warn",
+        debug: 'warn',
         modules: {
           // Toolbar configuration
           toolbar: [
-            ["bold", "italic", "underline", "strike"], // bold italic underline strikethrough
-            ["blockquote", "code-block"], // quote code block
-            [{ list: "ordered" }, { list: "bullet" }], // ordered, unordered list
-            [{ indent: "-1" }, { indent: "+1" }], // indent
-            [{ size: ["small", false, "large", "huge"] }], // font size
+            ['bold', 'italic', 'underline', 'strike'], // bold, italic, underline, strikethrough
+            ['blockquote', 'code-block'], // quote code block
+            [{ list: 'ordered' }, { list: 'bullet' }], // ordered, unordered list
+            [{ indent: '-1' }, { indent: '+1' }], // indent
+            [{ size: ['small', false, 'large', 'huge'] }], // font size
             [{ header: [1, 2, 3, 4, 5, 6, false] }], // header
             [{ color: [] }, { background: [] }], // font color, font background color
             [{ align: [] }], // Alignment
-            ["clean"], // Clear text format
-            ["link", "image", "video"], // link, picture, video
-          ],
+            ['clean'], // Clear text format
+            ['link', 'image', 'video'] // link, picture, video
+          ]
         },
-        placeholder: "Please enter content",
-        readOnly: false,
-      },
-    };
+        placeholder: 'Please enter content',
+        readOnly: false
+      }
+    }
   },
   computed: {
     styles() {
-      let style = {};
+      const style = {}
       if (this.minHeight) {
-        style.minHeight = `${this.minHeight}px`;
+        style.minHeight = `${this.minHeight}px`
       }
       if (this.height) {
-        style.height = `${this.height}px`;
+        style.height = `${this.height}px`
       }
-      return style;
-    },
+      return style
+    }
   },
   watch: {
     value: {
       handler(val) {
         if (val !== this.currentValue) {
-          this.currentValue = val === null ? "" : val;
+          this.currentValue = val === null ? '' : val
           if (this.Quill) {
-            this.Quill.pasteHTML(this.currentValue);
+            this.Quill.pasteHTML(this.currentValue)
           }
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   mounted() {
-    this.init();
+    this.init()
   },
   beforeDestroy() {
-    this.Quill = null;
+    this.Quill = null
   },
   methods: {
     init() {
-      const editor = this.$refs.editor;
-      this.Quill = new Quill(editor, this.options);
-      this.Quill.pasteHTML(this.currentValue);
-      this.Quill.on("text-change", (delta, oldDelta, source) => {
-        const html = this.$refs.editor.children[0].innerHTML;
-        const text = this.Quill.getText();
-        const quill = this.Quill;
-        this.currentValue = html;
-        this.$emit("input", html);
-        this.$emit("on-change", { html, text, quill });
-      });
-      this.Quill.on("text-change", (delta, oldDelta, source) => {
-        this.$emit("on-text-change", delta, oldDelta, source);
-      });
-      this.Quill.on("selection-change", (range, oldRange, source) => {
-        this.$emit("on-selection-change", range, oldRange, source);
-      });
-      this.Quill.on("editor-change", (eventName, ...args) => {
-        this.$emit("on-editor-change", eventName, ...args);
-      });
-    },
-  },
-};
+      const editor = this.$refs.editor
+      this.Quill = new Quill(editor, this.options)
+      this.Quill.pasteHTML(this.currentValue)
+      this.Quill.on('text-change', (delta, oldDelta, source) => {
+        const html = this.$refs.editor.children[0].innerHTML
+        const text = this.Quill.getText()
+        const quill = this.Quill
+        this.currentValue = html
+        this.$emit('input', html)
+        this.$emit('on-change', { html, text, quill })
+      })
+      this.Quill.on('text-change', (delta, oldDelta, source) => {
+        this.$emit('on-text-change', delta, oldDelta, source)
+      })
+      this.Quill.on('selection-change', (range, oldRange, source) => {
+        this.$emit('on-selection-change', range, oldRange, source)
+      })
+      this.Quill.on('editor-change', (eventName, ...args) => {
+        this.$emit('on-editor-change', eventName, ...args)
+      })
+    }
+  }
+}
 </script>
 
 <style>
-.editor,
-.ql-toolbar {
-  white-space: pre-wrap !important;
+.editor, .ql-toolbar {
+  white-space: pre-wrap!important;
   line-height: normal !important;
 }
 .quill-img {

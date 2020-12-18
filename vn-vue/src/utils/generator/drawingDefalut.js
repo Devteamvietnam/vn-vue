@@ -1,21 +1,21 @@
 export default [
   {
-    layout:'colFormItem',
-    tagIcon:'input',
-    label:'Mobile phone number',
-    vModel:'mobile',
+    layout: 'colFormItem',
+    tagIcon: 'input',
+    label: 'Mobile phone number',
+    vModel: 'mobile',
     formId: 6,
-    tag:'el-input',
-    placeholder:'Please enter your phone number',
-    defaultValue:'',
+    tag: 'el-input',
+    placeholder: 'Please enter your phone number',
+    defaultValue: '',
     span: 24,
-    style: {width: '100%' },
+    style: { width: '100%' },
     clearable: true,
-    prepend:'',
-    append:'',
-    'prefix-icon':'el-icon-mobile',
-    'suffix-icon':'',
-    maxlength: 11,
+    prepend: '',
+    append: '',
+    'prefix-icon': 'el-icon-mobile',
+    'suffix-icon': '',
+    maxlength: 10,
     'show-word-limit': true,
     readonly: false,
     disabled: false,
@@ -23,7 +23,7 @@ export default [
     changeTag: true,
     regList: [{
       // pattern:'/^1(3|4|5|7|8|9)\\d{9}$/',
-      message:'Mobile phone number format error'
+      message: 'Mobile phone number format error'
     }]
   }
 ]
