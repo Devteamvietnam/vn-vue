@@ -4,13 +4,13 @@ import { parseTime } from './devteam'
  * Table time format
  */
 export function formatDate(cellValue) {
-  if (cellValue == null || cellValue == "") return "";
-  var date = new Date(cellValue) 
+  if (cellValue == null || cellValue === '') return ''
+  var date = new Date(cellValue)
   var year = date.getFullYear()
   var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate() 
-  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours() 
-  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes() 
+  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+  var hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
   var seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
   return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
 }
@@ -31,14 +31,14 @@ export function formatTime(time, option) {
 
   const diff = (now - d) / 1000
 
-  if (diff <30) {
-    return'just now'
-  } else if (diff <3600) {
+  if (diff < 30) {
+    return 'just now'
+  } else if (diff < 3600) {
     // less 1 hour
-    return Math.ceil(diff / 60) +'minute ago'
-  } else if (diff <3600 * 24) {
-    return Math.ceil(diff / 3600) +'hours ago'
-  } else if (diff <3600 * 24 * 2) {
+    return Math.ceil(diff / 60) + 'minute ago'
+  } else if (diff < 3600 * 24) {
+    return Math.ceil(diff / 3600) + 'hours ago'
+  } else if (diff < 3600 * 24 * 2) {
     return '1 day ago'
   }
   if (option) {
@@ -220,11 +220,11 @@ export function debounce(func, wait, immediate) {
 
   const later = function() {
     // According to the last trigger time interval
-    const last = +new Date()-timestamp
+    const last = +new Date() - timestamp
 
     // The last time the wrapped function was called last is less than the set time interval wait
-    if (last <wait && last> 0) {
-      timeout = setTimeout(later, wait-last)
+    if (last < wait && last > 0) {
+      timeout = setTimeout(later, wait - last)
     } else {
       timeout = null
       // If set to immediate===true, because the start boundary has already been called, there is no need to call here
@@ -330,7 +330,7 @@ export function makeMap(str, expectsLowerCase) {
     ? val => map[val.toLowerCase()]
     : val => map[val]
 }
- 
+
 export const exportDefault = 'export default '
 
 export const beautifierConf = {
@@ -387,4 +387,3 @@ export function camelCase(str) {
 export function isNumberStr(str) {
   return /^[+-]?(0|([1-9]\d*))(\.\d+)?$/g.test(str)
 }
- 

@@ -1,10 +1,10 @@
 /**
   * General css style layout processing
-  * Copyright (c) 2020 from devteamvietnam
+  * Copyright (c) 2020 JiHoon
   */
 
   /** Basic general **/
- .pt5 {
+.pt5 {
 	padding-top: 5px;
 }
 .pr5 {
@@ -74,7 +74,7 @@
 	}
 }
 
-/** Form layout **/
+/** 表单布局 **/
 .form-header {
     font-size:15px;
 	color:#6379bb;
@@ -220,14 +220,14 @@
 	position: absolute;
 	top: 50%;
 	transform: translate(50%, -50%);
-	width: 180px;
-	height: 180px;
+	width: 200px;
+	height: 200px;
 	border-radius: 50%;
 	box-shadow: 0 0 4px #ccc;
 	overflow: hidden;
 }
 
-/* Drag column style */
+/* 拖拽列样式 */
 .sortable-ghost{
 	opacity: .8;
 	color: #fff!important;
@@ -237,8 +237,4 @@
 .top-right-btn {
 	position: relative;
 	float: right;
-}
-/*  el-tabs provides scrolling mechanism  */
-.el-tabs__content  {
-	overflow-x : scroll;
 }

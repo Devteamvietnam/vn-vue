@@ -34,11 +34,11 @@ export function cssStyle(cssStr) {
 }
 
 function buildFormTemplate(conf, child, type) {
-  let labelPosition =''
-  if (conf.labelPosition !=='right') {
+  let labelPosition = ''
+  if (conf.labelPosition !== 'right') {
     labelPosition = `label-position="${conf.labelPosition}"`
   }
-  const disabled = conf.disabled? `:disabled="${conf.disabled}"`:''
+  const disabled = conf.disabled ? `:disabled="${conf.disabled}"` : ''
   let str = `<el-form ref="${conf.formRef}" :model="${conf.formModel}" :rules="${conf.formRules}" size="${conf.size}" ${disabled} label-width="${conf.labelWidth}px" ${labelPosition}>
       ${child}
       ${buildFromBtns(conf, type)}
@@ -52,8 +52,8 @@ function buildFormTemplate(conf, child, type) {
 }
 
 function buildFromBtns(conf, type) {
-  let str =''
-  if (conf.formBtns && type ==='file') {
+  let str = ''
+  if (conf.formBtns && type === 'file') {
     str = `<el-form-item size="large">
           <el-button type="primary" @click="submitForm">Submit</el-button>
           <el-button @click="resetForm">Reset</el-button>
@@ -79,12 +79,12 @@ function colWrapper(element, str) {
 
 const layouts = {
   colFormItem(element) {
-    let labelWidth =''
+    let labelWidth = ''
     if (element.labelWidth && element.labelWidth !== confGlobal.labelWidth) {
       labelWidth = `label-width="${element.labelWidth}px"`
     }
-    const required = !trigger[element.tag] && element.required?'required':''
-    const tagDom = tags[element.tag]? tags[element.tag](element): null
+    const required = !trigger[element.tag] && element.required ? 'required' : ''
+    const tagDom = tags[element.tag] ? tags[element.tag](element) : null
     let str = `<el-form-item ${labelWidth} label="${element.label}" prop="${element.vModel}" ${required}>
         ${tagDom}
       </el-form-item>`
@@ -92,10 +92,10 @@ const layouts = {
     return str
   },
   rowFormItem(element) {
-    const type = element.type ==='default'?'': `type="${element.type}"`
-    const justify = element.type ==='default'?'': `justify="${element.justify}"`
-    const align = element.type ==='default'?'': `align="${element.align}"`
-    const gutter = element.gutter? `gutter="${element.gutter}"`:''
+    const type = element.type === 'default' ? '' : `type="${element.type}"`
+    const justify = element.type === 'default' ? '' : `justify="${element.justify}"`
+    const align = element.type === 'default' ? '' : `align="${element.align}"`
+    const gutter = element.gutter ? `gutter="${element.gutter}"` : ''
     const children = element.children.map(el => layouts[el.layout](el))
     let str = `<el-row ${type} ${justify} ${align} ${gutter}>
       ${children.join('\n')}
@@ -334,7 +334,7 @@ function buildElCheckboxGroupChild(conf) {
 
 function buildElUploadChild(conf) {
   const list = []
-  if (conf['list-type'] ==='picture-card') list.push('<i class="el-icon-plus"></i>')
+  if (conf['list-type'] === 'picture-card') list.push('<i class="el-icon-plus"></i>')
   else list.push(`<el-button size="small" type="primary" icon="el-icon-upload">${conf.buttonText}</el-button>`)
   if (conf.showTip) list.push(`<div slot="tip" class="el-upload__tip">Only upload ${conf.accept} that does not exceed ${conf.fileSize}${conf.sizeUnit} File</div>`)
   return list.join('\n')

@@ -19,19 +19,19 @@ export function downLoadZip(str, filename) {
   })
 }
 /**
-  * Parse the blob response content and download
-  * @param {*} res blob response content
-  * @param {String} mimeType MIME type
-  */
- export function resolveBlob(res, mimeType) {
+ * Parse the blob response content and download
+ * @param {*} res blob response content
+ * @param {String} mimeType MIME type
+ */
+export function resolveBlob(res, mimeType) {
   const aLink = document.createElement('a')
-  var blob = new Blob([res.data], {type: mimeType })
+  var blob = new Blob([res.data], { type: mimeType })
   // //Get the filename from the response headers, the file name set by the backend response.setHeader("Content-disposition", "attachment; filename=xxxx.docx");
   var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*')
   var contentDisposition = decodeURI(res.headers['content-disposition'])
   var result = patt.exec(contentDisposition)
   var fileName = result[1]
-  fileName = fileName.replace(/\"/g,'')
+  fileName = fileName.replace(/\"/g, '')
   aLink.href = URL.createObjectURL(blob)
   aLink.setAttribute('download', fileName) // set the download file name
   document.body.appendChild(aLink)

@@ -1,16 +1,21 @@
-import {constantRoutes} from '@/router'
-import {getRouters} from '@/services/menu'
-import Layout from '@/layouts'
+import { constantRoutes } from '@/router'
+import { getRouters } from '@/api/menu'
+import Layout from '@/layout/index'
+import ParentView from '@/components/ParentView'
 
 const permission = {
   state: {
     routes: [],
-    addRoutes: []
+    addRoutes: [],
+    sidebarRouters: []
   },
   mutations: {
     SET_ROUTES: (state, routes) => {
       state.addRoutes = routes
       state.routes = constantRoutes.concat(routes)
+    },
+    SET_SIDEBAR_ROUTERS: (state, routers) => {
+      state.sidebarRouters = routers
     }
   },
   actions: {
@@ -19,10 +24,14 @@ const permission = {
       return new Promise(resolve => {
         // Request routing data from the backend
         getRouters().then(res => {
-          const accessedRoutes = filterAsyncRouter(res.data)
-          accessedRoutes.push({ path:'*', redirect:'/404', hidden: true })
-          commit('SET_ROUTES', accessedRoutes)
-          resolve(accessedRoutes)
+          const sdata = JSON.parse(JSON.stringify(res.data))
+          const rdata = JSON.parse(JSON.stringify(res.data))
+          const sidebarRoutes = filterAsyncRouter(sdata)
+          const rewriteRoutes = filterAsyncRouter(rdata, true)
+          rewriteRoutes.push({ path: '*', redirect: '/404', hidden: true })
+          commit('SET_ROUTES', rewriteRoutes)
+          commit('SET_SIDEBAR_ROUTERS', sidebarRoutes)
+          resolve(rewriteRoutes)
         })
       })
     }
@@ -30,25 +39,52 @@ const permission = {
 }
 
 // Traverse the routing string from the background and convert it into a component object
-function filterAsyncRouter(asyncRouterMap) {
+function filterAsyncRouter(asyncRouterMap, isRewrite = false) {
   return asyncRouterMap.filter(route => {
+    if (isRewrite && route.children) {
+      route.children = filterChildren(route.children)
+    }
     if (route.component) {
       // Layout ParentView component special processing
-      if (route.component ==='Layout') {
+      if (route.component === 'Layout') {
         route.component = Layout
+      } else if (route.component === 'ParentView') {
+        route.component = ParentView
       } else {
         route.component = loadView(route.component)
       }
     }
     if (route.children != null && route.children && route.children.length) {
-      route.children = filterAsyncRouter(route.children)
+      route.children = filterAsyncRouter(route.children, route, isRewrite)
     }
     return true
   })
 }
 
-export const loadView = (view) => {// Route lazy loading
-  return (resolve) => require([`@/pages/${view}`], resolve)
+function filterChildren(childrenMap) {
+  var children = []
+  childrenMap.forEach((el, index) => {
+    if (el.children && el.children.length) {
+      if (el.component === 'ParentView') {
+        el.children.forEach(c => {
+          c.path = el.path + '/' + c.path
+          if (c.children && c.children.length) {
+            children = children.concat(filterChildren(c.children, c))
+            return
+          }
+          children.push(c)
+        })
+        childrenMap.splice(index, 1)
+        return
+      }
+    }
+    children = children.concat(el)
+  })
+  return children
+}
+
+export const loadView = (view) => { // Route lazy loading
+  return (resolve) => require([`@/views/${view}`], resolve)
 }
 
 export default permission
