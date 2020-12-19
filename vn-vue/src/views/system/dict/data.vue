@@ -91,7 +91,7 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:dict:edit']"
@@ -108,7 +108,7 @@
             @click="handleDelete(scope.row)"
           >Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination
@@ -120,21 +120,21 @@
     />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="700px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="Dictionary type">
+        <el-form-item label="Type">
           <el-input v-model="form.dictType" :disabled="true" />
         </el-form-item>
-        <el-form-item label="data label" prop="dictLabel">
+        <el-form-item label="Data" prop="dictLabel">
           <el-input v-model="form.dictLabel" placeholder="Please enter the data label" />
         </el-form-item>
-        <el-form-item label="Data key value" prop="dictValue">
+        <el-form-item label="Data key" prop="dictValue">
           <el-input v-model="form.dictValue" placeholder="Please enter the data key value" />
         </el-form-item>
-        <el-form-item label="Display sort" prop="dictSort">
+        <el-form-item label="Sort" prop="dictSort">
           <el-input-number v-model="form.dictSort" controls-position="right" :min="0" />
         </el-form-item>
-        <el-form-item label="status" prop="status">
+        <el-form-item label="Status" prop="status">
           <el-radio-group v-model="form.status">
             <el-radio
               v-for="dict in statusOptions"
@@ -158,9 +158,11 @@
 <script>
 import { listData, getData, delData, addData, updateData, exportData } from '@/api/system/dict/data'
 import { listType, getType } from '@/api/system/dict/type'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'Data',
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -172,7 +174,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Dictionary table data

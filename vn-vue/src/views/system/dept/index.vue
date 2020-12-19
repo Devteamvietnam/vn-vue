@@ -83,7 +83,7 @@
     </el-table>
 
     <!-- Add or modify department dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col v-if="form.parentId !== 0" :span="24">
@@ -92,7 +92,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="department name" prop="deptName">
+            <el-form-item label="Department name" prop="deptName">
               <el-input v-model="form.deptName" placeholder="Please enter the department name" />
             </el-form-item>
           </el-col>
@@ -141,16 +141,18 @@
 import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from '@/api/system/dept'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'Dept',
   components: { Treeselect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
       loading: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // table tree data
       deptList: [],
       // Department tree options

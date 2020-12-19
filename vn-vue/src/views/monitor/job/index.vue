@@ -134,24 +134,24 @@
       <el-form ref="form" :model="form" label-width="120px" size="mini">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="Task ID:">{{ form.jobId }}</el-form-item>
-            <el-form-item label="Task name:">{{ form.jobName }}</el-form-item>
+            <el-form-item label="ID:">{{ form.jobId }}</el-form-item>
+            <el-form-item label="Name:">{{ form.jobName }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Task grouping:">{{ jobGroupFormat(form) }}</el-form-item>
+            <el-form-item label="Grouping:">{{ jobGroupFormat(form) }}</el-form-item>
             <el-form-item label="Create Time:">{{ form.createTime }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="cron expression:">{{ form.cronExpression }}</el-form-item>
+            <el-form-item label="Cron:">{{ form.cronExpression }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Next execution time:">{{ parseTime(form.nextValidTime) }}</el-form-item>
+            <el-form-item label="Validtime:">{{ parseTime(form.nextValidTime) }}</el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Invoke target method:">{{ form.invokeTarget }}</el-form-item>
+            <el-form-item label="Invoke target:">{{ form.invokeTarget }}</el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Task Status:">
+            <el-form-item label="Status:">
               <div v-if="form.status == 0">Normal</div>
               <div v-else-if="form.status == 1">Failed</div>
             </el-form-item>

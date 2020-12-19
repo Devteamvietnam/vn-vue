@@ -79,17 +79,16 @@
 
     <el-table v-loading="loading" :data="postList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="post number" align="center" prop="postId" />
-      <el-table-column label="post code" align="center" prop="postCode" />
-      <el-table-column label="post name" align="center" prop="postName" />
-      <el-table-column label="post sorting" align="center" prop="postSort" />
-      <el-table-column label="status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="create time" align="center" prop="createTime" width="180">
+      <el-table-column label="Code" align="center" prop="postCode" />
+      <el-table-column label="Name" align="center" prop="postName" />
+      <el-table-column label="Sorting" align="center" prop="postSort" />
+      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
+      <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:post:edit']"
@@ -118,18 +117,18 @@
     />
 
     <!-- Add or modify post dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="post name" prop="postName">
+        <el-form-item label="Name" prop="postName">
           <el-input v-model="form.postName" placeholder="Please enter the name of the post" />
         </el-form-item>
-        <el-form-item label="Post Code" prop="postCode">
+        <el-form-item label="Code" prop="postCode">
           <el-input v-model="form.postCode" placeholder="Please enter the code name" />
         </el-form-item>
-        <el-form-item label="post order" prop="postSort">
+        <el-form-item label="Sort" prop="postSort">
           <el-input-number v-model="form.postSort" controls-position="right" :min="0" />
         </el-form-item>
-        <el-form-item label="post status" prop="status">
+        <el-form-item label="Status" prop="status">
           <el-radio-group v-model="form.status">
             <el-radio
               v-for="dict in statusOptions"
@@ -152,9 +151,11 @@
 
 <script>
 import { listPost, getPost, delPost, addPost, updatePost, exportPost } from '@/api/system/post'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'Post',
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -166,7 +167,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Job table data
