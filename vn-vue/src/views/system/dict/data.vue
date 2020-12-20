@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="Dictionary name" prop="dictType">
+      <el-form-item label="Name" prop="dictType">
         <el-select v-model="queryParams.dictType" size="small">
           <el-option
             v-for="item in typeOptions"
@@ -11,7 +11,7 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="Dictionary label" prop="dictLabel">
+      <el-form-item label="Label" prop="dictLabel">
         <el-input
           v-model="queryParams.dictLabel"
           placeholder="Please enter a dictionary tag"
@@ -20,7 +20,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="status" prop="status">
+      <el-form-item label="Status" prop="status">
         <el-select v-model="queryParams.status" placeholder="data status" clearable size="small">
           <el-option
             v-for="dict in statusOptions"

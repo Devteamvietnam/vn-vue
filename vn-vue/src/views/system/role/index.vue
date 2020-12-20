@@ -99,7 +99,7 @@
 
     <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="100" align="center" />
-      <el-table-column label="Name" prop="roleName" :show-overflow-tooltip="true" width="250" />
+      <el-table-column label="Name" prop="roleName" :show-overflow-tooltip="true" />
       <el-table-column label="Permission" prop="roleKey" :show-overflow-tooltip="true" width="200" />
       <el-table-column label="Sort" prop="roleSort" width="150" />
       <el-table-column label="Status" align="center" width="100">

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true">
-      <el-form-item label="department name" prop="deptName">
+      <el-form-item label="Department name" prop="deptName">
         <el-input
           v-model="queryParams.deptName"
           placeholder="Please enter the department name"
@@ -10,7 +10,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="status" prop="status">
+      <el-form-item label="Status" prop="status">
         <el-select v-model="queryParams.status" placeholder="Department Status" clearable size="small">
           <el-option
             v-for="dict in statusOptions"
@@ -84,40 +84,40 @@
 
     <!-- Add or modify department dialog box -->
     <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="90px">
         <el-row>
           <el-col v-if="form.parentId !== 0" :span="24">
-            <el-form-item label="Superior Department" prop="parentId">
+            <el-form-item label="Superior" prop="parentId">
               <treeselect v-model="form.parentId" :options="deptOptions" :normalizer="normalizer" placeholder="Select the superior department" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Department name" prop="deptName">
+            <el-form-item label="Name" prop="deptName">
               <el-input v-model="form.deptName" placeholder="Please enter the department name" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Display order" prop="orderNum">
+            <el-form-item label="Sort" prop="orderNum">
               <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="person in charge" prop="leader">
+            <el-form-item label="Change" prop="leader">
               <el-input v-model="form.leader" placeholder="Please enter the person in charge" maxlength="20" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Contact number" prop="phone">
+            <el-form-item label="Phone" prop="phone">
               <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="11" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Mailbox" prop="email">
+            <el-form-item label="Email" prop="email">
               <el-input v-model="form.email" placeholder="Please enter the email" maxlength="50" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Department Status">
+            <el-form-item label="Status">
               <el-radio-group v-model="form.status">
                 <el-radio
                   v-for="dict in statusOptions"

@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard-editor-container">
     <div class="title">{{ timeFix }}，{{ name }}，{{ welcome }}</div>
-    <br>
     <!-- Introduce -->
     <el-divider />
     <el-row :gutter="20">

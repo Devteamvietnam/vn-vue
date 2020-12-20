@@ -76,7 +76,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      this.$confirm('Are you sure to log out and exit the system?', 'Prompt', {
+      this.$confirm('Are you sure to log out and exit the system?', 'Warring', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning'

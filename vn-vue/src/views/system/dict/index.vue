@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="Dictionary name" prop="dictName">
+      <el-form-item label="Name" prop="dictName">
         <el-input
           v-model="queryParams.dictName"
           placeholder="Please enter the name of the dictionary"

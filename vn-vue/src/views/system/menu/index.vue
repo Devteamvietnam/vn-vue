@@ -52,7 +52,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="orderNum" label="Sort" width="60" />
-      <el-table-column prop="perms" label="Authority identification" :show-overflow-tooltip="true" />
+      <el-table-column prop="perms" label="Authority" :show-overflow-tooltip="true" />
       <el-table-column prop="component" label="Component path" :show-overflow-tooltip="true" />
       <el-table-column prop="status" label="Status" :formatter="statusFormat" width="80" />
       <el-table-column label="Create time" align="center" prop="createTime">

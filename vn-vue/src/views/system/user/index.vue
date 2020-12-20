@@ -137,7 +137,7 @@
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="userLogin" align="center" prop="userName" :show-overflow-tooltip="true" />
           <el-table-column label="Full name" align="center" prop="nickName" :show-overflow-tooltip="true" />
-          <el-table-column label="Department" align="center" prop="dept.deptName" :show-overflow-tooltip="true" />
+          <el-table-column label="Dept" align="center" prop="dept.deptName" :show-overflow-tooltip="true" />
           <el-table-column label="Phone" align="center" prop="phonenumber" width="120" />
           <el-table-column label="Status" align="center">
             <template slot-scope="scope">
@@ -207,7 +207,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Department" prop="deptId">
+            <el-form-item label="Dept" prop="deptId">
               <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="Please select the department attribution" />
             </el-form-item>
           </el-col>
