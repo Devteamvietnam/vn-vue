@@ -102,8 +102,7 @@
 
     <el-table v-loading="loading" :data="configList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Parameter primary key" align="center" prop="configId" />
-      <el-table-column label="Parameter name" align="center" prop="configName" :show-overflow-tooltip="true" />
+      <el-table-column label="Name" align="center" prop="configName" :show-overflow-tooltip="true" />
       <el-table-column label="Parameter key name" align="center" prop="configKey" :show-overflow-tooltip="true" />
       <el-table-column label="Parameter key value" align="center" prop="configValue" />
       <el-table-column label="System built-in" align="center" prop="configType" :formatter="typeFormat" />
@@ -113,7 +112,7 @@
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:config:edit']"
@@ -130,7 +129,7 @@
             @click="handleDelete(scope.row)"
           >Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination
@@ -142,7 +141,7 @@
     />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="Parameter name" prop="configName">
           <el-input v-model="form.configName" placeholder="Please enter the parameter name" />
@@ -176,9 +175,10 @@
 
 <script>
 import { listConfig, getConfig, delConfig, addConfig, updateConfig, exportConfig, clearCache } from '@/api/system/config'
-
+import elDragDialog from '@/components/el-drag-dialog'
 export default {
   name: 'Config',
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -190,7 +190,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Parameter table data

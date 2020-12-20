@@ -143,7 +143,7 @@
             <table cellspacing="0" style="width: 100%;">
               <thead>
                 <tr>
-                  <th class="is-leaf"><div class="cell">drive letter path</div></th>
+                  <th class="is-leaf"><div class="cell">Drive letter path</div></th>
                   <th class="is-leaf"><div class="cell">File system</div></th>
                   <th class="is-leaf"><div class="cell">Drive letter type</div></th>
                   <th class="is-leaf"><div class="cell">Total size</div></th>

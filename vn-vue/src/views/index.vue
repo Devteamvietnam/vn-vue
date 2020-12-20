@@ -1,8 +1,6 @@
 <template>
   <div class="dashboard-editor-container">
     <div class="title">{{ timeFix }}，{{ name }}，{{ welcome }}</div>
-    <br>
-
     <!-- Introduce -->
     <el-divider />
     <el-row :gutter="20">
@@ -97,19 +95,16 @@
 <script>
 import { timeFix } from '@/utils/util'
 import { welcome } from '@/utils/util'
-import RaddarChart from './dashboard/RaddarChart'
-import { mapState } from 'vuex'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Index',
   components: {
-    RaddarChart
   },
   data() {
     return {
       // Version number
-      version: '1.0.0',
+      version: '1.0.1',
       timeFix: timeFix(),
       welcome: welcome()
     }
@@ -119,6 +114,7 @@ export default {
   },
   methods: {
     handleSetLineChartData(type) {
+      // eslint-disable-next-line no-undef
       this.lineChartData = lineChartData[type]
     },
     goTarget(href) {
@@ -169,6 +165,12 @@ export default {
   align-items: center;
   justify-content: center;
   color: white;
+}
+.chart-player {
+      width: 100%;
+      height: 270px;
+      padding: 10px;
+      background-color: #fff;
 }
 
 .App-link {

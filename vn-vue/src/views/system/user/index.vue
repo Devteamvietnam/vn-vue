@@ -135,11 +135,10 @@
 
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="user number" align="center" prop="userId" />
-          <el-table-column label="user name" align="center" prop="userName" :show-overflow-tooltip="true" />
-          <el-table-column label="User nickname" align="center" prop="nickName" :show-overflow-tooltip="true" />
-          <el-table-column label="Department" align="center" prop="dept.deptName" :show-overflow-tooltip="true" />
-          <el-table-column label="phone number" align="center" prop="phonenumber" width="120" />
+          <el-table-column label="userLogin" align="center" prop="userName" :show-overflow-tooltip="true" />
+          <el-table-column label="Full name" align="center" prop="nickName" :show-overflow-tooltip="true" />
+          <el-table-column label="Dept" align="center" prop="dept.deptName" :show-overflow-tooltip="true" />
+          <el-table-column label="Phone" align="center" prop="phonenumber" width="120" />
           <el-table-column label="Status" align="center">
             <template slot-scope="scope">
               <el-switch
@@ -150,19 +149,19 @@
               />
             </template>
           </el-table-column>
-          <el-table-column label="create time" align="center" prop="createTime" width="160">
+          <el-table-column label="Create time" align="center" prop="createTime" width="160">
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="action"
+            label="Action"
             align="center"
             width="160"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope">
-              <el-button
+              <!-- <el-button
                 v-hasPermi="['system:user:edit']"
                 size="mini"
                 type="text"
@@ -176,7 +175,7 @@
                 type="text"
                 icon="el-icon-delete"
                 @click="handleDelete(scope.row)"
-              >Delete</el-button>
+              >Delete</el-button> -->
               <el-button
                 v-hasPermi="['system:user:resetPwd']"
                 size="mini"
@@ -199,47 +198,47 @@
     </el-row>
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="90px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="User nickname" prop="nickName">
+            <el-form-item label="Fullname" prop="nickName">
               <el-input v-model="form.nickName" placeholder="Please enter the user's nickname" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Attribution Department" prop="deptId">
+            <el-form-item label="Dept" prop="deptId">
               <treeselect v-model="form.deptId" :options="deptOptions" :show-count="true" placeholder="Please select the department attribution" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="phone number" prop="phonenumber">
-              <el-input v-model="form.phonenumber" placeholder="Please enter the phone number" maxlength="11" />
+            <el-form-item label="Phone" prop="phonenumber">
+              <el-input v-model="form.phonenumber" placeholder="Please enter the phone number" maxlength="10" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Mailbox" prop="email">
+            <el-form-item label="Email" prop="email">
               <el-input v-model="form.email" placeholder="Please enter the email" maxlength="50" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="user name" prop="userName">
+            <el-form-item v-if="form.userId == undefined" label="userLogin" prop="userName">
               <el-input v-model="form.userName" placeholder="Please enter the user name" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.userId == undefined" label="user password" prop="password">
+            <el-form-item v-if="form.userId == undefined" label="Password" prop="password">
               <el-input v-model="form.password" placeholder="Please enter the user password" type="password" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="User gender">
+            <el-form-item label="Gender">
               <el-select v-model="form.sex" placeholder="Please select">
                 <el-option
                   v-for="dict in sexOptions"
@@ -264,7 +263,7 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="post">
+            <el-form-item label="Post">
               <el-select v-model="form.postIds" multiple placeholder="Please select">
                 <el-option
                   v-for="item in postOptions"
@@ -277,7 +276,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="role">
+            <el-form-item label="Role">
               <el-select v-model="form.roleIds" multiple placeholder="Please select">
                 <el-option
                   v-for="item in roleOptions"
@@ -343,10 +342,12 @@ import { getToken } from '@/utils/auth'
 import { treeselect } from '@/api/system/dept'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'User',
   components: { Treeselect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -358,7 +359,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // User table data
@@ -433,7 +434,7 @@ export default {
         ],
         phonenumber: [
           {
-            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            // pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: 'Please enter the correct mobile phone number',
             trigger: 'blur'
           }
@@ -572,7 +573,7 @@ export default {
     },
     /** Reset password button operation */
     handleResetPwd(row) {
-      this.$prompt('Please enter "' + row.userName + '" new password', 'prompt', {
+      this.$prompt('Please enter "' + row.userName + '" New password', 'prompt', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel'
       }).then(({ value }) => {

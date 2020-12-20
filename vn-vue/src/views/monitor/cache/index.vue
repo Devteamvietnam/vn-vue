@@ -1,7 +1,3 @@
-auto_awesome
-Dịch từ: Anh
-3243 / 5000
-Kết quả dịch
 <template>
   <div class="app-container">
     <el-row>

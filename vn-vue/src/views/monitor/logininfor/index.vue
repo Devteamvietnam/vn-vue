@@ -89,15 +89,14 @@
 
     <el-table v-loading="loading" :data="list" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Access number" align="center" prop="infoId" />
-      <el-table-column label="user name" align="center" prop="userName" />
-      <el-table-column label="Login address" align="center" prop="ipaddr" width="130" :show-overflow-tooltip="true" />
-      <el-table-column label="Login Location" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
-      <el-table-column label="browser" align="center" prop="browser" />
-      <el-table-column label="operating system" align="center" prop="os" />
-      <el-table-column label="Login status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="Operation information" align="center" prop="msg" />
-      <el-table-column label="login date" align="center" prop="loginTime" width="180">
+      <el-table-column label="User" align="center" prop="userName" />
+      <el-table-column label="Address" align="center" prop="ipaddr" width="130" :show-overflow-tooltip="true" />
+      <el-table-column label="Location" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
+      <el-table-column label="Browser" align="center" prop="browser" />
+      <el-table-column label="System" align="center" prop="os" />
+      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
+      <el-table-column label="Information" align="center" prop="msg" />
+      <el-table-column label="Date" align="center" prop="loginTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.loginTime) }}</span>
         </template>
@@ -128,7 +127,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // table data

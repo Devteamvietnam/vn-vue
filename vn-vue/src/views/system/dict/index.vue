@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="Dictionary name" prop="dictName">
+      <el-form-item label="Name" prop="dictName">
         <el-input
           v-model="queryParams.dictName"
           placeholder="Please enter the name of the dictionary"
@@ -108,23 +108,22 @@
 
     <el-table v-loading="loading" :data="typeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="Dictionary Number" align="center" prop="dictId" />
-      <el-table-column label="Dictionary name" align="center" prop="dictName" :show-overflow-tooltip="true" />
-      <el-table-column label="Dictionary type" align="center" :show-overflow-tooltip="true">
+      <el-table-column label="Name" align="center" prop="dictName" :show-overflow-tooltip="true" />
+      <el-table-column label="Type" align="center" :show-overflow-tooltip="true">
         <template slot-scope="scope">
           <router-link :to="'/dict/type/data/' + scope.row.dictId" class="link-type">
             <span>{{ scope.row.dictType }}</span>
           </router-link>
         </template>
       </el-table-column>
-      <el-table-column label="status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="remarks" align="center" prop="remark" :show-overflow-tooltip="true" />
-      <el-table-column label="create time" align="center" prop="createTime" width="180">
+      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
+      <el-table-column label="Remarks" align="center" prop="remark" :show-overflow-tooltip="true" />
+      <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <!-- <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:dict:edit']"
@@ -141,7 +140,7 @@
             @click="handleDelete(scope.row)"
           >Delete</el-button>
         </template>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <pagination
@@ -153,15 +152,15 @@
     />
 
     <!-- Add or modify parameter configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="Dictionary name" prop="dictName">
+        <el-form-item label="Name" prop="dictName">
           <el-input v-model="form.dictName" placeholder="Please enter the name of the dictionary" />
         </el-form-item>
-        <el-form-item label="Dictionary Type" prop="dictType">
+        <el-form-item label="Type" prop="dictType">
           <el-input v-model="form.dictType" placeholder="Please enter the dictionary type" />
         </el-form-item>
-        <el-form-item label="status" prop="status">
+        <el-form-item label="Status" prop="status">
           <el-radio-group v-model="form.status">
             <el-radio
               v-for="dict in statusOptions"
@@ -184,9 +183,10 @@
 
 <script>
 import { listType, getType, delType, addType, updateType, exportType, clearCache } from '@/api/system/dict/type'
-
+import elDragDialog from '@/components/el-drag-dialog'
 export default {
   name: 'Dict',
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -198,7 +198,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // Dictionary table data

@@ -12,27 +12,27 @@
             </div>
             <ul class="list-group list-group-striped">
               <li class="list-group-item">
-                <svg-icon icon-class="user" />User name
+                <svg-icon icon-class="user" />UserLogin
                 <div class="pull-right">{{ user.userName }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="phone" />Mobile phone number
+                <svg-icon icon-class="phone" /> Mobile phone
                 <div class="pull-right">{{ user.phonenumber }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="email" />User mailbox
+                <svg-icon icon-class="email" /> Email
                 <div class="pull-right">{{ user.email }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="tree" />Department
+                <svg-icon icon-class="tree" /> Department
                 <div v-if="user.dept" class="pull-right">{{ user.dept.deptName }} / {{ postGroup }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="peoples" />The role of
+                <svg-icon icon-class="peoples" /> The role of
                 <div class="pull-right">{{ roleGroup }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="date" />Created date
+                <svg-icon icon-class="date" /> Created date
                 <div class="pull-right">{{ user.createTime }}</div>
               </li>
             </ul>

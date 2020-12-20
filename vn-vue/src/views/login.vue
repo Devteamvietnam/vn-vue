@@ -81,7 +81,7 @@
     </el-form>
     <!--  footer  -->
     <div class="el-login-footer">
-      <span>Copyright © 2020-2021 Ivan All Rights Reserved.</span>
+      <span>Copyright © 2020-2021 CTN All Rights Reserved.</span>
     </div>
   </div>
 </template>
@@ -89,7 +89,6 @@
 <script>
 import { getCodeImg } from '@/api/login'
 import Cookies from 'js-cookie'
-import { encrypt, decrypt } from '@/utils/jsencrypt'
 
 export default {
   name: 'Login',
@@ -158,12 +157,9 @@ export default {
     },
     getCookie() {
       const username = Cookies.get('username')
-      const password = Cookies.get('password')
       const rememberMe = Cookies.get('rememberMe')
       this.loginForm = {
         username: username === undefined ? this.loginForm.username : username,
-        password:
-          password === undefined ? this.loginForm.password : decrypt(password),
         rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
       }
     },

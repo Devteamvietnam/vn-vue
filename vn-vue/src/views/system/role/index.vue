@@ -98,12 +98,11 @@
     </el-row>
 
     <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="role number" prop="roleId" width="120" />
-      <el-table-column label="role name" prop="roleName" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="Permission character" prop="roleKey" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="Display order" prop="roleSort" width="100" />
-      <el-table-column label="status" align="center" width="100">
+      <el-table-column type="selection" width="100" align="center" />
+      <el-table-column label="Name" prop="roleName" :show-overflow-tooltip="true" />
+      <el-table-column label="Permission" prop="roleKey" :show-overflow-tooltip="true" width="200" />
+      <el-table-column label="Sort" prop="roleSort" width="150" />
+      <el-table-column label="Status" align="center" width="100">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.status"
@@ -113,20 +112,20 @@
           />
         </template>
       </el-table-column>
-      <el-table-column label="create time" align="center" prop="createTime" width="180">
+      <el-table-column label="Create time" align="center" prop="createTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-          <el-button
+          <!-- <el-button
             v-hasPermi="['system:role:edit']"
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-          >Edit</el-button>
+          >Edit</el-button> -->
           <el-button
             v-hasPermi="['system:role:edit']"
             size="mini"
@@ -134,13 +133,13 @@
             icon="el-icon-circle-check"
             @click="handleDataScope(scope.row)"
           >Data permission</el-button>
-          <el-button
+          <!-- <el-button
             v-hasPermi="['system:role:remove']"
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-          >Delete</el-button>
+          >Delete</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -200,15 +199,15 @@
     </el-dialog>
 
     <!-- Assign role data permissions dialog box -->
-    <el-dialog :title="title" :visible.sync="openDataScope" width="500px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="openDataScope" width="500px" append-to-body>
       <el-form :model="form" label-width="80px">
-        <el-form-item label="role name">
+        <el-form-item label="Name">
           <el-input v-model="form.roleName" :disabled="true" />
         </el-form-item>
-        <el-form-item label="Permission character">
+        <el-form-item label="Permission">
           <el-input v-model="form.roleKey" :disabled="true" />
         </el-form-item>
-        <el-form-item label="Scope of authority">
+        <el-form-item label="Scope">
           <el-select v-model="form.dataScope">
             <el-option
               v-for="item in dataScopeOptions"
@@ -247,9 +246,11 @@
 import { listRole, getRole, delRole, addRole, updateRole, exportRole, dataScope, changeRoleStatus } from '@/api/system/role'
 import { treeselect as menuTreeselect, roleMenuTreeselect } from '@/api/system/menu'
 import { treeselect as deptTreeselect, roleDeptTreeselect } from '@/api/system/dept'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'Role',
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
@@ -261,7 +262,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // role table data
@@ -427,10 +428,10 @@ export default {
       if (this.$refs.menu !== undefined) {
         this.$refs.menu.setCheckedKeys([])
       }
-      this.menuExpand = false,
-      this.menuNodeAll = false,
-      this.deptExpand = true,
-      this.deptNodeAll = false,
+      this.menuExpand = false
+      this.menuNodeAll = false
+      this.deptExpand = true
+      this.deptNodeAll = false
       this.form = {
         roleId: undefined,
         roleName: undefined,

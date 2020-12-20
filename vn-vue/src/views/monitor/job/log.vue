@@ -64,11 +64,11 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="LogId:">{{ form.jobLogId }}</el-form-item>
-            <el-form-item label="Task name:">{{ form.jobName }}</el-form-item>
+            <el-form-item label="Name:">{{ form.jobName }}</el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="Task:">{{ form.jobGroup }}</el-form-item>
-            <el-form-item label="Execution time:">{{ form.createTime }}</el-form-item>
+            <el-form-item label="Time:">{{ form.createTime }}</el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="Invoke:">{{ form.invokeTarget }}</el-form-item>

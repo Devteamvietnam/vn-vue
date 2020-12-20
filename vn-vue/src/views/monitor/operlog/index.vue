@@ -105,20 +105,19 @@
 
     <el-table v-loading="loading" :data="list" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="log number" align="center" prop="operId" />
       <el-table-column label="System Module" align="center" prop="title" />
-      <el-table-column label="operation type" align="center" prop="businessType" :formatter="typeFormat" />
-      <el-table-column label="request method" align="center" prop="requestMethod" />
-      <el-table-column label="operator" align="center" prop="operName" />
-      <el-table-column label="host" align="center" prop="operIp" width="130" :show-overflow-tooltip="true" />
-      <el-table-column label="operating location" align="center" prop="operLocation" :show-overflow-tooltip="true" />
-      <el-table-column label="operating status" align="center" prop="status" :formatter="statusFormat" />
-      <el-table-column label="Operation Date" align="center" prop="operTime" width="180">
+      <el-table-column label="Operation type" align="center" prop="businessType" :formatter="typeFormat" />
+      <el-table-column label="Request method" align="center" prop="requestMethod" />
+      <el-table-column label="Operator" align="center" prop="operName" />
+      <el-table-column label="Host" align="center" prop="operIp" width="130" :show-overflow-tooltip="true" />
+      <el-table-column label="location" align="center" prop="operLocation" :show-overflow-tooltip="true" />
+      <el-table-column label="Status" align="center" prop="status" :formatter="statusFormat" />
+      <el-table-column label="Date" align="center" prop="operTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.operTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['monitor:operlog:query']"
@@ -197,7 +196,7 @@ export default {
       // not multiple disabled
       multiple: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Total number
       total: 0,
       // table data

@@ -45,22 +45,22 @@
       row-key="menuId"
       :tree-props="{children:'children', hasChildren:'hasChildren'}"
     >
-      <el-table-column prop="menuName" label="menu name" :show-overflow-tooltip="true" width="160" />
-      <el-table-column prop="icon" label="icon" align="center" width="100">
+      <el-table-column prop="menuName" label="Name" :show-overflow-tooltip="true" width="160" />
+      <el-table-column prop="icon" label="Icon" align="center" width="100">
         <template slot-scope="scope">
           <svg-icon :icon-class="scope.row.icon" />
         </template>
       </el-table-column>
-      <el-table-column prop="orderNum" label="sort" width="60" />
-      <el-table-column prop="perms" label="authority identification" :show-overflow-tooltip="true" />
-      <el-table-column prop="component" label="component path" :show-overflow-tooltip="true" />
-      <el-table-column prop="status" label="status" :formatter="statusFormat" width="80" />
-      <el-table-column label="create time" align="center" prop="createTime">
+      <el-table-column prop="orderNum" label="Sort" width="60" />
+      <el-table-column prop="perms" label="Authority" :show-overflow-tooltip="true" />
+      <el-table-column prop="component" label="Component path" :show-overflow-tooltip="true" />
+      <el-table-column prop="status" label="Status" :formatter="statusFormat" width="80" />
+      <el-table-column label="Create time" align="center" prop="createTime">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.createTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['system:menu:edit']"
@@ -88,7 +88,7 @@
     </el-table>
 
     <!-- Add or modify menu dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="24">
@@ -211,16 +211,18 @@ import { listMenu, getMenu, delMenu, addMenu, updateMenu } from '@/api/system/me
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import IconSelect from '@/components/IconSelect'
+import elDragDialog from '@/components/el-drag-dialog'
 
 export default {
   name: 'Menu',
   components: { Treeselect, IconSelect },
+  directives: { elDragDialog },
   data() {
     return {
       // Mask layer
       loading: true,
       // Show search criteria
-      showSearch: true,
+      showSearch: false,
       // Menu table tree data
       menuList: [],
       // Menu tree options
