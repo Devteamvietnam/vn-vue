@@ -54,13 +54,17 @@ export function resetForm(refName) {
 }
 
 // add date range
-export function addDateRange(params, dateRange) {
+export function addDateRange(params, dateRange, propName) {
   var search = params
-  search.beginTime = ''
-  search.endTime = ''
+  search.params = {}
   if (dateRange != null && dateRange !== '') {
-    search.beginTime = dateRange[0]
-    search.endTime = dateRange[1]
+    if (typeof (propName) === 'undefined') {
+      search.params['beginTime'] = dateRange[0]
+      search.params['endTime'] = dateRange[1]
+    } else {
+      search.params['begin' + propName] = dateRange[0]
+      search.params['end' + propName] = dateRange[1]
+    }
   }
   return search
 }
@@ -137,7 +141,7 @@ export function handleTree(data, id, parentId, children, rootId) {
   // loop all items
   const treeData = cloneData.filter(father => {
     const branchArr = cloneData.filter(child => {
-      // Returns the array of children of each item
+      // Returns the sub-level array of each item
       return father[id] === child[parentId]
     })
     branchArr.length > 0 ? father.children = branchArr : ''

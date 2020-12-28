@@ -23,10 +23,12 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
 import org.apache.poi.ss.usermodel.DataValidationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
@@ -38,6 +40,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDataValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,12 +55,14 @@ import com.devteam.common.exception.CustomException;
 import com.devteam.common.utils.DateUtils;
 import com.devteam.common.utils.DictUtils;
 import com.devteam.common.utils.StringUtils;
+import com.devteam.common.utils.file.FileTypeUtils;
+import com.devteam.common.utils.file.ImageUtils;
 import com.devteam.common.utils.reflect.ReflectUtils;
 
 /**
  * Excel related processing
  *
- * @author ruoyi
+ *
  */
 public class ExcelUtil<T>
 {
@@ -102,6 +107,11 @@ public class ExcelUtil<T>
      * Annotation list
      */
     private List<Object[]> fields;
+    
+    /**
+     * maximum height
+     */
+    private short maxHeight;
 
     /**
      * Statistics list
@@ -240,7 +250,15 @@ public class ExcelUtil<T>
                         }
                         else
                         {
-                            val = Convert.toStr(val);
+                        	 String dateFormat = field.getAnnotation(Excel.class).dateFormat();
+                             if (StringUtils.isNotEmpty(dateFormat))
+                             {
+                                 val = DateUtils.parseDateToStr(dateFormat, (Date) val);
+                             }
+                             else
+                             {
+                                 val = Convert.toStr(val);
+                             }
                         }
                     }
                     else if ((Integer.TYPE == fieldType || Integer.class == fieldType) && StringUtils.isNumeric(Convert.toStr(val)))
@@ -505,8 +523,48 @@ public class ExcelUtil<T>
             cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(StringUtils.contains(Convert.toStr(value), ".")? Convert.toDouble(value): Convert.toInt(value));
         }
+        else if (ColumnType.IMAGE == attr.cellType())
+        {
+            ClientAnchor anchor = new XSSFClientAnchor(0, 0, 0, 0, (short) cell.getColumnIndex(), cell.getRow().getRowNum(), (short) (cell.getColumnIndex() + 1),
+                    cell.getRow().getRowNum() + 1);
+            String imagePath = Convert.toStr(value);
+            if (StringUtils.isNotEmpty(imagePath))
+            {
+                byte[] data = ImageUtils.getImage(imagePath);
+                getDrawingPatriarch(cell.getSheet()).createPicture(anchor,
+                        cell.getSheet().getWorkbook().addPicture(data, getImageType(data)));
+            }
+        }
     }
 
+    /**
+     * Get the canvas
+     */
+    public static Drawing<?> getDrawingPatriarch(Sheet sheet)
+    {
+        if (sheet.getDrawingPatriarch() == null)
+        {
+            sheet.createDrawingPatriarch();
+        }
+        return sheet.getDrawingPatriarch();
+    }
+
+    /**
+     * Get picture type, set picture insertion type
+     */
+    public int getImageType(byte[] value)
+    {
+        String type = FileTypeUtils.getFileExtendName(value);
+        if ("JPG".equalsIgnoreCase(type))
+        {
+            return Workbook.PICTURE_TYPE_JPEG;
+        }
+        else if ("PNG".equalsIgnoreCase(type))
+        {
+            return Workbook.PICTURE_TYPE_PNG;
+        }
+        return Workbook.PICTURE_TYPE_JPEG;
+    }
     /**
      * Create table style
      */
@@ -545,7 +603,7 @@ public class ExcelUtil<T>
         try
         {
             // set line height
-            row.setHeight((short) (attr.height() * 20));
+            row.setHeight(maxHeight);
             // Decide whether to export according to the settings in Excel. In some cases, you need to keep it blank, and users are expected to fill in this column.
             if (attr.isExport())
             {
@@ -899,6 +957,20 @@ public class ExcelUtil<T>
             }
         }
         this.fields = this.fields.stream().sorted(Comparator.comparing(objects -> ((Excel) objects[1]).sort())).collect(Collectors.toList());
+        this.maxHeight = getRowHeight();
+    }
+    /**
+     * Get the maximum row height according to the annotation
+     */
+    public short getRowHeight()
+    {
+        double maxHeight = 0;
+        for (Object[] os: this.fields)
+        {
+            Excel excel = (Excel) os[1];
+            maxHeight = maxHeight> excel.height()? maxHeight: excel.height();
+        }
+        return (short) (maxHeight * 20);
     }
 
     /**

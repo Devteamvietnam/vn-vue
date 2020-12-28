@@ -8,7 +8,7 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 // Create axios instance
 const service = axios.create({
   // The request is configured with the baseURL option in axios, which indicates the public part of the request URL
-  baseURL: process.approx.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_API,
   // time out
   timeout: 10000
 })
@@ -17,7 +17,7 @@ service.interceptors.request.use(config => {
   // Do you need to set a token
   const isToken = (config.headers || {}).isToken === false
   if (getToken() && !isToken) {
-    config.headers[ 'Authorization' ] = 'Bearer ' + getToken() // Let each request carry a custom token, please modify it according to the actual situation
+    config.headers['Authorization'] = 'Bearer ' + getToken() // Let each request carry a custom token, please modify it according to the actual situation
   }
   // get request mapping params parameters
   if (config.method === 'get' && config.params) {
@@ -54,7 +54,7 @@ service.interceptors.response.use(res => {
   // Get error information
   const msg = errorCode[code] || res.data.msg || errorCode['default']
   if (code === 401) {
-    MessageBox.Confirm('Login status has expired, you can stay on this page or log in again', 'System prompt', {
+    MessageBox.confirm('Login status has expired, you can stay on this page or log in again', 'System prompt', {
       confirmButtonText: 'Login again',
       cancelButtonText: 'Cancel',
       type: 'warning'
@@ -85,7 +85,7 @@ error => {
   if (message === 'Network Error') {
     message = 'Back-end interface connection is abnormal'
   } else if (message.includes('timeout')) {
-    message = 'System interface request timeout'
+    message = 'System interface request timed out'
   } else if (message.includes('Request failed with status code')) {
     message = 'System Interface' + message.substr(message.length - 3) + 'Exception'
   }
