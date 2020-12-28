@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
 
+
 /**
  * Custom export Excel data annotation
  *
@@ -105,6 +106,27 @@ public @interface Excel
     public boolean isStatistics() default false;
 
     /**
+     * Export field alignment (0: default; 1: left; 2: center; 3: right)
+     */
+    Align align() default Align.AUTO;
+
+    public enum Align
+    {
+        AUTO(0), LEFT(1), CENTER(2), RIGHT(3);
+        private final int value;
+
+        Align(int value)
+        {
+            this.value = value;
+        }
+
+        public int value()
+        {
+            return this.value;
+        }
+    }
+
+    /**
      * Field type (0: export and import; 1: export only; 2: import only)
      */
     Type type() default Type.ALL;
@@ -127,7 +149,7 @@ public @interface Excel
 
     public enum ColumnType
     {
-        NUMERIC(0), STRING(1);
+        NUMERIC(0), STRING(1), IMAGE(2);
         private final int value;
 
         ColumnType(int value)
