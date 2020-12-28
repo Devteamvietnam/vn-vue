@@ -108,7 +108,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="Phone" prop="phone">
-              <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="11" />
+              <el-input v-model="form.phone" placeholder="Please enter the phone number" maxlength="10" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -190,7 +190,7 @@ export default {
         ],
         phone: [
           {
-            pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+            // pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: 'Please enter the correct mobile phone number',
             trigger: 'blur'
           }
