@@ -153,15 +153,15 @@
     />
 
     <!-- Add or modify role configuration dialog box -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="role name" prop="roleName">
+    <el-dialog v-el-drag-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+        <el-form-item label="Name" prop="roleName">
           <el-input v-model="form.roleName" placeholder="Please enter the role name" />
         </el-form-item>
-        <el-form-item label="Authorization character" prop="roleKey">
+        <el-form-item label="Authorization" prop="roleKey">
           <el-input v-model="form.roleKey" placeholder="Please enter the authority characters" />
         </el-form-item>
-        <el-form-item label="role order" prop="roleSort">
+        <el-form-item label="Order" prop="roleSort">
           <el-input-number v-model="form.roleSort" controls-position="right" :min="0" />
         </el-form-item>
         <el-form-item label="Status">
@@ -173,7 +173,7 @@
             >{{ dict.dictLabel }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="Menu permissions">
+        <el-form-item label="Permissions">
           <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event,'menu')">Expand/collapse</el-checkbox>
           <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event,'menu')">Select all/Unselect all</el-checkbox>
           <el-checkbox v-model="form.menuCheckStrictly" @change="handleCheckedTreeConnect($event,'menu')">Father-son linkage</el-checkbox>
@@ -200,7 +200,7 @@
 
     <!-- Assign role data permissions dialog box -->
     <el-dialog v-el-drag-dialog :title="title" :visible.sync="openDataScope" width="500px" append-to-body>
-      <el-form :model="form" label-width="80px">
+      <el-form :model="form" label-width="100px">
         <el-form-item label="Name">
           <el-input v-model="form.roleName" :disabled="true" />
         </el-form-item>

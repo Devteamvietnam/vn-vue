@@ -92,7 +92,7 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="Upper menu">
+            <el-form-item label="Menu">
               <treeselect
                 v-model="form.parentId"
                 :options="menuOptions"
@@ -103,7 +103,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="Menu Type" prop="menuType">
+            <el-form-item label="Type" prop="menuType">
               <el-radio-group v-model="form.menuType">
                 <el-radio label="M">Catalog</el-radio>
                 <el-radio label="C">Menu</el-radio>
@@ -112,7 +112,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item v-if="form.menuType !='F'" label="menu icon">
+            <el-form-item v-if="form.menuType !='F'" label="Icon">
               <el-popover
                 placement="bottom-start"
                 width="460"
@@ -134,17 +134,17 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="menu name" prop="menuName">
+            <el-form-item label="Name" prop="menuName">
               <el-input v-model="form.menuName" placeholder="Please enter the menu name" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="Display order" prop="orderNum">
+            <el-form-item label="Order" prop="orderNum">
               <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.menuType !='F'" label="Whether it is outside the chain">
+            <el-form-item v-if="form.menuType !='F'" label="Outside">
               <el-radio-group v-model="form.isFrame">
                 <el-radio label="0">Yes</el-radio>
                 <el-radio label="1">No</el-radio>
@@ -152,7 +152,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.menuType !='F'" label="route address" prop="path">
+            <el-form-item v-if="form.menuType !='F'" label="Route" prop="path">
               <el-input v-model="form.path" placeholder="Please enter the routing address" />
             </el-form-item>
           </el-col>
@@ -167,7 +167,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.menuType !='F'" label="Display status">
+            <el-form-item v-if="form.menuType !='F'" label="Display">
               <el-radio-group v-model="form.visible">
                 <el-radio
                   v-for="dict in visibleOptions"
@@ -178,7 +178,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item v-if="form.menuType !='F'" label="Menu Status">
+            <el-form-item v-if="form.menuType !='F'" label="Status">
               <el-radio-group v-model="form.status">
                 <el-radio
                   v-for="dict in statusOptions"
