@@ -27,8 +27,10 @@ public class GenConstants
     public static final String PARENT_MENU_NAME = "parentMenuName";
 
     /** Database string type */
-    public static final String[] COLUMNTYPE_STR = {"char", "varchar", "nvarchar", "varchar2", "tinytext", "text",
-            "mediumtext", "longtext" };
+    public static final String[] COLUMNTYPE_STR = { "char", "varchar", "nvarchar", "varchar2" };
+
+    /** Database text type */
+    public static final String[] COLUMNTYPE_TEXT = { "tinytext", "text", "mediumtext", "longtext" };
 
     /** Database time type */
     public static final String[] COLUMNTYPE_TIME = {"datetime", "time", "date", "timestamp" };
