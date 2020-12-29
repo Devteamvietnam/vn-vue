@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="Login address" prop="ipaddr">
+    <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="80px">
+      <el-form-item label="Address" prop="ipaddr">
         <el-input
           v-model="queryParams.ipaddr"
           placeholder="Please enter the login address"
@@ -10,7 +10,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="User Name" prop="userName">
+      <el-form-item label="User" prop="userName">
         <el-input
           v-model="queryParams.userName"
           placeholder="Please enter the user name"
@@ -30,24 +30,24 @@
       :data="list.slice((pageNum-1)*pageSize,pageNum*pageSize)"
       style="width: 100%;"
     >
-      <el-table-column label="serial number" type="index" align="center">
+      <el-table-column label="id" type="index" align="center">
         <template slot-scope="scope">
           <span>{{ (pageNum-1) * pageSize + scope.$index + 1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="session number" align="center" prop="tokenId" :show-overflow-tooltip="true" />
-      <el-table-column label="login name" align="center" prop="userName" :show-overflow-tooltip="true" />
-      <el-table-column label="department name" align="center" prop="deptName" />
-      <el-table-column label="host" align="center" prop="ipaddr" :show-overflow-tooltip="true" />
+      <el-table-column label="Session" align="center" prop="tokenId" :show-overflow-tooltip="true" />
+      <el-table-column label="Login name" align="center" prop="userName" :show-overflow-tooltip="true" />
+      <el-table-column label="Dept name" align="center" prop="deptName" />
+      <el-table-column label="Host" align="center" prop="ipaddr" :show-overflow-tooltip="true" />
       <el-table-column label="Login Location" align="center" prop="loginLocation" :show-overflow-tooltip="true" />
-      <el-table-column label="browser" align="center" prop="browser" />
-      <el-table-column label="operating system" align="center" prop="os" />
-      <el-table-column label="login time" align="center" prop="loginTime" width="180">
+      <el-table-column label="Browser" align="center" prop="browser" />
+      <el-table-column label="OS" align="center" prop="os" />
+      <el-table-column label="Login time" align="center" prop="loginTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.loginTime) }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="operation" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="Operation" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             v-hasPermi="['monitor:online:forceLogout']"

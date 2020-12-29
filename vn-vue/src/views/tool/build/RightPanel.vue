@@ -309,7 +309,7 @@
           <el-form-item v-if="activeData.readonly !== undefined" label="Read only">
             <el-switch v-model="activeData.readonly" />
           </el-form-item>
-          <el-form-item v-if="activeData.disabled !== undefined" label="whether to disable ">
+          <el-form-item v-if="activeData.disabled !== undefined" label="Disable ">
             <el-switch v-model="activeData.disabled" />
           </el-form-item>
           <el-form-item v-if="activeData.tag === 'el-select'" label="Searchable or not">
@@ -434,7 +434,7 @@ export default {
       currentIconModel: null,
       dateTypeOptions: [
         {
-          label: '日(date)',
+          label: 'Date(date)',
           value: 'date'
         },
         {
