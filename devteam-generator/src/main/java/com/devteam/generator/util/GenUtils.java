@@ -38,13 +38,15 @@ public class GenUtils
         column.setCreateBy(table.getCreateBy());
         // Set the java field name
         column.setJavaField(StringUtils.toCamelCase(columnName));
+        // Set the default type
+        column.setJavaType(GenConstants.TYPE_STRING);
 
-        if (arraysContains(GenConstants.COLUMNTYPE_STR, dataType))
+        if (arraysContains(GenConstants.COLUMNTYPE_STR, dataType) || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType))
         {
             column.setJavaType(GenConstants.TYPE_STRING);
             // Set the string length more than 500 as a text field
             Integer columnLength = getColumnLength(column.getColumnType());
-            String htmlType = columnLength >= 500? GenConstants.HTML_TEXTAREA: GenConstants.HTML_INPUT;
+            String htmlType = columnLength >= 500 || arraysContains(GenConstants.COLUMNTYPE_TEXT, dataType) ? GenConstants.HTML_TEXTAREA: GenConstants.HTML_INPUT;
             column.setHtmlType(htmlType);
         }
         else if (arraysContains(GenConstants.COLUMNTYPE_TIME, dataType))
