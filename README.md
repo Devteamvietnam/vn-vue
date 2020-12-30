@@ -6,8 +6,6 @@
 * Support loading dynamic authority menu, multi-mode easy authority control.
 * High-efficiency development, using the code generator can generate front-end and back-end code with one click.
 * Thanks to [Vue-Element-Admin](https://github.com/PanJiaChen/vue-element-admin), [eladmin-web](https://gitee.com/elunez/eladmin-web?_from=gitee_search ).
-* Thanks to [yangzongzhuan-RuoYi](https://github.com/yangzongzhuan/RuoYi), [yangzongzhuan](https://github.com/yangzongzhuan/RuoYi ).
-
 
 ## Built-in functions
 
