@@ -9,36 +9,32 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>devteam-system</artifactId>
+	<artifactId>devteam-generator</artifactId>
 
 	<description>
-         system system module
+         generator code generation
      </description>
 
 	<dependencies>
+
+		<!--Velocity code generation template -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+		</dependency>
 
 		<!-- General Tools -->
 		<dependency>
 			<groupId>com.devteam</groupId>
 			<artifactId>devteam-common</artifactId>
 		</dependency>
-		<!-- lombok data -->
+
+
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-				<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
-		<dependency>
-		    <groupId>javax.persistence</groupId>
-		    <artifactId>javax.persistence-api</artifactId>
-		</dependency>
-		
 	</dependencies>
 
 </project>
